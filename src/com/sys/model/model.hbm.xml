@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.sys.model">
+	<!--  configure your class here-->
+
+	<class name="User" table="[Users]">
+		<cache usage="read-write" region="com.sys.model.User" />
+		<id name="id">
+			<generator class="identity" />
+		</id>
+		<property name="username" column="username" not-null="true" />
+		<property name="password" column="password" not-null="true" />
+		<component name="detailInfor" class="com.sys.model.Contactor">
+			<property name="name" column="name" not-null="false" />
+			<property name="gender" column="gender" not-null="false" />
+			<property name="picture_url" column="picture_url" not-null="false" />
+			<property name="cellphoneNumber" column="cellphoneNumber"
+				not-null="false" />
+			<property name="telephoneNumber" column="telephoneNumber"
+				not-null="false" />
+			<property name="email" column="email" not-null="false" />
+			<property name="address" column="address" not-null="false" />
+			<property name="QQ" column="QQ" not-null="false" />
+			<property name="comments" column="comments" not-null="false" />
+			<property name="other1" column="other1" not-null="false" />
+			<property name="other2" column="other2" not-null="false" />
+		</component>
+		<set name="groups" inverse="true" cascade="all">
+			<key column="userID" not-null="false" />
+			<one-to-many class="Group" />
+		</set>
+		<set name="messages" inverse="true" cascade="all">
+			<key column="messageID" not-null="false" />
+			<one-to-many class="ShortMsg" />
+		</set>
+		<property name="ipAdress" column="ipAdress" not-null="false" />
+	</class>
+
+	<class name="Group" table="[Groups]">
+		<cache usage="read-write" region="com.sys.model.Group" />
+		<id name="id">
+			<generator class="identity" />
+		</id>
+		<property name="groupName" column="groupName" not-null="false" />
+		<property name="createTime" column="createTime" not-null="false" />
+		<property name="memberNum" column="memberNum" not-null="false" />
+		<set name="contacts"  lazy="false" inverse="true" cascade="all">
+			<key column="groupsID" not-null="false" />
+			<one-to-many class="com.sys.model.Contactor" />
+		</set>
+	<many-to-one name="owner" column="userID" class="User"></many-to-one>
+	</class>
+	
+	
+	<class name="Contactor" table="[Contactors]">
+		<cache usage="read-write" region="com.sys.model.Contactor" />
+		<id name="id">
+			<generator class="identity" />
+		</id>
+		<property name="name" column="name" not-null="false" />
+		<property name="gender" column="gender" not-null="false" />
+		<property name="picture_url" column="picture_url" not-null="false" />
+		<property name="cellphoneNumber" column="cellphoneNumber"
+			not-null="false" />
+		<property name="telephoneNumber" column="telephoneNumber"
+			not-null="false" />
+		<property name="email" column="email" not-null="false" />
+		<property name="address" column="address" not-null="false" />
+		<property name="QQ" column="QQ" not-null="false" />
+		<property name="comments" column="comments" not-null="false" />
+		<property name="other1" column="other1" not-null="false" />
+		<property name="other2" column="other2" not-null="false" />
+<!--		<property name="groupid" column="groupid" not-null="false" />-->
+		<many-to-one name="group" column="groupsID" class="Group" ></many-to-one>
+	</class>
+
+
+
+	<class name="ShortMsg" table="[ShortMsgs]">
+		<cache usage="read-write" region="com.sys.model.ShortMsg" />
+		<id name="id">
+			<generator class="identity" />
+		</id>
+		<property name="from" column="from" not-null="false" />
+		<property name="to" column="to" not-null="false" />
+		<property name="fromName" column="fromName" not-null="false" />
+		<property name="toName" column="toName" not-null="false" />
+		<property name="createTime" column="createTime" not-null="false" />
+		<property name="content" column="content" not-null="false" />
+		<property name="msgType" column="msgType" not-null="false" />
+		<many-to-one name="owner" column="messageID" class="User"></many-to-one>
+	</class>
+
+
+</hibernate-mapping>

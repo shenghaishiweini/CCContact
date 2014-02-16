@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+	<!--
+		指定Web应用的默认编码集,相当于调用HttpServletRequest的setCharacterEncoding方法
+	-->
+	<!--    <constant name="struts.i18n.encoding" value="UTF-8"/>-->
+	<!--    -->
+	<!--   -->
+	<!--
+		该属性指定需要Struts 2处理的请求后缀，该属性的默认值是action，即所有匹配*.action的请求都由Struts2处理。
+	-->
+	<!--    如果用户需要指定多个请求后缀，则多个后缀之间以英文逗号（,）隔开。 -->
+	<!--    <constant name="struts.action.extension" value="do"/>-->
+	<!--     设置浏览器是否缓存静态内容,默认值为true(生产环境下使用),开发阶段最好关闭 -->
+	<!--
+		<constant name="struts.serve.static.browserCache" value="false"/>
+	-->
+	<!--     当struts的配置文件修改后,系统是否自动重新加载该文件,默认值为false(生产环境下使用),开发阶段最好打开 -->
+	<!--
+		<constant name="struts.configuration.xml.reload" value="true"/>
+	-->
+	<!--     开发模式下使用,这样可以打印出更详细的错误信息 -->
+	<!--    <constant name="struts.devMode" value="false" />-->
+	<!--      默认的视图主题 -->
+	<!--    <constant name="struts.ui.theme" value="simple" />-->
+
+	<constant name="struts.objectFactory" value="spring" />
+
+	<package name="sys" namespace="/sys" extends="struts-default">
+
+		<action name="_*" class="userAction" method="{1}">
+			<result name="userLogin">/WEB-INF/user/login.jsp</result>
+		</action>
+
+		<!--
+			<interceptors> <interceptor name="userInter"
+			class="com.sys.myinterceptor.myInterceptor"></interceptor>
+			<interceptor-stack name="myStack"> <interceptor-ref
+			name="userInter"></interceptor-ref> <interceptor-ref
+			name="defaultStack"></interceptor-ref> </interceptor-stack>
+			</interceptors> <default-interceptor-ref
+			name="myStack"></default-interceptor-ref> <global-results> <result
+			name="userLogin" type="chain">login_login</result> </global-results>
+
+			<action name="user_*" class="userAction" method="{1}"> <result
+			name="RegisterUser">/WEB-INF/user/RegisterUser.jsp</result> <result
+			name="user_manage">/WEB-INF/user/manage.jsp</result> <result
+			name="user_alter">/WEB-INF/user/userAlter.jsp</result> <result
+			name="user_manageAction" type="chain">user_manage</result> <result
+			name="userList">/WEB-INF/user/userList.jsp</result> </action> <action
+			name="commodity_*" class="commodityAction" method="{1}"> <result
+			name="comm_index">/WEB-INF/commodity/index.jsp</result> <result
+			name="comm_add">/WEB-INF/commodity/addCommodity.jsp</result> <result
+			name="comm_alter">/WEB-INF/commodity/updateCommodity.jsp</result>
+			<result name="comm_alterAction" type="chain">commodity_index</result>
+			<result
+			name="comm_addCommoditySuccess">/WEB-INF/commodity/addCommoditySuccess.jsp
+			</result> <result
+			name="comm_loginok">/WEB-INF/main/index.jsp</result> <result
+			name="comm_manage">/WEB-INF/commodity/manage.jsp</result> </action>
+
+
+			<action name="ordering_*" class="orderingAction" method="{1}">
+			<result name="ordering_create">/WEB-INF/ordering/create.jsp</result>
+
+			<result
+			name="showSelectedList">/WEB-INF/commodity/shoppinglist.jsp</result>
+			<result name="ordering_createOK"
+			type="redirectAction">commodity_index </result> <result name="list"
+			type="redirectAction">ordering_cartList </result> <result
+			name="orderinglist">/WEB-INF/ordering/curList.jsp</result> <result
+			name="tablelist">/WEB-INF/ordering/tableList.jsp</result> <result
+			name="orderingdetail">/WEB-INF/ordering/orderDetail.jsp</result>
+
+			</action>
+		-->
+
+	</package>
+	<package name="android" extends="json-default">
+		<action name="android_login" class="com.sys.action.UserAction"
+			method="checklogin">
+			<result type="json" name="ok"></result>
+		</action>
+	</package>
+
+</struts>

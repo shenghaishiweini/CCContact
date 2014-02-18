@@ -7,7 +7,7 @@ import java.util.Set;
  * @author Gui Junfei
  * 2014.2.7
  */
-public class User extends Contactor{
+public class User {//extends Contactor
     private int id;
     private String username;
     private String password;
@@ -18,6 +18,8 @@ public class User extends Contactor{
     @SuppressWarnings("unchecked")
 	private Set messages;
     
+    private Set contactors;
+    
     /*
      * android端当前的IP地址
      * 用于WEB和android通信使用
@@ -25,12 +27,7 @@ public class User extends Contactor{
      */
     private String ipAdress;
     
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+
 	public String getUsername() {
 		return username;
 	}
@@ -70,6 +67,18 @@ public class User extends Contactor{
 	}
 	public String getIpAdress() {
 		return ipAdress;
+	}
+	public void setContactors(Set<Contactor> contactors) {
+		this.contactors = contactors;
+	}
+	public Set<Contactor> getContactors() {
+		return contactors;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public int getId() {
+		return id;
 	}
 
 }

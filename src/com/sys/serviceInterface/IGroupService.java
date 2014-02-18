@@ -67,5 +67,5 @@ public interface IGroupService {
 	 * @param groupID
 	 * @return  Set<Contactor> 
 	 */
-	public Set<Contactor> getGroupContactors(int groupID);
+	public List<Contactor> getGroupContactors(int groupID);
 }

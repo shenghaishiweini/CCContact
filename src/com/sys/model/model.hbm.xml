@@ -28,6 +28,10 @@
 			<property name="other1" column="other1" not-null="false" />
 			<property name="other2" column="other2" not-null="false" />
 		</component>
+		<set name="contactors" inverse="true" cascade="all">
+			<key column="userID" not-null="false" />
+			<one-to-many class="Contactor" />
+		</set>
 		<set name="groups" inverse="true" cascade="all">
 			<key column="userID" not-null="false" />
 			<one-to-many class="Group" />
@@ -47,14 +51,25 @@
 		<property name="groupName" column="groupName" not-null="false" />
 		<property name="createTime" column="createTime" not-null="false" />
 		<property name="memberNum" column="memberNum" not-null="false" />
-		<set name="contacts"  lazy="false" inverse="true" cascade="all">
-			<key column="groupsID" not-null="false" />
-			<one-to-many class="com.sys.model.Contactor" />
-		</set>
-	<many-to-one name="owner" column="userID" class="User"></many-to-one>
+		<!--		<set name="contacts" lazy="false" inverse="true" cascade="all">-->
+		<!--			<key column="groupsID" not-null="false" />-->
+		<!--			<one-to-many class="com.sys.model.Contactor" />-->
+		<!--		</set>-->
+		<!--
+			<set name="contacts" table="contactor_group" lazy="false"
+			cascade="all"
+		-->
+		<!--			inverse="true">-->
+		<!--			<key column="group_id" not-null="false"></key>-->
+		<!--
+			<many-to-many class="com.sys.model.Contactor" column="contactor_id">
+		-->
+		<!--			</many-to-many>-->
+		<!--		</set>-->
+		<many-to-one name="owner" column="userID" class="User"></many-to-one>
 	</class>
-	
-	
+
+
 	<class name="Contactor" table="[Contactors]">
 		<cache usage="read-write" region="com.sys.model.Contactor" />
 		<id name="id">
@@ -73,9 +88,34 @@
 		<property name="comments" column="comments" not-null="false" />
 		<property name="other1" column="other1" not-null="false" />
 		<property name="other2" column="other2" not-null="false" />
-<!--		<property name="groupid" column="groupid" not-null="false" />-->
-		<many-to-one name="group" column="groupsID" class="Group" ></many-to-one>
+		<!--		<property name="groupid" column="groupid" not-null="false" />-->
+		<!--
+			<many-to-one name="group" column="groupsID" class="Group"
+			></many-to-one>
+		-->
+		<!--
+			<set name="groups" table="contactor_group" lazy="false"
+			cascade="all">
+		-->
+		<!--			<key column="contactor_id"  not-null="false"></key>-->
+		<!--
+			<many-to-many class="com.sys.model.Group"
+			column="group_id"></many-to-many>
+		-->
+		<!--		</set>-->
+		<many-to-one name="owner" column="userID" class="User"></many-to-one>
 	</class>
+
+
+	<class name="Group_Contactor" table="[Group_Contactors]">
+		<cache usage="read-write" region="com.sys.model.Group_Contactor" />
+		<id name="id">
+			<generator class="identity" />
+		</id>
+		<property name="groupId" column="groupId" not-null="false" />
+		<property name="contactorId" column="contactorId" not-null="false" />
+	</class>
+
 
 
 

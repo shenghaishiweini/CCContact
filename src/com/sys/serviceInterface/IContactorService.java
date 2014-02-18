@@ -3,6 +3,7 @@ package com.sys.serviceInterface;
 import java.util.List;
 
 import com.sys.model.Contactor;
+import com.sys.model.Group;
 
 
 
@@ -14,12 +15,23 @@ import com.sys.model.Contactor;
 public interface IContactorService {
 	
 	/**
-	 * 新增联系人
-	 * @param contactor 新增的联系人
+	 * 新增联系人到Contactor表中，并且新增对应的Group_Contactor对象到Group_Contactor表中
+	 * @param contactor 新增的联系人 
+	 * @param groups 联系人对应的分组集
 	 * @return boolean
 	 * 成功返回true，失败返回false
+	 * 
 	 */
-	public boolean addContactor(Contactor contactor);
+	public boolean addContactor(Contactor contactor,List<Group> groups);
+	
+	/**
+	 * 新增联系人到Contactor表中，并且新增对应的Group_Contactor对象到Group_Contactor表中
+	 * @param contactor 新增的联系人 
+	 * @return boolean
+	 * 成功返回true，失败返回false
+	 * 
+	 */
+	public boolean addContactorDefault(Contactor contactor);
 	
 	/**
 	 * 修改联系人信息
@@ -30,12 +42,12 @@ public interface IContactorService {
 	public boolean alterContactor(Contactor contactor);
 	
 	/**
-	 * 删除联系人
+	 * 删除Contator中的记录,并且还会删除Group_Contactor表中的对应记录
 	 * @param contactorID 删除只能按照ID来删除
 	 * @return boolean
 	 * 成功返回true，失败返回false
 	 */
-	public boolean delterContactor(int contactorID);
+	public boolean deleteContactor(int contactorID);
 	
 	/**
 	 * 根据联系人ID 查找
@@ -56,7 +68,7 @@ public interface IContactorService {
 	 * 可能存在同名的联系人，采用模糊查找
 	 *        
 	 */
-	public List<Contactor> findContactorByName(String contactorName);
+	public List<Contactor> findContactorByName(String contactorName,int userid);
 	
 	/**
 	 * 根据联系人手机号码查找
@@ -68,7 +80,7 @@ public interface IContactorService {
 	 * @return List<Contactor> 
 	 * 理论上来说一个号码对应一个联系人，但是存在用户输入号码不完全，所以可能存在多个结果。采用模糊查找
 	 */
-	public List<Contactor> findContactorByCellphoneNumber(String contactorCellphoneNumber);
+	public List<Contactor> findContactorByCellphoneNumber(String contactorCellphoneNumber,int userid);
 	
 	/**
 	 * 根据联系人电话号码查找
@@ -79,7 +91,7 @@ public interface IContactorService {
 	 * @param contactorTelephoneNumber
 	 * @return List<Contactor>
 	 */
-	public List<Contactor> findContactorByTelephoneNumber(String contactorTelephoneNumber);
+	public List<Contactor> findContactorByTelephoneNumber(String contactorTelephoneNumber,int userid);
 	
 	/**
 	 * 根据联系人所在组名查找
@@ -102,5 +114,22 @@ public interface IContactorService {
 	 * @return List<Contactor>
 	 */
 	public List<Contactor> findContactorByGroupId(int GroupId,int userId);
+	
+	/**
+	 * 根据用户ID列出对应的所有的联系人
+	 * @param userId
+	 * @return List<Contactor>
+	 */
+	public List<Contactor> findAllContactorsByUserId(int userId);
+	
+	
+	/**
+	 * 根据用户输入查询 主要查询 姓名，电话号码，手机号码，QQ号码
+	 * @param searchStr 用户输入的搜索条件
+	 * @return List<Contactor>
+	 */
+	public List<Contactor> findSearchContactors(String searchStr,int userid);
+	
+
 }
 

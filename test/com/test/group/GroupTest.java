@@ -1,7 +1,6 @@
 package com.test.group;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -37,18 +36,25 @@ public class GroupTest {
 	@Test
 	public void testNewGroup()
 	{
-		User user=_userService.findUserById(2); 
+		User user=_userService.findUserById(1); 
 		Group gp=new Group();
-		gp.setGroupName("testNewGroup1");
+		gp.setGroupName("testNewGroup");
 		gp.setOwner(user);
 		_groupService.newGroup(gp);
+	}
+	
+
+	@Test
+	public void testDeleteGroup()
+	{
+		_groupService.deleteGroup(1);
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Test
 	public void testAlterGroup()
 	{
-		Group gp=_groupService.getGroupByGroupId(3);
+		Group gp=_groupService.getGroupByGroupId(2);
 		gp.setGroupName("thisIsATest");
 		//Contactor contactor=_contactorService.findContactorById(4);
 //		Contactor contactor1=_contactorService.findContactorById(1);
@@ -71,12 +77,12 @@ public class GroupTest {
 	public void testAddGroupContactorItem()
 	{
 
-		Contactor contactor=_contactorService.findContactorById(4);
-		Contactor contactor1=_contactorService.findContactorById(1);
+		Contactor contactor=_contactorService.findContactorById(1);
+//		Contactor contactor1=_contactorService.findContactorById(1);
 		//Contactor temp=new Contactor();
 //		temp=Contactor.copyContactor(temp,contactor);
 		_groupService.addGroupContactorItem(2, contactor);
-		_groupService.addGroupContactorItem(2, contactor1);
+//		_groupService.addGroupContactorItem(1, contactor1);
 		System.out.print("a");
 		
 	}
@@ -88,22 +94,14 @@ public class GroupTest {
 //		System.out.print("a");
 	}
 	
-	@Test
-	public void testdDeleteGroup()
-	{
-		_groupService.deleteGroup(3);
-//		System.out.print("a");
-	}
-	
 	
 	@Test
 	public void testGetGroupContactors()
 	{
-		User user=_userService.findUserById(2); 
-		Group gp=new Group();
-		gp.setGroupName("testNewGroup");
-		gp.setOwner(user);
-		_groupService.newGroup(gp);
+		List<Contactor> list=_groupService.getGroupContactors(2);
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i).getName());
+		}
 	}
 	
 }

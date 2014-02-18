@@ -1,5 +1,8 @@
 package com.sys.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 
 
 
@@ -32,8 +35,11 @@ public class Contactor {
 	 * many to one 
 	 * 一个联系人可以属于多个分组
 	 */
-	//private Set groups=new HashSet(0);
-	private Group group;
+//	private Set groups=new HashSet(0);
+//	private Group group;
+	
+	private User owner; 
+	
 	
 	public int getId() {
 		return id;
@@ -60,12 +66,12 @@ public class Contactor {
 	public void setPicture_url(String pictureUrl) {
 		picture_url = pictureUrl;
 	}
-	public Group getGroup() {
-		return group;
-	}
-	public void setGroup(Group group) {
-		this.group = group;
-	}
+//	public Group getGroup() {
+//		return group;
+//	}
+//	public void setGroup(Group group) {
+//		this.group = group;
+//	}
 	public String getCellphoneNumber() {
 		return cellphoneNumber;
 	}
@@ -122,10 +128,23 @@ public class Contactor {
 		newContactor.setComments(oldContactor.getComments());
 		newContactor.setEmail(oldContactor.getEmail());
 		newContactor.setGender(oldContactor.getGender());
-		newContactor.setGroup(oldContactor.getGroup());
+//		newContactor.setGroup(oldContactor.getGroup());
+//		newContactor.setGroups(oldContactor.getGroups());
 		newContactor.setName(oldContactor.getName());
 		newContactor.setOther1(oldContactor.getOther1());
 		newContactor.setOther2(oldContactor.getOther2());
 		return newContactor;
+	}
+//	public void setGroups(Set groups) {
+//		this.groups = groups;
+//	}
+//	public Set getGroups() {
+//		return groups;
+//	}
+	public void setOwner(User owner) {
+		this.owner = owner;
+	}
+	public User getOwner() {
+		return owner;
 	}
 }

@@ -16,19 +16,19 @@ public class Group {
 	private Date createTime;
 	private int memberNum=0;
 	
-	/*
-	 * 分组包含的联系人
-	 * 关联到Contact的ID
-	 * many to one
-	 */
-	@SuppressWarnings("unchecked")
-	private Set contacts=new HashSet(0);
-	
-	/*
-	 * 分组的拥有者
-	 * 关联到User ID
-	 * many to one
-	 */
+//	/*
+//	 * 分组包含的联系人
+//	 * 关联到Contact的ID
+//	 * many to one
+//	 */
+//	@SuppressWarnings("unchecked")
+//	private Set contacts=new HashSet(0);
+//	
+//	/*
+//	 * 分组的拥有者
+//	 * 关联到User ID
+//	 * many to one
+//	 */
 	private User owner;
 	
 	public int getId() {
@@ -55,14 +55,14 @@ public class Group {
 	public void setMemberNum(int memberNum) {
 			this.memberNum = memberNum;
 	}
-	@SuppressWarnings("unchecked")
-	public Set getContacts() {
-		return contacts;
-	}
-	@SuppressWarnings("unchecked")
-	public void setContacts(Set contacts) {
-		this.contacts = contacts;
-	}
+//	@SuppressWarnings("unchecked")
+//	public Set getContacts() {
+//		return contacts;
+//	}
+//	@SuppressWarnings("unchecked")
+//	public void setContacts(Set contacts) {
+//		this.contacts = contacts;
+//	}
 	public User getOwner() {
 		return owner;
 	}

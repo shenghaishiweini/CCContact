@@ -39,38 +39,53 @@ public class UserTest {
 	{
 		//User user=_userService.findUserById(2);
 		User user=new User();
-		user.setUsername("gjf12");
+		user.setUsername("gjf3");
 		user.setPassword("123456");
-		user.setCellphoneNumber("987654321");
+		Contactor contactor=_contactorService.findContactorById(1);
+		user.setDetailInfor(contactor);
+//		user.setCellphoneNumber("987654321");
 		_userService.registerUser(user);//保存用户
 		
-		Group gp=new Group();
-		gp.setGroupName("test123");
-		
-		Contactor ct=new Contactor();
-		ct.setName("lisi");
-		///_contactorService.addContactor(ct);//保存联系人
-		
-		Set contact=new HashSet<Contactor>();
-		contact.add(ct);
-		
-		gp.setContacts(contact);
-		gp.setOwner(user);
-		//_userService.registerUser(user);//保存用户
-		_groupService.newGroup(gp);//保存分组
+//		Group gp=new Group();
+//		gp.setGroupName("test123");
+//		
+//		Contactor ct=new Contactor();
+//		ct.setName("lisi");
+//		///_contactorService.addContactor(ct);//保存联系人
+//		
+//		Set contact=new HashSet<Contactor>();
+//		contact.add(ct);
+//		
+//		gp.setContacts(contact);
+//		gp.setOwner(user);
+//		//_userService.registerUser(user);//保存用户
+//		_groupService.newGroup(gp);//保存分组
 		
 	}
 	
 	@Test
 	public void testGetGroupContactors()
 	{
+		User user=_userService.findUserById(1);
+		Set group=user.getGroups();
+		
 	Set	list=(Set) _groupService.getGroupContactors(4);
 	for(int i=0;i<list.size();i++)
 	{
 		//list[i];
 		//System.out.println(list.get(i).getName()+", "+list.get(i).getGroups());
 	}
+	}
 	
+	@Test
+	public void testAlterUser()
+	{
+		User user=_userService.findUserById(2);
+		System.out.println(user.getPassword());
+		System.out.println(user.getDetailInfor().getAddress());
+		user.getDetailInfor().setAddress("hefei");
+		_userService.alterUser(user);
+		
 	}
 	
 }

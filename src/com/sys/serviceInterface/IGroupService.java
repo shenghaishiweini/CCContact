@@ -22,10 +22,12 @@ public interface IGroupService {
 	
 	/**
 	 *  新增分组成员
-	 * @param int GroupID,Contactor item
+	 * @param int fromGroupID 源组ID 
+	 * @param int toGroupID 目的组ID
+	 * @param Contactor item 联系人已经存在
 	 * @return boolean
 	 */
-	public boolean addGroupContactorItem(int GroupID,Contactor item);
+	public boolean moveGroupContactorItem(int fromGroupID,int toGroupID,Contactor item);
 
 	/**
 	 *  删除分组成员

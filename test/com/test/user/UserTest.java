@@ -10,9 +10,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.sys.model.Contactor;
 import com.sys.model.Group;
+import com.sys.model.ShortMsg;
 import com.sys.model.User;
 import com.sys.serviceInterface.IContactorService;
 import com.sys.serviceInterface.IGroupService;
+import com.sys.serviceInterface.IShortMsgService;
 import com.sys.serviceInterface.IUserService;
 /**
  * 用户 单元测试
@@ -25,18 +27,27 @@ public class UserTest {
 	private static IUserService _userService;
 	private static IGroupService _groupService;
 	private static IContactorService _contactorService;
+	private static IShortMsgService _ishortMsgService;
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		ApplicationContext ac=new ClassPathXmlApplicationContext("beans.xml");
 		_userService=(IUserService) ac.getBean("IUserService");
 		_groupService=(IGroupService) ac.getBean("IGroupService");
 		_contactorService=(IContactorService) ac.getBean("IContactorService");
+		_ishortMsgService=(IShortMsgService) ac.getBean("IShortMsgService");
 	}
 	
 	
 	@Test
 	public void testRegisterUser()
 	{
+//		User user=_userService.findUserById(1);
+//		ShortMsg sm=new ShortMsg();
+//		sm.setOwner(user);
+//		sm.setContent("111");
+////		sm.setId(1);
+//		_ishortMsgService.add(sm);
+		
 		//User user=_userService.findUserById(2);
 		User user=new User();
 		user.setUsername("gjf3");
@@ -44,6 +55,7 @@ public class UserTest {
 		Contactor contactor=_contactorService.findContactorById(1);
 		user.setDetailInfor(contactor);
 //		user.setCellphoneNumber("987654321");
+
 		_userService.registerUser(user);//保存用户
 		
 //		Group gp=new Group();

@@ -30,21 +30,15 @@ public class ContactorTest {
 	}
 
 	@Test
-	public void testAddContactor() {
+	public void testAddContactorToNewGroup() {
 		User user = _userService.findUserById(1);
 
-		Contactor contactor = new Contactor();
-		contactor.setName("01");
-		contactor.setCellphoneNumber("111111");
+		Contactor contactor = _contactorService.findContactorById(2);
 		contactor.setOwner(user);
 
 		Group group1 = _groupService.getGroupByGroupId(1);
-		Group group2 = _groupService.getGroupByGroupId(2);
 
-		List<Group> groups = new ArrayList<Group>();
-		groups.add(group1);
-		groups.add(group2);
-		_contactorService.addContactor(contactor, groups);
+		_contactorService.addContactorToNewGroup(contactor, group1);
 	}
 
 	@Test

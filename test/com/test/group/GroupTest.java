@@ -54,53 +54,45 @@ public class GroupTest {
 	@Test
 	public void testAlterGroup()
 	{
-		Group gp=_groupService.getGroupByGroupId(2);
-		gp.setGroupName("thisIsATest");
-		//Contactor contactor=_contactorService.findContactorById(4);
-//		Contactor contactor1=_contactorService.findContactorById(1);
-		//Contactor temp=new Contactor();
-//		temp=Contactor.copyContactor(temp,contactor);
-//		System.out.print(temp==contactor);
-//		HashSet set=new HashSet<Contactor>();
-//		set.add(temp);
-		//Set gpset=gp.getContacts();
-		//gpset.add(contactor);
-//		gpset.add(contactor1);
-		//gp.setContacts(gpset);
-		//_contactorService.addContactor(temp);
+		Group gp=_groupService.getGroupByGroupId(1);
+		gp.setGroupName("alterTest-default");
 		_groupService.alterGroup(gp);
-		
-		
 	}
 	
 	@Test
-	public void testAddGroupContactorItem()
+	public void testMoveGroupContactorItem()
 	{
 
-		Contactor contactor=_contactorService.findContactorById(1);
-//		Contactor contactor1=_contactorService.findContactorById(1);
-		//Contactor temp=new Contactor();
-//		temp=Contactor.copyContactor(temp,contactor);
-		_groupService.addGroupContactorItem(2, contactor);
-//		_groupService.addGroupContactorItem(1, contactor1);
-		System.out.print("a");
+		Contactor contactor=_contactorService.findContactorById(2);
+
+		_groupService.moveGroupContactorItem(3, 2, contactor);
+
+//		System.out.print("a");
 		
 	}
 	
 	@Test
 	public void testRemoveGroupContactorItem()
 	{
-		_groupService.removeGroupContactorItem(2, 8);
+		_groupService.removeGroupContactorItem(1, 2);
 //		System.out.print("a");
 	}
-	
 	
 	@Test
 	public void testGetGroupContactors()
 	{
-		List<Contactor> list=_groupService.getGroupContactors(2);
+		List<Contactor> list=_groupService.getGroupContactors(1);
 		for (int i = 0; i < list.size(); i++) {
 			System.out.println(list.get(i).getName());
+		}
+	}
+	
+	@Test
+	public void testGetAllGroupByUserId()
+	{
+		List<Group> list=_groupService.getAllGroupByUserId(1);
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i).getGroupName());
 		}
 	}
 	

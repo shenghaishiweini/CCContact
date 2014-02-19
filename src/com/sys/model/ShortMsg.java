@@ -33,6 +33,7 @@ public class ShortMsg {
 	private int msgType;//短信类型，可能是彩信或语音
 	
 	private User owner;
+	
 	public int getId() {
 		return id;
 	}

@@ -17,16 +17,6 @@ public interface IContactorService {
 	/**
 	 * 新增联系人到Contactor表中，并且新增对应的Group_Contactor对象到Group_Contactor表中
 	 * @param contactor 新增的联系人 
-	 * @param groups 联系人对应的分组集
-	 * @return boolean
-	 * 成功返回true，失败返回false
-	 * 
-	 */
-	public boolean addContactor(Contactor contactor,List<Group> groups);
-	
-	/**
-	 * 新增联系人到Contactor表中，并且新增对应的Group_Contactor对象到Group_Contactor表中
-	 * @param contactor 新增的联系人 
 	 * @return boolean
 	 * 成功返回true，失败返回false
 	 * 
@@ -48,6 +38,18 @@ public interface IContactorService {
 	 * 成功返回true，失败返回false
 	 */
 	public boolean deleteContactor(int contactorID);
+	
+	
+	/**
+	 * 给联系人新增分组
+	 * @param contactor 新增的联系人 
+	 * @param group 欲加入的组
+	 * @return boolean
+	 * 成功返回true，失败返回false
+	 * 
+	 */
+	public boolean addContactorToNewGroup(Contactor contactor,Group group);
+	
 	
 	/**
 	 * 根据联系人ID 查找

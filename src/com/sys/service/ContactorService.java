@@ -27,18 +27,15 @@ public class ContactorService implements IContactorService {
 	@Resource
 	private SessionFactory sessionFactory;
 
-	public boolean addContactor(Contactor contactor, List<Group> groups) {
+	public boolean addContactorToNewGroup(Contactor contactor, Group group) {
 
 		try {
-			sessionFactory.getCurrentSession().persist(contactor);
-			Group_Contactor group_contactor = null;
-			for (int i = 0; i < groups.size(); i++) {
-				group_contactor = new Group_Contactor();
-				group_contactor.setGroupId(groups.get(i).getId());
+				Group_Contactor group_contactor = new Group_Contactor();
+				group_contactor.setGroupId(group.getId());
 				group_contactor.setContactorId(contactor.getId());
 				sessionFactory.getCurrentSession().persist(group_contactor);
-			}
-			return true;
+				return true;
+
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
 			sessionFactory.getCurrentSession().getTransaction().rollback();

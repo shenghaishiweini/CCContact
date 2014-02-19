@@ -1,5 +1,7 @@
 package com.sys.serviceInterface;
 
-public interface IShortMsgService {
+import com.sys.model.ShortMsg;
 
+public interface IShortMsgService {
+	public boolean add(ShortMsg shortmsg);
 }

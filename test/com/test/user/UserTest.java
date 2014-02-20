@@ -14,7 +14,6 @@ import com.sys.model.ShortMsg;
 import com.sys.model.User;
 import com.sys.serviceInterface.IContactorService;
 import com.sys.serviceInterface.IGroupService;
-import com.sys.serviceInterface.IShortMsgService;
 import com.sys.serviceInterface.IUserService;
 /**
  * 用户 单元测试
@@ -27,53 +26,83 @@ public class UserTest {
 	private static IUserService _userService;
 	private static IGroupService _groupService;
 	private static IContactorService _contactorService;
-	private static IShortMsgService _ishortMsgService;
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		ApplicationContext ac=new ClassPathXmlApplicationContext("beans.xml");
 		_userService=(IUserService) ac.getBean("IUserService");
 		_groupService=(IGroupService) ac.getBean("IGroupService");
 		_contactorService=(IContactorService) ac.getBean("IContactorService");
-		_ishortMsgService=(IShortMsgService) ac.getBean("IShortMsgService");
 	}
-	
 	
 	@Test
 	public void testRegisterUser()
 	{
-//		User user=_userService.findUserById(1);
-//		ShortMsg sm=new ShortMsg();
-//		sm.setOwner(user);
-//		sm.setContent("111");
-////		sm.setId(1);
-//		_ishortMsgService.add(sm);
-		
-		//User user=_userService.findUserById(2);
 		User user=new User();
-		user.setUsername("gjf3");
+		user.setUsername("gjf0");
 		user.setPassword("123456");
-		Contactor contactor=_contactorService.findContactorById(1);
+		Contactor contactor=new Contactor();
+		contactor.setName("myself");
 		user.setDetailInfor(contactor);
-//		user.setCellphoneNumber("987654321");
-
+		user.getDetailInfor().setCellphoneNumber("987654321");
+//		ShortMsg sh=new ShortMsg();
+//		sh.setContent("hello !");
+//		sh.setOwner(user);
+//		Set mset=new HashSet();
+//		mset.add(sh);
+//		user.getMessages().add(mset);
 		_userService.registerUser(user);//保存用户
-		
-//		Group gp=new Group();
-//		gp.setGroupName("test123");
-//		
-//		Contactor ct=new Contactor();
-//		ct.setName("lisi");
-//		///_contactorService.addContactor(ct);//保存联系人
-//		
-//		Set contact=new HashSet<Contactor>();
-//		contact.add(ct);
-//		
-//		gp.setContacts(contact);
-//		gp.setOwner(user);
-//		//_userService.registerUser(user);//保存用户
-//		_groupService.newGroup(gp);//保存分组
+	}
+	@Test
+	public void tsetAlterUser()
+	{
+		User user=_userService.findUserById(3);
+		user.getDetailInfor().setAddress("ustc");
+		user.getDetailInfor().setName("aaa");
+		_userService.alterUser(user);
+	}
+	@Test
+	public void testCheckLogin()
+	{
+		User user = new User();
+		user.setUsername("gjf02");
+		user.setPassword("3456");
+		User res=_userService.checkLogin(user);
+		System.out.print(res);
 		
 	}
+	
+	@Test
+	public void testDeleteUser()
+	{
+		_userService.deleteUser(3);
+	}
+	
+//	@Test
+//	public void testRegisterUser()
+//	{
+//		//User user=_userService.findUserById(2);
+//		User user=new User();
+//		user.setUsername("gjf02");
+//		user.setPassword("123456");
+//		user.setCellphoneNumber("987654321");
+//		_userService.registerUser(user);//保存用户
+//		
+////		Group gp=new Group();
+////		gp.setGroupName("test123");
+////		
+////		Contactor ct=new Contactor();
+////		ct.setName("lisi");
+////		///_contactorService.addContactor(ct);//保存联系人
+////		
+////		Set contact=new HashSet<Contactor>();
+////		contact.add(ct);
+////		
+////		gp.setContacts(contact);
+////		gp.setOwner(user);
+////		//_userService.registerUser(user);//保存用户
+////		_groupService.newGroup(gp);//保存分组
+//		
+//	}
 	
 	@Test
 	public void testGetGroupContactors()
@@ -87,17 +116,7 @@ public class UserTest {
 		//list[i];
 		//System.out.println(list.get(i).getName()+", "+list.get(i).getGroups());
 	}
-	}
 	
-	@Test
-	public void testAlterUser()
-	{
-		User user=_userService.findUserById(2);
-		System.out.println(user.getPassword());
-		System.out.println(user.getDetailInfor().getAddress());
-		user.getDetailInfor().setAddress("hefei");
-		_userService.alterUser(user);
-		
 	}
 	
 }

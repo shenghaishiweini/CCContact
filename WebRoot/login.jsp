@@ -1,31 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="bms.sysmgr.domain.*" %>     
-<%@ page import="bms.sysmgr.manager.*" %>  
+
 <%
 	String mesg = "";
-	String command = request.getParameter("command");
-	if ("login".equals(command)){
-		String userId = request.getParameter("userId");
-		String password = request.getParameter("password");
-		try {
-			User user = UserManager.getInstance().login(userId, password);
-			//登陆成功将用户信息放到session中
-			if(user == null){
-				mesg = "用户名或密码错误";
-			}else{
-				session.setAttribute("login_user", user);
-			
-				//设置超时，单位:秒
-				session.setMaxInactiveInterval(6000);
-				
-				//重定向到主控页面
-				response.sendRedirect("main.html");
-			}	
-		}catch(Exception e) {
-			e.printStackTrace();
-		}		
-	}
 
 %>
 
@@ -64,7 +41,7 @@
 		//	return;				
 		//} 
 		if (!flag) {
-			loginForm.action = "login.jsp";
+			loginForm.action = "sys/login";
 			loginForm.method = "post";
 			loginForm.submit();
 		}

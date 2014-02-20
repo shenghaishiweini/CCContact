@@ -1,5 +1,7 @@
 package com.sys.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.hibernate.SessionFactory;
@@ -29,6 +31,16 @@ public class ShortMsgService implements IShortMsgService {
 			return false;
 		}
 		
+	}
+
+	public List<ShortMsg> readMsgsByRecipient(int recipipentId, int userid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<ShortMsg> readMsgsByUserid(int userid) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

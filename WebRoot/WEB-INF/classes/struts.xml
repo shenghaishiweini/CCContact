@@ -33,12 +33,9 @@
 
 	<package name="sys" namespace="/sys" extends="struts-default">
 
-		<action name="_*" class="userAction" method="{1}">
-			<result name="userLogin">/WEB-INF/user/login.jsp</result>
-		</action>
-
-		<action name="login" class="com.sys.action.UserAction" method="login1">
+		<action name="*" class="userAction" method="{1}">
 			<result name="success">/main.html</result>
+			<result name="login" >/login.jsp</result>
 		</action>
 		
 		<action name="listAllGroups" class="com.sys.action.GroupAction" method="listAllGroups">

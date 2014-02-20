@@ -119,16 +119,16 @@ public class ContactorAction extends ActionSupport {
 		contactor.setOther1(other1);
 		contactor.setOther2(other2);
 
-		contactorService.addContactor(contactor);
+//		contactorService.addContactor(contactor);
 
 		return SUCCESS;
 	}	
 	
 	public String findAllContactorsByUserId() throws Exception
 	{
-		List<Contactor> list = contactorService.listAllContactors();
-		HttpServletRequest request = ServletActionContext.getRequest();
-		request.setAttribute("list", list);
+//		List<Contactor> list = contactorService.listAllContactors();
+//		HttpServletRequest request = ServletActionContext.getRequest();
+//		request.setAttribute("list", list);
 		
 		return SUCCESS;
 	}

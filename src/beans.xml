@@ -54,11 +54,10 @@
 
 	<!-- 注册Action -->
 	<bean id="userAction" class="com.sys.action.UserAction" scope="prototype" />
-<!--	<bean id="groupAction" class="com.sys.action.GroupAction" scope="prototype" />-->
+	<bean id="groupAction" class="com.sys.action.GroupAction" scope="prototype" />
 
 	<!-- 注册 Interface-->
 	<bean id="IUserService" class="com.sys.service.UserService" />
 	<bean id="IGroupService" class="com.sys.service.GroupService" />
 	<bean id="IContactorService" class="com.sys.service.ContactorService" />
-	<bean id="IShortMsgService" class="com.sys.service.ShortMsgService" />
 </beans>

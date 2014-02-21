@@ -143,7 +143,7 @@ for(i=0;i<cs.length;i++){
 														<img src="tab/images/tb.gif" width="16" height="16" />
 													</div>
 												</td>
-												<td width="95%" class="STYLE1"><span class="STYLE3">xxx											
+												<td width="95%" class="STYLE1"><span class="STYLE3">xxx												
 												</td>
 											</tr>
 										</table>
@@ -171,55 +171,46 @@ for(i=0;i<cs.length;i++){
 						<td>
 							<p>
 								<span id="mesg"><font color='red'>xxx</font> </span>
-							</p>
-							<form id="contactorForm" name="contactorForm">
+							</p> <s:form action="sys/addContactor.action" theme="simple">
 								<p>
-									姓&nbsp;&nbsp;&nbsp;&nbsp;名：<input type="text" name="name"
-										id="name" /><font color="#FF0000">*</font>&nbsp;<span
-										id="nameSpan"><font color='red'>xxxxx</font> </span>
+									姓&nbsp;&nbsp;&nbsp;&nbsp;名：<s:textfield name="contactor.name" />
+									<font color="#FF0000">*</font>&nbsp;<span id="nameSpan"><font
+										color='red'>xxxxx</font> </span>
 								</p>
 								<p>
-									性&nbsp;&nbsp;&nbsp;&nbsp;别：<input type="text" name="gender"
-										id="gender" />&nbsp;<span id="genderSpan">
+									性&nbsp;&nbsp;&nbsp;&nbsp;别：<s:textfield name="contactor.gender" />&nbsp;<span id="genderSpan">
 								</p>
 								<p>
-									移动电话：<input type="text" name="cellphoneNumber"
-										id="cellphoneNumber" />
+									移动电话：<s:textfield name="contactor.cellphoneNumber" />
 								</p>
 								<p>
-									固定电话：<input type="text" name="telephoneNumber"
-										id="telephoneNumber" />
+									固定电话：<s:textfield name="contactor.telephoneNumber" />
 								</p>
 								<p>
-									电子邮件：<input type="text" name="email" id="email" />
+									电子邮件：<s:textfield name="contactor.email" />
 								</p>
 								<p>
-									地&nbsp;&nbsp;&nbsp;&nbsp;址：<input type="text" name="address"
-										id="address" />
+									地&nbsp;&nbsp;&nbsp;&nbsp;址：<s:textfield name="contactor.address" />
 								</p>
 								<p>
-									&nbsp;&nbsp;&nbsp;&nbsp;QQ号：<input type="text" name="QQ"
-										id="QQ" />
+									&nbsp;&nbsp;&nbsp;&nbsp;QQ号：<s:textfield name="contactor.QQ" />
 								</p>
 								<p>
-									备&nbsp;&nbsp;&nbsp;&nbsp;注：<input type="text" name="comments"
-										id="comments" />
+									备&nbsp;&nbsp;&nbsp;&nbsp;注：<s:textfield name="contactor.comments" />
 								</p>
 								<p>
-									&nbsp;&nbsp;other1：<input type="text" name="other1" id="other1" />
+									&nbsp;&nbsp;other1：<s:textfield name="contactor.other1" />
 								</p>
 								<p>
-									&nbsp;&nbsp;other2：<input type="text" name="other2" id="other2" />
+									&nbsp;&nbsp;other2：<s:textfield name="contactor.other2" />
 								</p>
 								<p>
-									<input name="addBtn" class="button1" type="button" id="addBtn"
-										value="添加" onClick="addContactor()">&nbsp;&nbsp;&nbsp;<input
-										type="reset" value="清空" />
+									<s:submit value="保存"></s:submit>&nbsp;&nbsp;&nbsp;<s:reset value="清空"></s:reset>
 								</p>
 								<p>
 									注：<font color="#FF0000">*</font>号为必填项
 								</p>
-							</form></td>
+							</s:form></td>
 						<td width="8" background="tab/images/tab_15.gif">&nbsp;</td>
 					</tr>
 				</table>

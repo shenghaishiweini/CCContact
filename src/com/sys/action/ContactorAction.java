@@ -37,19 +37,19 @@ public class ContactorAction extends ActionSupport {
 
 	public String addContactor() throws Exception
 	{
-		Contactor contactor = new Contactor();
-
-		contactor.setName("fuyu");
-//		contactor.setGender(gender);
-//		contactor.setPicture_url(picture_url);
-		contactor.setCellphoneNumber("123456");
-//		contactor.setTelephoneNumber(telephoneNumber);
-//		contactor.setEmail(email);
-//		contactor.setAddress(address);
-		contactor.setQQ("741232163");
-//		contactor.setComments(comments);
-//		contactor.setOther1(other1);
-//		contactor.setOther2(other2);
+//		Contactor contactor = new Contactor();
+//
+//		contactor.setName("fuyu");
+////		contactor.setGender(gender);
+////		contactor.setPicture_url(picture_url);
+//		contactor.setCellphoneNumber("123456");
+////		contactor.setTelephoneNumber(telephoneNumber);
+////		contactor.setEmail(email);
+////		contactor.setAddress(address);
+//		contactor.setQQ("741232163");
+////		contactor.setComments(comments);
+////		contactor.setOther1(other1);
+////		contactor.setOther2(other2);
 		
 		ActionContext actionContext = ActionContext.getContext();
         Map<String, Object> session = actionContext.getSession();

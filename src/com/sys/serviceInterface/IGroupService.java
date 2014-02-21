@@ -65,6 +65,13 @@ public interface IGroupService {
 	public List<Group> getAllGroupByUserId(int userid);
 	
 	/**
+	 * 根据联系人ID找到对应的所有分组
+	 * @param contactorId 联系人ID
+	 * @return List<Group>
+	 */
+	public List<Group> getAllGroupsByContactorId(int contactorId);
+	
+	/**
 	 * 得到某一分组中所有联系人的信息
 	 * @param groupID
 	 * @return  Set<Contactor> 

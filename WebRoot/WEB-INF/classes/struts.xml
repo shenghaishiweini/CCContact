@@ -33,27 +33,39 @@
 
 	<package name="sys" namespace="/sys" extends="struts-default">
 
+
 		<action name="*" class="userAction" method="{1}">
 			<result name="success">/main.html</result>
 			<result name="login" >/login.jsp</result>
 		</action>
 		
-		<action name="listAllGroups" class="com.sys.action.GroupAction" method="listAllGroups">
+		<action name="register" class="userAction" method="register">
+			<result name="success">/login.jsp</result>
+		</action>
+		
+		<action name="listAllGroups" class="groupAction" method="listAllGroups">
 			<result name="success">/groups.jsp</result>
 		</action>
 		
-		<action name="newGroup" class="com.sys.action.GroupAction" method="newGroup">
+		<action name="newGroup" class="groupAction" method="newGroup">
 			<!-- <result name="success" type="redirectAction">
 				<param name="actionName">listAllGroups</param>
 			</result> -->
-			<result name="success"></result>
+			<result name="success">/test.html</result>
 		</action>
 		
-		<action name="addContactor" class="com.sys.action.GroupAction" method="addContactor">
+		<action name="addContactor" class="contactorAction" method="addContactor">
 			<!-- <result name="success" type="redirectAction">
 				<param name="actionName">listAllGroups</param>
 			</result> -->
-			<result name="success"></result>
+			<result name="success">/test.html</result>
+		</action>
+		
+		<action name="listAllContactors" class="contactorAction" method="findAllContactorsByUserId">
+			<!-- <result name="success" type="redirectAction">
+				<param name="actionName">listAllGroups</param>
+			</result> -->
+			<result name="success">/tab/contactortab.jsp</result>
 		</action>
 		
 		<!--

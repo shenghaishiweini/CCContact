@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -214,143 +215,220 @@ for(i=0;i<cs.length;i++){
 </head>
 
 <body onLoad="init()">
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td height="30" background="images/tab_05.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td width="12" height="30"><img src="images/tab_03.gif" width="12" height="30" /></td>
-        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td width="46%" valign="middle"><table width="100%" border="0" cellspacing="0" cellpadding="0">
-              <tr>
-                <td width="5%"><div align="center"><img src="images/tb.gif" width="16" height="16" /></div></td>
-                <td width="95%" class="STYLE1"><span class="STYLE3">你当前的位置</span>：[业务中心]-[读者管理]</td>
-              </tr>
-            </table></td>
-            <td width="54%"><table border="0" align="right" cellpadding="0" cellspacing="0">
-              <tr>
-                <td width="60"><table width="87%" border="0" cellpadding="0" cellspacing="0">
-                  <tr>
-                    <td class="STYLE1"><div align="center">
-                      <input type="checkbox" name="topIfAll" id="topIfAll" onClick="topCheckAll()"/>
-                    </div></td>
-                    <td class="STYLE1"><div align="center">全选</div></td>
-                  </tr>
-                </table></td>
-                <td width="60"><table width="90%" border="0" cellpadding="0" cellspacing="0">
-                  <tr>
-                    <td class="STYLE1"><div align="center"><img src="images/22.gif" width="14" height="14" /></div></td>
-                    <td class="STYLE1"><div align="center"><a href="addReader.jsp">新增</a></div></td>
-                  </tr>
-                </table></td>
-                <td width="60"><table width="90%" border="0" cellpadding="0" cellspacing="0">
-                  <tr>
-                    <td class="STYLE1"><div align="center"><img src="images/33.gif" width="14" height="14" /></div></td>
-                    <td class="STYLE1"><div align="center"><a href="javascript:modifyReader()">修改</a></div></td>
-                  </tr>
-                </table></td>
-                <td width="52"><table width="88%" border="0" cellpadding="0" cellspacing="0">
-                  <tr>
-                    <td class="STYLE1"><div align="center"><img src="images/11.gif" width="14" height="14" /></div></td>
-                    <td class="STYLE1"><div align="center"><a href="javascript:deleteReader()">删除</a></div></td>
-                  </tr>
-                </table></td>
-              </tr>
-            </table></td>
-          </tr>
-        </table></td>
-        <td width="16"><img src="images/tab_07.gif" width="16" height="30" /></td>
-      </tr>
-    </table></td>
-  </tr>
-  <tr>
-    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td width="8" background="images/tab_12.gif">&nbsp;</td>
-        <td><table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="b5d6e6" onMouseOver="changeto()"  onmouseout="changeback()">
-            
-            <form name="searchForm" id="searchForm">
-            <input type="hidden" name="command" value="search">
-            &nbsp;<span class="STYLE1">按
-            <select name="select" id="select">
-          <option value="readerId">读者编号</option>
-          <option value="readerName">读者姓名</option>
-        </select>
-        来查询 ：<input type="text" name="searchText" id="searchText"/>&nbsp;
-            <input name="searchBtn" class="button1" type="button" id="searchBtn" value="查询" onClick="search()"></span>
-            </form>
-            
-          <tr>
-            <td width="3%" height="22" background="images/bg.gif" bgcolor="#FFFFFF"><div align="center">
-              <input type="checkbox" name="ifAll" id="ifAll" onClick="checkAll()" />
-            </div></td>
-            <td width="14%" height="22" background="images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">读者编号</span></div></td>
-            <td width="15%" height="22" background="images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">读者姓名</span></div></td>
-            <td width="20%" height="22" background="images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">性别</span></div></td>
-            <td width="20%" height="22" background="images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">邮箱地址</span></div></td>
-            <td width="10%" height="22" background="images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">已借数量</span></div></td>
-            <td width="20%" height="22" background="images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">注册日期</span></div></td>
-            <!-- <td width="15%" height="22" background="images/bg.gif" bgcolor="#FFFFFF" class="STYLE1"><div align="center">基本操作</div></td> -->
-          </tr>
-          <form name="readerform" id="readerform">
-          <%-- <%
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td height="30" background="tab/images/tab_05.gif"><table
+					width="100%" border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td width="12" height="30"><img src="tab/images/tab_03.gif"
+							width="12" height="30" /></td>
+						<td><table width="100%" border="0" cellspacing="0"
+								cellpadding="0">
+								<tr>
+									<td width="46%" valign="middle"><table width="100%"
+											border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td width="5%"><div align="center">
+														<img src="tab/images/tb.gif" width="16" height="16" />
+													</div></td>
+												<td width="95%" class="STYLE1"><span class="STYLE3">你当前的位置</span>：[业务中心]-[读者管理]</td>
+											</tr>
+										</table></td>
+									<td width="54%"><table border="0" align="right"
+											cellpadding="0" cellspacing="0">
+											<tr>
+												<td width="60"><table width="87%" border="0"
+														cellpadding="0" cellspacing="0">
+														<tr>
+															<td class="STYLE1"><div align="center">
+																	<input type="checkbox" name="topIfAll" id="topIfAll"
+																		onClick="topCheckAll()" />
+																</div></td>
+															<td class="STYLE1"><div align="center">全选</div></td>
+														</tr>
+													</table></td>
+												<td width="60"><table width="90%" border="0"
+														cellpadding="0" cellspacing="0">
+														<tr>
+															<td class="STYLE1"><div align="center">
+																	<img src="tab/images/22.gif" width="14" height="14" />
+																</div></td>
+															<td class="STYLE1"><div align="center">
+																	<a href="addReader.jsp">新增</a>
+																</div></td>
+														</tr>
+													</table></td>
+												<td width="60"><table width="90%" border="0"
+														cellpadding="0" cellspacing="0">
+														<tr>
+															<td class="STYLE1"><div align="center">
+																	<img src="tab/images/33.gif" width="14" height="14" />
+																</div></td>
+															<td class="STYLE1"><div align="center">
+																	<a href="javascript:modifyReader()">修改</a>
+																</div></td>
+														</tr>
+													</table></td>
+												<td width="52"><table width="88%" border="0"
+														cellpadding="0" cellspacing="0">
+														<tr>
+															<td class="STYLE1"><div align="center">
+																	<img src="tab/images/11.gif" width="14" height="14" />
+																</div></td>
+															<td class="STYLE1"><div align="center">
+																	<a href="javascript:deleteReader()">删除</a>
+																</div></td>
+														</tr>
+													</table></td>
+											</tr>
+										</table></td>
+								</tr>
+							</table></td>
+						<td width="16"><img src="tab/images/tab_07.gif" width="16"
+							height="30" /></td>
+					</tr>
+				</table></td>
+		</tr>
+		<tr>
+			<td><table width="100%" border="0" cellspacing="0"
+					cellpadding="0">
+					<tr>
+						<td width="8" background="tab/images/tab_12.gif">&nbsp;</td>
+						<td><table width="100%" border="0" cellpadding="0"
+								cellspacing="1" bgcolor="b5d6e6" onMouseOver="changeto()"
+								onmouseout="changeback()">
+
+								<form name="searchForm" id="searchForm">
+									<input type="hidden" name="command" value="search">
+									&nbsp;<span class="STYLE1">按 <select name="select"
+										id="select">
+											<option value="readerId">读者编号</option>
+											<option value="readerName">读者姓名</option>
+									</select> 来查询 ：<input type="text" name="searchText" id="searchText" />&nbsp;
+										<input name="searchBtn" class="button1" type="button"
+										id="searchBtn" value="查询" onClick="search()"> </span>
+								</form>
+
+								<tr>
+									<td width="3%" height="22" background="tab/images/bg.gif"
+										bgcolor="#FFFFFF"><div align="center">
+											<input type="checkbox" name="ifAll" id="ifAll"
+												onClick="checkAll()" />
+										</div></td>
+									<td width="14%" height="22" background="tab/images/bg.gif"
+										bgcolor="#FFFFFF"><div align="center">
+											<span class="STYLE1">姓名</span>
+										</div></td>
+									<td width="15%" height="22" background="tab/images/bg.gif"
+										bgcolor="#FFFFFF"><div align="center">
+											<span class="STYLE1">移动电话</span>
+										</div></td>
+									<td width="20%" height="22" background="tab/images/bg.gif"
+										bgcolor="#FFFFFF"><div align="center">
+											<span class="STYLE1">QQ号</span>
+										</div></td>
+									<td width="20%" height="22" background="tab/images/bg.gif"
+										bgcolor="#FFFFFF"><div align="center">
+											<span class="STYLE1">对应分组</span>
+										</div></td>
+									<!-- <td width="15%" height="22" background="images/bg.gif" bgcolor="#FFFFFF" class="STYLE1"><div align="center">基本操作</div></td> -->
+								</tr>
+								<form name="readerform" id="readerform">
+									<%-- <%
           List<Reader> readerList = pageModel.getList();
           for(Iterator<Reader> iter=readerList.iterator(); iter.hasNext();) {
             Reader reader = iter.next();
           %> --%>
-          <tr>
-            
-            <input type="hidden" name="command" value="del">
-            <td height="20" bgcolor="#FFFFFF"><div align="center">
-              <input type="checkbox" name="selectFlag" value="<%=reader.getReaderId() %>" />
-            </div></td>
-            <td height="20" bgcolor="#FFFFFF"><div align="center" class="STYLE1">
-              <div align="center"><%=reader.getReaderId() %></div>
-            </div></td>
-            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=reader.getReaderName() %></span></div></td>
-            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=reader.getGender()%> </span></div></td>
-            <td bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=reader.getEmail() %></span></div></td>
-            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=reader.getBorrowedBooks() %></span></div></td>
-            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(reader.getRegisterDate()) %></span></div></td>
-            
-          </tr>
-          <%-- <%
+									<s:iterator value="#request.list" id="contactor">
+										<tr>
+
+											<input type="hidden" name="command" value="del">
+											<td height="20" bgcolor="#FFFFFF"><div align="center">
+													<input type="checkbox" name="selectFlag"
+														value="<%-- <%=reader.getReaderId()%> --%>" />
+												</div></td>
+											<td height="20" bgcolor="#FFFFFF"><div align="center"
+													class="STYLE1">
+													<div align="center">
+														<s:property value="name" />
+													</div>
+												</div></td>
+											<td height="20" bgcolor="#FFFFFF"><div align="center">
+													<span class="STYLE1"><s:property
+															value="cellphoneNumber" />
+													</span>
+												</div></td>
+											<td height="20" bgcolor="#FFFFFF"><div align="center">
+													<span class="STYLE1"><s:property value="QQ" /> </span>
+												</div></td>
+											<td bgcolor="#FFFFFF"><div align="center">
+													<span class="STYLE1">xxxxx</span>
+												</div></td>
+
+										</tr>
+									</s:iterator>
+									<%-- <%
             }
           %> --%>
-        </form>  
-        </table></td>
-        <td width="8" background="images/tab_15.gif">&nbsp;</td>
-      </tr>
-    </table></td>
-  </tr>
-  <tr>
-    <td height="35" background="images/tab_19.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td width="12" height="35"><img src="images/tab_18.gif" width="12" height="35" /></td>
-        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="STYLE4">&nbsp;&nbsp;共有 <%=pageModel.getTotalRecords() %> 条记录，当前第 <%=pageModel.getPageNo() %>/<%=pageModel.getTotalPages() %> 页</td>
-            <td><table border="0" align="right" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td width="40"><input type="button" onClick="topPage()" tabindex="5" style="background:url(images/first.gif); border-style:none; width:37px; height:15px; background-repeat:no-repeat;" /></td>
-                  <td width="45"><input type="button" onClick="previousPage()" tabindex="5" style="background:url(images/back.gif); border-style:none; width:43px; height:15px; background-repeat:no-repeat;" /></td>
-                  <td width="45"><input type="button" onClick="nextPage()" tabindex="5" style="background:url(images/next.gif); border-style:none; width:43px; height:15px; background-repeat:no-repeat;" /></td>
-                  <td width="40"><input type="button" onClick="bottomPage()" tabindex="5" style="background:url(images/last.gif); border-style:none; width:37px; height:15px; background-repeat:no-repeat;" /></td>
-                  <form id="myForm" action="readertab.jsp" method="get">
-                  <td width="100"><div align="center"><span class="STYLE1">转到第
-                    <input name="pageNo" type="text" size="4" style="height:16px; width:20px; border:1px solid #999999;" /> 
-              页 </span></div></td>
-                  <td width="40"><input type="button" onClick="formSubmit()" tabindex="5" style="background:url(images/go.gif); border-style:none; width:37px; height:15px; background-repeat:no-repeat;" /></td>
-                  </form>
-                </tr>
-            </table></td>
-          </tr>
-        </table></td>
-        <td width="16"><img src="images/tab_20.gif" width="16" height="35" /></td>
-      </tr>
-    </table></td>
-  </tr>
-</table>
+								</form>
+							</table></td>
+						<td width="8" background="tab/images/tab_15.gif">&nbsp;</td>
+					</tr>
+				</table></td>
+		</tr>
+		<tr>
+			<td height="35" background="tab/images/tab_19.gif"><table
+					width="100%" border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td width="12" height="35"><img src="tab/images/tab_18.gif"
+							width="12" height="35" /></td>
+						<td><table width="100%" border="0" cellspacing="0"
+								cellpadding="0">
+								<tr>
+									<td class="STYLE4">&nbsp;&nbsp;共有 <%-- <%=pageModel.getTotalRecords()%>
+										条记录，当前第 <%=pageModel.getPageNo()%>/<%=pageModel.getTotalPages()%> --%>
+										页</td>
+									<td><table border="0" align="right" cellpadding="0"
+											cellspacing="0">
+											<tr>
+												<td width="40"><input type="button" onClick="topPage()"
+													tabindex="5"
+													style="background:url(tab/images/first.gif); border-style:none; width:37px; height:15px; background-repeat:no-repeat;" />
+												</td>
+												<td width="45"><input type="button"
+													onClick="previousPage()" tabindex="5"
+													style="background:url(tab/images/back.gif); border-style:none; width:43px; height:15px; background-repeat:no-repeat;" />
+												</td>
+												<td width="45"><input type="button"
+													onClick="nextPage()" tabindex="5"
+													style="background:url(tab/images/next.gif); border-style:none; width:43px; height:15px; background-repeat:no-repeat;" />
+												</td>
+												<td width="40"><input type="button"
+													onClick="bottomPage()" tabindex="5"
+													style="background:url(tab/images/last.gif); border-style:none; width:37px; height:15px; background-repeat:no-repeat;" />
+												</td>
+												<form id="myForm" action="readertab.jsp" method="get">
+													<td width="100"><div align="center">
+															<span class="STYLE1">转到第 <input name="pageNo"
+																type="text" size="4"
+																style="height:16px; width:20px; border:1px solid #999999;" />
+																页 </span>
+														</div></td>
+													<td width="40"><input type="button"
+														onClick="formSubmit()" tabindex="5"
+														style="background:url(tab/images/go.gif); border-style:none; width:37px; height:15px; background-repeat:no-repeat;" />
+													</td>
+												</form>
+											</tr>
+										</table></td>
+								</tr>
+							</table></td>
+						<td width="16"><img src="tab/images/tab_20.gif" width="16"
+							height="35" /></td>
+					</tr>
+				</table></td>
+		</tr>
+	</table>
 </body>
 
 </html>

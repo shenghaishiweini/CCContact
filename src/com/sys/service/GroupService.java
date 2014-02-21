@@ -216,4 +216,9 @@ public class GroupService implements IGroupService {
 			return false;
 		}
 	}
+
+	public List<Group> getAllGroupsByContactorId(int contactorId) {
+		
+		return null;
+	}
 }

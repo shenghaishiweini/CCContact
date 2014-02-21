@@ -1,5 +1,6 @@
 package com.sys.action;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,13 +14,16 @@ import org.springframework.stereotype.Controller;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.sys.model.Contactor;
+import com.sys.model.Group;
 import com.sys.model.User;
 import com.sys.serviceInterface.IContactorService;
+import com.sys.serviceInterface.IGroupService;
 
 @Controller @Scope("prototype")
 public class ContactorAction extends ActionSupport {
 	
 	@Resource IContactorService contactorService;
+	@Resource IGroupService groupService;
 
 	private Contactor contactor;
 	
@@ -75,10 +79,20 @@ public class ContactorAction extends ActionSupport {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		request.setAttribute("list", list);
 
-		
+		Map<Integer,String> groupsOfContactor = new HashMap<Integer,String>();
 		for(int i=0;i<list.size();i++){
-			
+			List<Group> groups = groupService.getAllGroupsByContactorId(list.get(i).getId());
+			StringBuffer str = new StringBuffer();
+			for(int j=0;j<groups.size();j++){
+				String temp = groups.get(j).getGroupName();
+				if(!"default".equals(temp)){
+					str.append(temp);
+					str.append("  "); //用2个空格作为间隔符
+				}				
+			}
+			groupsOfContactor.put(list.get(i).getId(), str.toString());
 		}
+		request.setAttribute("groupsOfContactor", groupsOfContactor);
 		
 		return SUCCESS;
 	}

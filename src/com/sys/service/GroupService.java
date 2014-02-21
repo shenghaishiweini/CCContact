@@ -219,6 +219,15 @@ public class GroupService implements IGroupService {
 
 	public List<Group> getAllGroupsByContactorId(int contactorId) {
 		
-		return null;
+		String hql = "select * from Group_Contactors where contactorId='"+contactorId+"'";
+		Query query = sessionFactory.getCurrentSession().createSQLQuery(hql)
+				.addEntity(Group_Contactor.class);
+		List<Group_Contactor> gc = query.list();
+		List<Group> groups = new ArrayList<Group>();
+		for(int i=0;i<gc.size();i++){
+			Group group = (Group) sessionFactory.getCurrentSession().get(Group.class, gc.get(i).getGroupId());
+			groups.add(group);
+		}
+		return groups;
 	}
 }

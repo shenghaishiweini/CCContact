@@ -96,4 +96,14 @@ public class GroupTest {
 		}
 	}
 	
+	@Test
+	public void testGetAllGroupsByContactorId()
+	{
+		int contactorId = 11;
+		List<Group> list = _groupService.getAllGroupsByContactorId(contactorId);
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i).getGroupName());
+		}
+	}
+	
 }

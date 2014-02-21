@@ -214,7 +214,7 @@ for(i=0;i<cs.length;i++){
 
 </head>
 
-<body onLoad="init()">
+<body>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 		<tr>
 			<td height="30" background="tab/images/tab_05.gif"><table
@@ -254,7 +254,7 @@ for(i=0;i<cs.length;i++){
 																	<img src="tab/images/22.gif" width="14" height="14" />
 																</div></td>
 															<td class="STYLE1"><div align="center">
-																	<a href="addReader.jsp">新增</a>
+																	<a href="tab/contactorInfo.jsp">新增</a>
 																</div></td>
 														</tr>
 													</table></td>
@@ -362,7 +362,7 @@ for(i=0;i<cs.length;i++){
 													<span class="STYLE1"><s:property value="QQ" /> </span>
 												</div></td>
 											<td bgcolor="#FFFFFF"><div align="center">
-													<span class="STYLE1">xxxxx</span>
+													<span class="STYLE1"><s:property value="#request.groupsOfContactor.get(#contactor.getId())"/></span>
 												</div></td>
 
 										</tr>

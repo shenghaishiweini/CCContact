@@ -40,7 +40,7 @@
 		//	return;				
 		//} 
 		if (!flag) {
-			loginForm.action = "checkLogin";
+			loginForm.action = "user_checkLogin";
 			loginForm.method = "post";
 
 			loginForm.submit();

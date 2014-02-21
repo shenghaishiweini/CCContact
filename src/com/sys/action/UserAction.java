@@ -44,6 +44,50 @@ public class UserAction extends ActionSupport {
 		session.put("user", temp);
 		return SUCCESS;
 	}
+	
+	public String logout()
+	{
+		ActionContext actionContext = ActionContext.getContext();
+		Map<String, Object> session = actionContext.getSession();
+		session.remove("user");
+		session.clear();
+		return LOGIN;
+	}
+	
+	public String alterUser()
+	{
+		System.out.print(user);
+		User olduser=_userService.findUserById(user.getId());
+		olduser.setDetailInfor(user.getDetailInfor());
+		if(_userService.alterUser(olduser))
+		{
+			ActionContext actionContext = ActionContext.getContext();
+			Map<String, Object> session = actionContext.getSession();
+			session.put("user", olduser);//update the user in session
+		}
+		return SUCCESS;
+	}
+	
+	public String modifyPwd()
+	{
+		ActionContext actionContext = ActionContext.getContext();
+		Map<String, Object> session = actionContext.getSession();
+		User olduser=_userService.findUserById(user.getId());
+		if(user.getPassword().equals(olduser.getPassword()))
+		{
+			olduser.setPassword(user.getDetailInfor().getOther1());
+			if(_userService.alterUser(olduser))
+			{
+				session.put("user", olduser);//update the user in session
+				session.put("msg", "修改成功");
+			}
+		}
+		else
+		{
+			session.put("msg", "您的原密码输入有误，请重新输入！");
+		}
+		return SUCCESS;
+	}
 
 	// public String checklogin()
 	// {

@@ -86,29 +86,16 @@ body {
 	
 	//修改用户信息
 	function modifyUser() {
-		var selectFlags = document.getElementsByName("selectFlag");
-		//计数器
-		var count = 0;
-		//记录选中的checkbox索引号
-		var index = 0;
-		for (var i=0; i<selectFlags.length; i++) {
-			if (selectFlags[i].checked) {
-			    //记录选中的checkbox
-				count++;
-				index = i;
+
+			if (window.confirm("确认修改？")) {
+			with(document.getElementById("alterform")) {
+				action="../sys/user_alterUser";
+				method="post";
+				submit();
+				//document.getElementById("alterform").
 			}
 		}
-		if(count == 0) {
-			alert("请选择需要修改的数据！");
-			return;
-		}
-		if (count > 1) {
-			alert("一次只能修改一个用户！");
-			return;
-		}
-		//alert(selectFlags[index].value);
-		
-		window.self.location = "editUser.jsp?userId=" + selectFlags[index].value;
+		//window.self.location = "editUser.jsp?userId=" + selectFlags[index].value;
 	}
 	
 	function deleteUser() {
@@ -231,84 +218,84 @@ for(i=0;i<cs.length;i++){
 														</div>
 													</td>
 													<td width="95%" class="STYLE1">
-														<span class="STYLE3">你当前的位置</span>：[系统管理]-[系统维护]
+														<span class="STYLE3">你当前的位置</span>：[基本操作]-[基本信息维护]
 													</td>
 												</tr>
 											</table>
 										</td>
-										<td width="54%">
-											<table border="0" align="right" cellpadding="0"
-												cellspacing="0">
-												<tr>
-													<td width="60">
-														<table width="87%" border="0" cellpadding="0"
-															cellspacing="0">
-															<tr>
-																<td class="STYLE1">
-																	<div align="center">
-																		<input type="checkbox" name="topIfAll" id="topIfAll"
-																			onClick="topCheckAll()" />
-																	</div>
-																</td>
-																<td class="STYLE1">
-																	<div align="center">
-																		全选
-																	</div>
-																</td>
-															</tr>
-														</table>
-													</td>
-													<td width="60">
-														<table width="90%" border="0" cellpadding="0"
-															cellspacing="0">
-															<tr>
-																<td class="STYLE1">
-																	<div align="center">
-																		<img src="../images/22.gif" width="14" height="14" />
-																	</div>
-																</td>
-																<td class="STYLE1">
-																	<div align="center">
-																		<a href="addUser.jsp">新增</a>
-																	</div>
-																</td>
-															</tr>
-														</table>
-													</td>
-													<td width="60">
-														<table width="90%" border="0" cellpadding="0"
-															cellspacing="0">
-															<tr>
-																<td class="STYLE1">
-																	<div align="center">
-																		<img src="images/33.gif" width="14" height="14" />
-																	</div>
-																</td>
-																<td class="STYLE1">
-																	<div align="center">
-																		<a href="javascript:modifyUser()">修改</a>
-																	</div>
-																</td>
-															</tr>
-														</table>
-													</td>
-													<td width="52">
-														<table width="88%" border="0" cellpadding="0"
-															cellspacing="0">
-															<tr>
-																<td class="STYLE1">
-																	<div align="center">
-																		<img src="images/11.gif" width="14" height="14" />
-																	</div>
-																</td>
-																<td class="STYLE1">
-																	<div align="center">
-																		<a href="javascript:deleteUser()">删除</a>
-																	</div>
-																</td>
-															</tr>
-														</table>
-													</td>
+<!--										<td width="54%">-->
+<!--											<table border="0" align="right" cellpadding="0"-->
+<!--												cellspacing="0">-->
+<!--												<tr>-->
+<!--													<td width="60">-->
+<!--														<table width="87%" border="0" cellpadding="0"-->
+<!--															cellspacing="0">-->
+<!--															<tr>-->
+<!--																<td class="STYLE1">-->
+<!--																	<div align="center">-->
+<!--																		<input type="checkbox" name="topIfAll" id="topIfAll"-->
+<!--																			onClick="topCheckAll()" />-->
+<!--																	</div>-->
+<!--																</td>-->
+<!--																<td class="STYLE1">-->
+<!--																	<div align="center">-->
+<!--																		全选-->
+<!--																	</div>-->
+<!--																</td>-->
+<!--															</tr>-->
+<!--														</table>-->
+<!--													</td>-->
+<!--													<td width="60">-->
+<!--														<table width="90%" border="0" cellpadding="0"-->
+<!--															cellspacing="0">-->
+<!--															<tr>-->
+<!--																<td class="STYLE1">-->
+<!--																	<div align="center">-->
+<!--																		<img src="../images/22.gif" width="14" height="14" />-->
+<!--																	</div>-->
+<!--																</td>-->
+<!--																<td class="STYLE1">-->
+<!--																	<div align="center">-->
+<!--																		<a href="addUser.jsp">新增</a>-->
+<!--																	</div>-->
+<!--																</td>-->
+<!--															</tr>-->
+<!--														</table>-->
+<!--													</td>-->
+<!--													<td width="60">-->
+<!--														<table width="90%" border="0" cellpadding="0"-->
+<!--															cellspacing="0">-->
+<!--															<tr>-->
+<!--																<td class="STYLE1">-->
+<!--																	<div align="center">-->
+<!--																		<img src="images/33.gif" width="14" height="14" />-->
+<!--																	</div>-->
+<!--																</td>-->
+<!--																<td class="STYLE1">-->
+<!--																	<div align="center">-->
+<!--																		<a href="javascript:modifyUser()">修改</a>-->
+<!--																	</div>-->
+<!--																</td>-->
+<!--															</tr>-->
+<!--														</table>-->
+<!--													</td>-->
+<!--													<td width="52">-->
+<!--														<table width="88%" border="0" cellpadding="0"-->
+<!--															cellspacing="0">-->
+<!--															<tr>-->
+<!--																<td class="STYLE1">-->
+<!--																	<div align="center">-->
+<!--																		<img src="images/11.gif" width="14" height="14" />-->
+<!--																	</div>-->
+<!--																</td>-->
+<!--																<td class="STYLE1">-->
+<!--																	<div align="center">-->
+<!--																		<a href="javascript:deleteUser()">删除</a>-->
+<!--																	</div>-->
+<!--																</td>-->
+<!--															</tr>-->
+<!--														</table>-->
+<!--													</td>-->
 												</tr>
 											</table>
 										</td>
@@ -330,7 +317,13 @@ for(i=0;i<cs.length;i++){
 								&nbsp;
 							</td>
 							<td>
+							<form id="alterform">
+								<input name="user.id" value="${user.id }" type="hidden"/>
+								<input name="user.detailInfor.other1" value="${user.detailInfor.other1 }" type="hidden"/>
+								<input name="user.detailInfor.other2" value="${user.detailInfor.other2 }" type="hidden"/>
+								<input name="user.ipAdress" value="${user.ipAdress }" type="hidden"/>
 								<table width="100%" border="0" cellpadding="0" cellspacing="1">
+								
 									<tr>
 										<td  height="22" background="../images/bg.gif"
 											bgcolor="#FFFFFF">
@@ -340,7 +333,7 @@ for(i=0;i<cs.length;i++){
 										</td>
 										<td >
 											<div align="left">
-												<span class="STYLE1"><input name="user.username" value="${user.username }"/></span>
+												<span class="STYLE1"><input name="user.username" value="${user.username }" disabled="disabled"/></span>
 											</div>
 										</td>
 									</tr>
@@ -448,7 +441,17 @@ for(i=0;i<cs.length;i++){
 											</div>
 										</td>
 										</tr>
+										
+										<tr>
+										<td>
+											<input type="button" value="确定" onClick="modifyUser()" />
+										</td>
+										<td>
+										<input type="reset" value="取消" />
+										</td>
+										</tr>
 								</table>
+								</form>
 							</td>
 							<td width="8" background="images/tab_15.gif">
 								&nbsp;
@@ -458,5 +461,7 @@ for(i=0;i<cs.length;i++){
 				</td>
 			</tr>
 		</table>
+				
+						
 	</body>
 </html>

@@ -31,33 +31,9 @@ body {
 -->
 </style>
 
-		<script src="../script/client_validate.js"></script>
+
 		<script>
 
-	function modifyUser() {
-		//用户名称不能为空
-		var userNameField = document.getElementById("userName");
-		if (trim(userNameField.value).length == 0) {
-			alert("用户姓名不能为空！");
-			userNameField.focus();
-			return;
-		} 
-		
-		//密码至少6位！
-		/* var passwordField = document.getElementById("password");
-		if (trim(passwordField.value).length < 6) {
-			alert("密码至少6位！");
-			passwordField.focus();
-			return;
-		}  */
-
-		with(document.getElementById("userForm")) {
-			action="editUser.jsp";
-			method="post";
-			submit();
-		}
-	}
-	
 	function modifyPwd(){
 	
 		var oldPwdField = document.getElementById("oldPwd");
@@ -89,58 +65,12 @@ body {
 		}
 		
 		with(document.getElementById("pwdForm")) {
-			action="editUser.jsp";
-			method="post";
+			action="../sys/user_modifyPwd";
+			method="get";
 			submit();
 		}
 	}
 
-var  highlightcolor='#c1ebff';
-//此处clickcolor只能用win系统颜色代码才能成功,如果用#xxxxxx的代码就不行,还没搞清楚为什么:(
-var  clickcolor='#51b2f6';
-function  changeto(){
-source=event.srcElement;
-if  (source.tagName=="TR"||source.tagName=="TABLE")
-return;
-while(source.tagName!="TD")
-source=source.parentElement;
-source=source.parentElement;
-cs  =  source.children;
-//alert(cs.length);
-if  (cs[1].style.backgroundColor!=highlightcolor&&source.id!="nc"&&cs[1].style.backgroundColor!=clickcolor)
-for(i=0;i<cs.length;i++){
-	cs[i].style.backgroundColor=highlightcolor;
-}
-}
-
-function  changeback(){
-if  (event.fromElement.contains(event.toElement)||source.contains(event.toElement)||source.id=="nc")
-return
-if  (event.toElement!=source&&cs[1].style.backgroundColor!=clickcolor)
-//source.style.backgroundColor=originalcolor
-for(i=0;i<cs.length;i++){
-	cs[i].style.backgroundColor="";
-}
-}
-
-function  clickto(){
-source=event.srcElement;
-if  (source.tagName=="TR"||source.tagName=="TABLE")
-return;
-while(source.tagName!="TD")
-source=source.parentElement;
-source=source.parentElement;
-cs  =  source.children;
-//alert(cs.length);
-if  (cs[1].style.backgroundColor!=clickcolor&&source.id!="nc")
-for(i=0;i<cs.length;i++){
-	cs[i].style.backgroundColor=clickcolor;
-}
-else
-for(i=0;i<cs.length;i++){
-	cs[i].style.backgroundColor="";
-}
-}
 </script>
 
 	</head>
@@ -167,8 +97,7 @@ for(i=0;i<cs.length;i++){
 														</div>
 													</td>
 													<td width="95%" class="STYLE1">
-														<span class="STYLE3">你当前的位置</span>：[安全]-[
-														<a href="usertab.jsp">系统维护</a>]-[修改密码]
+														<span class="STYLE3">你当前的位置</span>：[安全]-[修改密码]
 													</td>
 												</tr>
 											</table>
@@ -208,31 +137,31 @@ for(i=0;i<cs.length;i++){
 								<!--	          <p>电子邮件：<input type="text" name="email" id="email" value=""/></p>-->
 								<!--			  <p><input type="button" value="确定" onClick="modifyUser()"/>&nbsp;&nbsp;&nbsp;<input type="reset" value="取消" /></p>-->
 								<!--		  </form>-->
-								<form name="pwdForm" id="pwdForm">
-									<input type="hidden" name="command" value="modifyPwd">
+								<form id="pwdForm">
+									<input type="hidden" name="user.id" id="userId" value="${user.id }">
+		
 									<p>
-										修改密码：
+										修改密码
 										<span id="mesg2Span"><font color='red'>
-								
+										${msg }
 										</font>
 									</p>
-									<input type="hidden" name="userId" id="userId"
-										value="${user.id }">
+								
 									<p>
 										原&nbsp;密&nbsp;码：
-										<input type="text" name="oldPwd" id="oldPwd" />
+										<input type="password" name="user.password" id="oldPwd" />
 										&nbsp;
 										<span id="oldPwdSpan"></span>
 									</p>
 									<p>
 										新&nbsp;密&nbsp;码：
-										<input type="text" name="newPwd" id="newPwd" />
+										<input type="password" name="user.detailInfor.other1" id="newPwd" />
 										&nbsp;
 										<span id="newPwdSpan"></span>
 									</p>
 									<p>
 										确认密码：
-										<input type="text" name="confirmPwd" id="confirmPwd" />
+										<input type="password"  id="confirmPwd" />
 										&nbsp;
 										<span id="confirmPwdSpan"></span>
 									</p>

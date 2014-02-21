@@ -298,7 +298,7 @@ onmouseout=
 	this.style.borderStyle = 'none';
 >
 														<div align="center" class="STYLE3">
-															<a href="sys/logout" target="_parent">退出 
+															<a href="sys/user_logout" target="_parent">退出 
 														</div>
 													</td>
 												</tr>

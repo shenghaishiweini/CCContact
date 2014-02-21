@@ -33,8 +33,7 @@
 
 	<package name="sys" namespace="/sys" extends="struts-default">
 
-
-		<action name="*" class="userAction" method="{1}">
+		<action name="user_*" class="userAction" method="{1}">
 			<result name="success">/main.html</result>
 			<result name="login" >/login.jsp</result>
 		</action>

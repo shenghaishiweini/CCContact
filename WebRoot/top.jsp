@@ -250,7 +250,7 @@ onmouseout=
 	this.style.borderStyle = 'none';
 >
 														<div align="center" class="STYLE3">
-															<a href="./bookmiddle.html" target="mainFrame">短信</a>
+															<a href="./shortMsgmiddle.html" target="mainFrame">短信</a>
 														</div>
 													</td>
 												</tr>
@@ -268,7 +268,7 @@ onmouseout=
 	this.style.backgroundImage = 'url(images/bg.gif)';
 	this.style.borderStyle = 'solid';
 	this.style.borderWidth = '1';
-	borderColor = '#a6d0e7';;
+	borderColor = '#a6d0e7';; 
 onmouseout=
 	this.style.backgroundImage = 'url()';
 	this.style.borderStyle = 'none';

@@ -50,6 +50,7 @@ public class UserAction extends ActionSupport {
 		ActionContext actionContext = ActionContext.getContext();
 		Map<String, Object> session = actionContext.getSession();
 		session.remove("user");
+		session.clear();
 		return LOGIN;
 	}
 	

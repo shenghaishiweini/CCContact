@@ -44,6 +44,14 @@ public class UserAction extends ActionSupport {
 		session.put("user", temp);
 		return SUCCESS;
 	}
+	
+	public String logout()
+	{
+		ActionContext actionContext = ActionContext.getContext();
+		Map<String, Object> session = actionContext.getSession();
+		session.remove("user");
+		return LOGIN;
+	}
 
 	// public String checklogin()
 	// {

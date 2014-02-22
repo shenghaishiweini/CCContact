@@ -64,8 +64,9 @@ public class UserAction extends ActionSupport {
 			ActionContext actionContext = ActionContext.getContext();
 			Map<String, Object> session = actionContext.getSession();
 			session.put("user", olduser);//update the user in session
+			
 		}
-		return SUCCESS;
+		return "alterFail";
 	}
 	
 	public String modifyPwd()
@@ -85,8 +86,9 @@ public class UserAction extends ActionSupport {
 		else
 		{
 			session.put("msg", "您的原密码输入有误，请重新输入！");
+			
 		}
-		return SUCCESS;
+		return "modifyPwd";
 	}
 
 	// public String checklogin()

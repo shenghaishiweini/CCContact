@@ -7,7 +7,6 @@ import javax.annotation.Resource;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sys.model.Group;
 import com.sys.model.ShortMsg;
 import com.sys.serviceInterface.IShortMsgService;
 /**

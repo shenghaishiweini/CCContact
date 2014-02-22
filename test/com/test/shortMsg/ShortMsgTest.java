@@ -62,9 +62,9 @@ public class ShortMsgTest {
 		}
 	}
 	
-	/*@Test
+	@Test
 	public void testReadConversationDetailMsgs(){
-		List<ShortMsg> list = _ishortMsgService.readConversationDetailMsgs(3,4);
+		List<ShortMsg> list = _ishortMsgService.readConversationDetailMsgs(2,4);
 		for (int i = 0; i < list.size(); i++) {
 			System.out.println("from: "+list.get(i).getFrom() + " to: "
 					+ list.get(i).getTo() + " content: "
@@ -72,5 +72,5 @@ public class ShortMsgTest {
 		}
 		
 	}
-	*/
+	
 }

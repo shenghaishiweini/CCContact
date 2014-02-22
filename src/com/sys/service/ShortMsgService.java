@@ -52,7 +52,7 @@ public class ShortMsgService implements IShortMsgService {
 
 	public List<ShortMsg> readConversationDetailMsgs(int recipipentId,
 			int userid) {
-		/*Contactor contactor = (Contactor) sessionFactory.getCurrentSession().get(Contactor.class, 
+		Contactor contactor = (Contactor) sessionFactory.getCurrentSession().get(Contactor.class, 
 							recipipentId);
 		User user = (User) sessionFactory.getCurrentSession().get(User.class,
 					userid);
@@ -70,8 +70,8 @@ public class ShortMsgService implements IShortMsgService {
 		} else {
 			return res;
 		}
-		*/
-		return null;
+		
+	
 	}
 	
 

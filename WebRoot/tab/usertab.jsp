@@ -42,7 +42,7 @@ body {
 }
 
 .STYLE1 {
-	font-size: 12px
+	font-size: 16px
 }
 
 .STYLE3 {
@@ -199,11 +199,11 @@ for(i=0;i<cs.length;i++){
 	<body onLoad="init()">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
 			<tr>
-				<td height="30" background="../images/tab_05.gif">
+				<td height="30" background="images/tab_05.gif">
 					<table width="100%" border="0" cellspacing="0" cellpadding="0">
 						<tr>
 							<td width="12" height="30">
-								<img src="../images/tab_03.gif" width="12" height="30" />
+								<img src="images/tab_03.gif" width="12" height="30" />
 							</td>
 							<td>
 								<table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -214,10 +214,10 @@ for(i=0;i<cs.length;i++){
 												<tr>
 													<td width="5%">
 														<div align="center">
-															<img src="../images/tb.gif" width="16" height="16" />
+															<img src="images/tb.gif" width="16" height="16" />
 														</div>
 													</td>
-													<td width="95%" class="STYLE1">
+													<td width="95%" class="STYLE3">
 														<span class="STYLE3">你当前的位置</span>：[基本操作]-[基本信息维护]
 													</td>
 												</tr>
@@ -303,7 +303,7 @@ for(i=0;i<cs.length;i++){
 								</table>
 							</td>
 							<td width="16">
-								<img src="../images/tab_07.gif" width="16" height="30" />
+								<img src="images/tab_07.gif" width="16" height="30" />
 							</td>
 						</tr>
 					</table>
@@ -322,10 +322,10 @@ for(i=0;i<cs.length;i++){
 								<input name="user.detailInfor.other1" value="${user.detailInfor.other1 }" type="hidden"/>
 								<input name="user.detailInfor.other2" value="${user.detailInfor.other2 }" type="hidden"/>
 								<input name="user.ipAdress" value="${user.ipAdress }" type="hidden"/>
-								<table width="100%" border="0" cellpadding="0" cellspacing="1">
+								<table width="100%" border="0" cellpadding="0" cellspacing="21">
 								
 									<tr>
-										<td  height="22" background="../images/bg.gif"
+										<td  height="22" 
 											bgcolor="#FFFFFF">
 											<div align="center">
 												<span class="STYLE1">用户名</span>
@@ -338,7 +338,7 @@ for(i=0;i<cs.length;i++){
 										</td>
 									</tr>
 										<tr>
-										<td  height="22" background="../images/bg.gif"
+										<td  height="22" 
 											bgcolor="#FFFFFF">
 											<div align="center">
 												<span class="STYLE1">姓名</span>
@@ -351,7 +351,7 @@ for(i=0;i<cs.length;i++){
 										</td>
 									</tr>
 											<tr>
-										<td width="13%" height="22" background="../images/bg.gif"
+										<td width="13%" height="22" 
 											bgcolor="#FFFFFF">
 											<div align="center">
 												<span class="STYLE1">性别</span>
@@ -364,7 +364,7 @@ for(i=0;i<cs.length;i++){
 										</td>
 									</tr>
 											<tr>
-										<td width="13%" height="22" background="../images/bg.gif"
+										<td width="13%" height="22" 
 											bgcolor="#FFFFFF">
 											<div align="center">
 												<span class="STYLE1">手机号码</span>
@@ -377,7 +377,7 @@ for(i=0;i<cs.length;i++){
 										</td>
 									</tr>
 											<tr>
-										<td width="13%" height="22" background="../images/bg.gif"
+										<td width="13%" height="22" 
 											bgcolor="#FFFFFF">
 											<div align="center">
 												<span class="STYLE1">电话号码</span>
@@ -390,7 +390,7 @@ for(i=0;i<cs.length;i++){
 										</td>
 									</tr>
 											<tr>
-										<td width="13%" height="22" background="../images/bg.gif"
+										<td width="13%" height="22" 
 											bgcolor="#FFFFFF">
 											<div align="center">
 												<span class="STYLE1">邮箱地址</span>
@@ -403,7 +403,7 @@ for(i=0;i<cs.length;i++){
 										</td>
 									</tr>
 											<tr>
-										<td width="13%" height="22" background="../images/bg.gif"
+										<td width="13%" height="22"
 											bgcolor="#FFFFFF">
 											<div align="center">
 												<span class="STYLE1">家庭住址</span>
@@ -416,7 +416,7 @@ for(i=0;i<cs.length;i++){
 										</td>
 									</tr>
 											<tr>
-										<td width="13%" height="22" background="../images/bg.gif"
+										<td width="13%" height="22" 
 											bgcolor="#FFFFFF">
 											<div align="center">
 												<span class="STYLE1">QQ号</span>
@@ -429,7 +429,7 @@ for(i=0;i<cs.length;i++){
 										</td>
 									</tr>
 										<tr>
-														<td width="20%" height="22" background="../images/bg.gif"
+														<td width="20%" height="22" 
 											bgcolor="#FFFFFF">
 											<div align="center">
 												<span class="STYLE1">备注</span>
@@ -444,11 +444,14 @@ for(i=0;i<cs.length;i++){
 										
 										<tr>
 										<td>
-											<input type="button" value="确定" onClick="modifyUser()" />
+											<div align="left">
+												<span class="STYLE1"></span>
+											</div>
 										</td>
 										<td>
-										<input type="reset" value="取消" />
+											<div align="left"><input type="button" value="确定" onClick="modifyUser()" /></div>
 										</td>
+									
 										</tr>
 								</table>
 								</form>

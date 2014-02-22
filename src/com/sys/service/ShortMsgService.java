@@ -4,25 +4,28 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sys.model.Group;
+import com.sys.model.Contactor;
 import com.sys.model.ShortMsg;
+import com.sys.model.User;
 import com.sys.serviceInterface.IShortMsgService;
+
 /**
  * 短信接口实现类
- * @author Gui Junfei
- * 2014.2.7
+ * 
+ * @author Gui Junfei 2014.2.7
  */
 @Transactional
 public class ShortMsgService implements IShortMsgService {
 
 	@Resource
 	private SessionFactory sessionFactory;
-	
+
 	public boolean add(ShortMsg shortmsg) {
-	
+
 		try {
 			sessionFactory.getCurrentSession().persist(shortmsg);
 			return true;
@@ -30,15 +33,30 @@ public class ShortMsgService implements IShortMsgService {
 			System.out.print(e.getMessage());
 			return false;
 		}
-		
+
 	}
 
-	public List<ShortMsg> readMsgsByRecipient(int recipipentId, int userid) {
+	@SuppressWarnings("unchecked")
+	public List<ShortMsg> readAllConversations(int userid) {
+		String hql = "select * from ShortMsgs where userID=:userid order by createTime";
+		Query q = sessionFactory.getCurrentSession().createSQLQuery(hql)
+				.addEntity(ShortMsg.class);
+		q.setParameter("userid", userid);
+		List<ShortMsg> res = q.list();
+		if (res.size() <= 0) {
+			return null;
+		} else {
+			return res;
+		}
+	}
+
+	public List<ShortMsg> readConversationDetailMsgs(int recipipentId,
+			int userid) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public List<ShortMsg> readMsgsByUserid(int userid) {
+	public ShortMsg readFirstConversationMsgs(int recipipentId, int userid) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -1,6 +1,11 @@
 package com.test.shortMsg;
 
+
+
+
+
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -41,7 +46,15 @@ public class ShortMsgTest {
 		shortmsg.setContent("this is a test!");
 		shortmsg.setFrom("123");
 		shortmsg.setOwner(user);
+		java.util.Date utilDate=new java.util.Date();
+		Timestamp sqlDate= new java.sql.Timestamp(utilDate.getTime());
+		shortmsg.setCreateTime(sqlDate);
 		_ishortMsgService.add(shortmsg);
 	}
 	
+	@Test
+	public void testReadAllConversations()
+	{
+		
+	}
 }

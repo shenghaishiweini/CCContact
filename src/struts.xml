@@ -36,6 +36,8 @@
 		<action name="user_*" class="userAction" method="{1}">
 			<result name="success" type="redirect">/main.html</result>
 			<result name="login" >/login.jsp</result>
+			<result name="modifyPwd" type="redirect">/main.html</result>
+			<result name="alterFail" type="redirect">/main.html</result>
 		</action>
 		
 		<action name="register" class="userAction" method="register">

@@ -61,4 +61,5 @@
 	<bean id="IUserService" class="com.sys.service.UserService" />
 	<bean id="IGroupService" class="com.sys.service.GroupService" />
 	<bean id="IContactorService" class="com.sys.service.ContactorService" />
+	<bean id="IShortMsgService" class="com.sys.service.ShortMsgService" />
 </beans>

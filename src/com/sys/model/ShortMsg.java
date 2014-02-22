@@ -1,6 +1,7 @@
 package com.sys.model;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * 短信类主要是临时使用，如果用户选择备份，则需要存入数据库
@@ -28,7 +29,7 @@ public class ShortMsg {
 	 */
 	private String fromName;
 	private String toName;
-	private Date createTime;
+	private Timestamp createTime;
 	private String content;
 	private int msgType;//短信类型，可能是彩信或语音
 	
@@ -52,10 +53,10 @@ public class ShortMsg {
 	public void setTo(String to) {
 		this.to = to;
 	}
-	public Date getCreateTime() {
+	public Timestamp getCreateTime() {
 		return createTime;
 	}
-	public void setCreateTime(Date createTime) {
+	public void setCreateTime(Timestamp createTime) {
 		this.createTime = createTime;
 	}
 	public String getContent() {

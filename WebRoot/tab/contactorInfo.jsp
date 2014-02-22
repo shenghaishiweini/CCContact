@@ -171,11 +171,15 @@ for(i=0;i<cs.length;i++){
 						<td>
 							<p>
 								<span id="mesg"><font color='red'>xxx</font> </span>
-							</p> <s:form action="sys/addContactor.action" theme="simple">
+							</p> <s:form action="sys/addContactor2.action" theme="simple">
 								<p>
 									姓&nbsp;&nbsp;&nbsp;&nbsp;名：<s:textfield name="contactor.name" />
 									<font color="#FF0000">*</font>&nbsp;<span id="nameSpan"><font
 										color='red'>xxxxx</font> </span>
+								</p>
+								<p>
+									分&nbsp;&nbsp;&nbsp;&nbsp;组：
+									<s:checkboxlist name="selectedGroups" list="#session.groups.{groupName}" value="" />  								
 								</p>
 								<p>
 									性&nbsp;&nbsp;&nbsp;&nbsp;别：<s:textfield name="contactor.gender" />&nbsp;<span id="genderSpan">

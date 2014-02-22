@@ -26,7 +26,16 @@ public class ContactorAction extends ActionSupport {
 	@Resource IGroupService groupService;
 
 	private Contactor contactor;
+	private String[] selectedGroups;
 	
+	public String[] getSelectedGroups() {
+		return selectedGroups;
+	}
+
+	public void setSelectedGroups(String[] selectedGroups) {
+		this.selectedGroups = selectedGroups;
+	}
+
 	public Contactor getContactor() {
 		return contactor;
 	}
@@ -35,21 +44,22 @@ public class ContactorAction extends ActionSupport {
 		this.contactor = contactor;
 	}
 
-	public String addContactor() throws Exception
+	
+	public String addContactor1() throws Exception
 	{
-//		Contactor contactor = new Contactor();
-//
-//		contactor.setName("fuyu");
-////		contactor.setGender(gender);
-////		contactor.setPicture_url(picture_url);
-//		contactor.setCellphoneNumber("123456");
-////		contactor.setTelephoneNumber(telephoneNumber);
-////		contactor.setEmail(email);
-////		contactor.setAddress(address);
-//		contactor.setQQ("741232163");
-////		contactor.setComments(comments);
-////		contactor.setOther1(other1);
-////		contactor.setOther2(other2);
+		ActionContext actionContext = ActionContext.getContext();
+        Map<String, Object> session = actionContext.getSession();
+		User owner = (User)session.get("user");
+		
+		List<Group> groups = groupService.getAllGroupByUserId(owner.getId());
+		
+		session.put("groups", groups);
+		
+		return SUCCESS;
+	}
+	
+	public String addContactor2() throws Exception
+	{
 		
 		ActionContext actionContext = ActionContext.getContext();
         Map<String, Object> session = actionContext.getSession();
@@ -57,7 +67,7 @@ public class ContactorAction extends ActionSupport {
 		
 		contactor.setOwner(owner);
 
-
+		System.out.println(selectedGroups.length);
 		contactorService.addContactorDefault(contactor);
 
 		return SUCCESS;

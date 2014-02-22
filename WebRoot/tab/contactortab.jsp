@@ -254,7 +254,7 @@ for(i=0;i<cs.length;i++){
 																	<img src="tab/images/22.gif" width="14" height="14" />
 																</div></td>
 															<td class="STYLE1"><div align="center">
-																	<a href="tab/contactorInfo.jsp">新增</a>
+																	<a href="sys/addContactor1.action">新增</a>
 																</div></td>
 														</tr>
 													</table></td>

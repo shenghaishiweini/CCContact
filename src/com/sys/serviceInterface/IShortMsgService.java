@@ -17,8 +17,27 @@ public interface IShortMsgService {
 	 */
 	public boolean add(ShortMsg shortmsg);
 	
-	public List<ShortMsg> readMsgsByUserid(int userid);
+	/**
+	 * 
+	 * @param userid
+	 * @return
+	 */
+	public List<ShortMsg> readAllConversations(int userid);
 	
-	public List<ShortMsg> readMsgsByRecipient(int recipipentId,int userid);
+	/**
+	 * 
+	 * @param recipipentId
+	 * @param userid
+	 * @return
+	 */
+	public List<ShortMsg> readConversationDetailMsgs(int recipipentId,int userid);
+	
+	/**
+	 * 
+	 * @param recipipentId
+	 * @param userid
+	 * @return
+	 */
+	public ShortMsg readFirstConversationMsgs(int recipipentId,int userid);
 	
 }

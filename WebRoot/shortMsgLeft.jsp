@@ -79,11 +79,15 @@ a:active {
 				</tr>
 			</table></td>
 	</tr>
+	
 	<tr>
 		<td valign="top"><table width="151" border="0" align="center"
 				cellpadding="0" cellspacing="0">
 				<tr>
 					<td><table width="100%" border="0" cellspacing="0"
+							cellpadding="0">
+							<tr>
+								<td><table width="100%" border="0" cellspacing="0"
 							cellpadding="0">
 							<tr>
 								<td height="23" background="../images/main_47.gif" id="imgmenu1"
@@ -93,7 +97,7 @@ a:active {
 										width="100%" border="0" cellspacing="0" cellpadding="0">
 										<tr>
 											<td width="18%">&nbsp;</td>
-											<td width="82%" class="STYLE1">全部分组</td>
+											<td width="82%" class="STYLE1">全部短信</td>
 										</tr>
 									</table></td>
 							</tr>
@@ -105,7 +109,7 @@ a:active {
 												<td><table width="90%" border="0" align="center"
 														cellpadding="0" cellspacing="0">
 
-														<s:iterator value="#request.list" id="group">
+														<s:iterator value="#request.list" id="fromname">
 															<tr>
 															<td width="16%" height="25"><div align="center">
 																	<img src="../images/left.gif" width="10" height="10" />
@@ -116,8 +120,8 @@ a:active {
 																		<td height="20" style="cursor:hand"
 																			onmouseover="this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#7bc4d3'; "
 																			onmouseout="this.style.borderStyle='none'"><span
-																			class="STYLE3"><a href="./readermiddle.html"
-																				target="_parent"><s:property value="groupName"/></a> </span></td>
+																			class="STYLE3"><a href="./shortMsgmiddle.html"
+																				target="_parent"><s:property value="fromname"/></a> </span></td>
 																	</tr>
 																</table></td>
 															</tr>

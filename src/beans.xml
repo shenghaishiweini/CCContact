@@ -56,6 +56,7 @@
 	<bean id="userAction" class="com.sys.action.UserAction" scope="prototype" />
 	<bean id="groupAction" class="com.sys.action.GroupAction" scope="prototype" />
 	<bean id="contactorAction" class="com.sys.action.ContactorAction" scope="prototype" />
+	<bean id="shortMsgAction" class="com.sys.action.ShortMsgAction" scope="prototype" />
 
 	<!-- 注册 Interface-->
 	<bean id="IUserService" class="com.sys.service.UserService" />

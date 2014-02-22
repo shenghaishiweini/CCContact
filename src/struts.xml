@@ -72,7 +72,9 @@
 			</result> -->
 			<result name="success">/tab/contactortab.jsp</result>
 		</action>
-		
+		<action name="getConversationList" class="shortMsgAction" method="getConversationList">
+			<result name="success">/shortMsgLeft.jsp</result>
+		</action>
 		<!--
 			<interceptors> <interceptor name="userInter"
 			class="com.sys.myinterceptor.myInterceptor"></interceptor>

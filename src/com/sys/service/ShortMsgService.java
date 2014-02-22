@@ -52,9 +52,28 @@ public class ShortMsgService implements IShortMsgService {
 
 	public List<ShortMsg> readConversationDetailMsgs(int recipipentId,
 			int userid) {
-		// TODO Auto-generated method stub
+		/*Contactor contactor = (Contactor) sessionFactory.getCurrentSession().get(Contactor.class, 
+							recipipentId);
+		User user = (User) sessionFactory.getCurrentSession().get(User.class,
+					userid);
+		
+		
+		String hql="select * from ShortMsgs where (fromnumber=:usernumber and tonumber=:recnumber) or (tonumber=:usernumber and fromnumber=:recnumber) order by createTime";
+		Query q = sessionFactory.getCurrentSession().createSQLQuery(hql)
+				.addEntity(ShortMsg.class);		
+		q.setParameter("usernumber", user.getDetailInfor().getCellphoneNumber());
+		q.setParameter("recnumber",contactor.getCellphoneNumber());
+		
+		List<ShortMsg> res = q.list();
+		if (res.size() <= 0) {
+			return null;
+		} else {
+			return res;
+		}
+		*/
 		return null;
 	}
+	
 
 	public ShortMsg readFirstConversationMsgs(int recipipentId, int userid) {
 		// TODO Auto-generated method stub

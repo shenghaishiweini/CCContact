@@ -34,6 +34,7 @@ public class ShortMsgService implements IShortMsgService {
 
 	public List<ShortMsg> readMsgsByRecipient(int recipipentId, int userid) {
 		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

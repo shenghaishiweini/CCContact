@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sys.model.Contactor;
+import com.sys.model.Group;
 import com.sys.model.ShortMsg;
 import com.sys.model.User;
 import com.sys.serviceInterface.IShortMsgService;
@@ -38,7 +39,7 @@ public class ShortMsgService implements IShortMsgService {
 
 	@SuppressWarnings("unchecked")
 	public List<ShortMsg> readAllConversations(int userid) {
-		String hql = "select * from ShortMsgs where userID=:userid order by createTime";
+		String hql = "select * from ShortMsgs where userID=:userid order by createTime desc";
 		Query q = sessionFactory.getCurrentSession().createSQLQuery(hql)
 				.addEntity(ShortMsg.class);
 		q.setParameter("userid", userid);
@@ -50,10 +51,10 @@ public class ShortMsgService implements IShortMsgService {
 		}
 	}
 
-	public List<ShortMsg> readConversationDetailMsgs(int recipipentId,
+	public List<ShortMsg> readConversationDetailMsgs(String recipipentCellphoneNumber,
 			int userid) {
-		Contactor contactor = (Contactor) sessionFactory.getCurrentSession().get(Contactor.class, 
-							recipipentId);
+//		Contactor contactor = (Contactor) sessionFactory.getCurrentSession().get(Contactor.class, 
+//							recipipentId);
 		User user = (User) sessionFactory.getCurrentSession().get(User.class,
 					userid);
 		
@@ -62,7 +63,7 @@ public class ShortMsgService implements IShortMsgService {
 		Query q = sessionFactory.getCurrentSession().createSQLQuery(hql)
 				.addEntity(ShortMsg.class);		
 		q.setParameter("usernumber", user.getDetailInfor().getCellphoneNumber());
-		q.setParameter("recnumber",contactor.getCellphoneNumber());
+		q.setParameter("recnumber",recipipentCellphoneNumber);
 		
 		List<ShortMsg> res = q.list();
 		if (res.size() <= 0) {
@@ -78,6 +79,17 @@ public class ShortMsgService implements IShortMsgService {
 	public ShortMsg readFirstConversationMsgs(int recipipentId, int userid) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public ShortMsg getShortMsgById(int shortmsgid) {
+		try {
+			ShortMsg temp = (ShortMsg) sessionFactory.getCurrentSession().get(
+					ShortMsg.class, shortmsgid);
+			return temp;
+		} catch (Exception e) {
+			System.out.print(e.getLocalizedMessage());
+			return null;
+		}
 	}
 
 }

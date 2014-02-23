@@ -35,6 +35,8 @@ public class ShortMsg {
 	
 	private User owner;
 	
+	private String conversation; 
+	
 	public int getId() {
 		return id;
 	}
@@ -88,6 +90,12 @@ public class ShortMsg {
 	}
 	public User getOwner() {
 		return owner;
+	}
+	public void setConversation(String conversation) {
+		this.conversation = conversation;
+	}
+	public String getConversation() {
+		return conversation;
 	}
 	
 }

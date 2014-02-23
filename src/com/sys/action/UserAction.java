@@ -3,6 +3,9 @@ package com.sys.action;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -56,6 +59,10 @@ public class UserAction extends ActionSupport {
 	
 	public String alterUser()
 	{
+		HttpServletRequest req = ServletActionContext.getRequest();
+		// 获取此请求的地址，请求地址包含application name，进行subString操作，去除application name
+		String path = req.getRequestURI();
+		
 		System.out.print(user);
 		User olduser=_userService.findUserById(user.getId());
 		olduser.setDetailInfor(user.getDetailInfor());
@@ -64,7 +71,7 @@ public class UserAction extends ActionSupport {
 			ActionContext actionContext = ActionContext.getContext();
 			Map<String, Object> session = actionContext.getSession();
 			session.put("user", olduser);//update the user in session
-			
+			session.put("prePage", path);
 		}
 		return "alterFail";
 	}

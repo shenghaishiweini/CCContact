@@ -30,7 +30,7 @@ public interface IShortMsgService {
 	 * @param userid
 	 * @return
 	 */
-	public List<ShortMsg> readConversationDetailMsgs(int recipipentId,int userid);
+	public List<ShortMsg> readConversationDetailMsgs(String recipipentCellphoneNumber,int userid);
 	
 	/**
 	 * 
@@ -39,5 +39,12 @@ public interface IShortMsgService {
 	 * @return
 	 */
 	public ShortMsg readFirstConversationMsgs(int recipipentId,int userid);
+	
+	/**
+	 * 
+	 * @param shortmsgid
+	 * @return
+	 */
+	public ShortMsg getShortMsgById(int shortmsgid);
 	
 }

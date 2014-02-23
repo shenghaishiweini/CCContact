@@ -37,14 +37,14 @@ public class ShortMsgTest {
 
 	@Test
 	public void testAdd() {
-		User user = _userService.findUserById(3);
-		String sender = "120";//
+		User user = _userService.findUserById(1);
+		String sender = "111";//
 		String receiver = "911";
 		// User receiver= _userService.findUserById(4);
 		ShortMsg shortmsg = new ShortMsg();
 		shortmsg.setContent("yes test3!");
-		shortmsg.setFrom(sender);
-		shortmsg.setTo(receiver);
+		shortmsg.setFrom(receiver);
+		shortmsg.setTo(sender);
 		shortmsg.setOwner(user);
 		java.util.Date utilDate = new java.util.Date();
 		Timestamp sqlDate = new java.sql.Timestamp(utilDate.getTime());
@@ -64,7 +64,7 @@ public class ShortMsgTest {
 	
 	@Test
 	public void testReadConversationDetailMsgs(){
-		List<ShortMsg> list = _ishortMsgService.readConversationDetailMsgs(2,4);
+		List<ShortMsg> list = _ishortMsgService.readConversationDetailMsgs("911",1);
 		for (int i = 0; i < list.size(); i++) {
 			System.out.println("from: "+list.get(i).getFrom() + " to: "
 					+ list.get(i).getTo() + " content: "

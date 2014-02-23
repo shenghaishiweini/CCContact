@@ -37,6 +37,14 @@ public interface IGroupService {
 	public boolean removeGroupContactorItem(int GroupID,int ContactorID);
 	
 	/**
+	 * 删除某个联系人对应的所有Group_Contactor条目
+	 * @param contactorId 联系人ID
+	 * @return
+	 * add by Fu Yu ,2014/2/22
+	 */
+	public boolean removeGroupContactorItemOfContactor(int contactorId);
+	
+	/**
 	 * 删除用户分组
 	 * @param groupID
 	 * @return boolean
@@ -56,6 +64,14 @@ public interface IGroupService {
 	 * @return  Group
 	 */
 	public Group getGroupByGroupId(int groupID);
+	
+	/**
+	 * 根据分组的名字来查找分组，因为每个用户的分组名不能有重复的
+	 * @param groupName
+	 * @return
+	 * add by Fu Yu, 2014/2/22
+	 */
+	public Group getGroupByGroupName(String groupName);
 	
 	/**
 	 * 查找某一用户所有的分组

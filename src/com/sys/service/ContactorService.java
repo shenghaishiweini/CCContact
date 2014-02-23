@@ -208,4 +208,30 @@ public class ContactorService implements IContactorService {
 		}
 	}
 
+	public boolean addContactor(Contactor contactor) {
+		try {
+			sessionFactory.getCurrentSession().persist(contactor);
+			return true;
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+			sessionFactory.getCurrentSession().getTransaction().rollback();
+			return false;
+		}
+	}
+
+//	public boolean addContactorToGroup(Contactor contactor, Group group) {
+//		try {
+//			sessionFactory.getCurrentSession().persist(contactor);
+//			Group_Contactor group_contactor = new Group_Contactor();
+//			group_contactor.setGroupId(group.getId());
+//			group_contactor.setContactorId(contactor.getId());
+//			sessionFactory.getCurrentSession().persist(group_contactor);
+//			return true;
+//		} catch (Exception e) {
+//			System.out.print(e.getMessage());
+//			sessionFactory.getCurrentSession().getTransaction().rollback();
+//			return false;
+//		}
+//	}
+
 }

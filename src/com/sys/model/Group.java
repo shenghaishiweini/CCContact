@@ -1,8 +1,7 @@
 package com.sys.model;
 
+import java.io.Serializable;
 import java.sql.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 
 /**
@@ -10,7 +9,7 @@ import java.util.Set;
  * @author Gui Junfei
  * 2014.2.7
  */
-public class Group {
+public class Group implements Serializable {
 	private int id;
 	private String groupName;
 	private Date createTime;

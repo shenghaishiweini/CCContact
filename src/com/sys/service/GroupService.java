@@ -230,4 +230,29 @@ public class GroupService implements IGroupService {
 		}
 		return groups;
 	}
+
+	public Group getGroupByGroupName(String groupName) {		
+		try {
+			String hql = "select * from Groups where groupName='"+groupName+"'";
+			Group temp = (Group) sessionFactory.getCurrentSession().createSQLQuery(hql).addEntity(Group.class).list().get(0);
+			return temp;
+		} catch (Exception e) {
+			System.out.print(e.getLocalizedMessage());
+			return null;
+		}
+	}
+
+	public boolean removeGroupContactorItemOfContactor(int contactorId) {
+		try {
+			String hql = "select * from Group_Contactors where contactorId='"+contactorId+"'";
+			List<Group_Contactor> temp = sessionFactory.getCurrentSession().createSQLQuery(hql).addEntity(Group_Contactor.class).list();
+			for(int i=0;i<temp.size();i++){
+				sessionFactory.getCurrentSession().delete(temp.get(i));
+			}			
+			return true;
+		} catch (Exception e) {
+			System.out.print(e.getLocalizedMessage());
+			return false;
+		}
+	}
 }

@@ -50,23 +50,16 @@ body {
 
 <script src="script/client_validate.js"></script>
 <script type="text/javascript">
-
-	function addContactor() {		
-		
-		var nameField = document.getElementById("name");
-		if(trim(nameField.value) == ""){
-			document.getElementById("nameSpan").innerHTML = "<font color='red'>" + "姓名不能为空" + "</font>";
+	
+	function validate(){
+		var nameField =document.getElementsByName("contactor.name")[0];
+		if(trim(nameField.value) == "")
+		{
+			document.getElementById("nameSpan").innerHTML = "<font color='red'>" + "联系人姓名不能为空" + "</font>";
 			nameField.focus();
-			return;
+       		return false;
 		}
-		
-		
-		//提交表单
-		with(document.getElementById("contactorForm")) {
-			method="post";
-			action="sys/addContactor.action";
-		}
-		
+		return true;
 	}
 	
 
@@ -143,7 +136,7 @@ for(i=0;i<cs.length;i++){
 														<img src="tab/images/tb.gif" width="16" height="16" />
 													</div>
 												</td>
-												<td width="95%" class="STYLE1"><span class="STYLE3">xxx												
+												<td width="95%" class="STYLE1"><span class="STYLE3">添加联系人												
 												</td>
 											</tr>
 										</table>
@@ -169,47 +162,46 @@ for(i=0;i<cs.length;i++){
 					<tr>
 						<td width="8" background="tab/images/tab_12.gif">&nbsp;</td>
 						<td>
-							<p>
-								<span id="mesg"><font color='red'>xxx</font> </span>
-							</p> <s:form action="sys/addContactor2.action" theme="simple">
+						<s:form action="sys/updateContactor.action" theme="simple" onsubmit = "return validate();">
+								
+								<s:hidden name="id" value="%{#request.contactor.id}"></s:hidden>
 								<p>
-									姓&nbsp;&nbsp;&nbsp;&nbsp;名：<s:textfield name="contactor.name" />
-									<font color="#FF0000">*</font>&nbsp;<span id="nameSpan"><font
-										color='red'>xxxxx</font> </span>
+									姓&nbsp;&nbsp;&nbsp;&nbsp;名：<s:textfield name="contactor.name" value="%{#request.contactor.name}"/>
+									<font color="#FF0000">*</font>&nbsp;<span id="nameSpan"></span>
 								</p>
 								<p>
 									分&nbsp;&nbsp;&nbsp;&nbsp;组：
-									<s:checkboxlist name="selectedGroups" list="#session.groups.{groupName}" value="" />  								
+									<s:checkboxlist name="selectedGroups" list="#session.groups.{groupName}" value="#request.groups.{groupName}" />  								
 								</p>
 								<p>
-									性&nbsp;&nbsp;&nbsp;&nbsp;别：<s:textfield name="contactor.gender" />&nbsp;<span id="genderSpan">
+									性&nbsp;&nbsp;&nbsp;&nbsp;别：<s:textfield name="contactor.gender" value="%{#request.contactor.gender}"/>&nbsp;<span id="genderSpan">
 								</p>
 								<p>
-									移动电话：<s:textfield name="contactor.cellphoneNumber" />
+									移动电话：<s:textfield name="contactor.cellphoneNumber" value="%{#request.contactor.cellphoneNumber}"/>
 								</p>
 								<p>
-									固定电话：<s:textfield name="contactor.telephoneNumber" />
+									固定电话：<s:textfield name="contactor.telephoneNumber" value="%{#request.contactor.telephoneNumber}"/>
 								</p>
 								<p>
-									电子邮件：<s:textfield name="contactor.email" />
+									电子邮件：<s:textfield name="contactor.email" value="%{#request.contactor.email}"/>
 								</p>
 								<p>
-									地&nbsp;&nbsp;&nbsp;&nbsp;址：<s:textfield name="contactor.address" />
+									地&nbsp;&nbsp;&nbsp;&nbsp;址：<s:textfield name="contactor.address" value="%{#request.contactor.address}"/>
 								</p>
 								<p>
-									&nbsp;&nbsp;&nbsp;&nbsp;QQ号：<s:textfield name="contactor.QQ" />
+									&nbsp;&nbsp;&nbsp;&nbsp;QQ号：<s:textfield name="contactor.QQ" value="%{#request.contactor.QQ}"/>
 								</p>
 								<p>
-									备&nbsp;&nbsp;&nbsp;&nbsp;注：<s:textfield name="contactor.comments" />
+									备&nbsp;&nbsp;&nbsp;&nbsp;注：<s:textfield name="contactor.comments" value="%{#request.contactor.comments}"/>
 								</p>
 								<p>
-									&nbsp;&nbsp;other1：<s:textfield name="contactor.other1" />
+									&nbsp;&nbsp;other1：<s:textfield name="contactor.other1" value="%{#request.contactor.other1}"/>
 								</p>
 								<p>
-									&nbsp;&nbsp;other2：<s:textfield name="contactor.other2" />
+									&nbsp;&nbsp;other2：<s:textfield name="contactor.other2" value="%{#request.contactor.other2}"/>
 								</p>
 								<p>
-									<s:submit value="保存"></s:submit>&nbsp;&nbsp;&nbsp;<s:reset value="清空"></s:reset>
+									<s:submit value="保存"></s:submit>&nbsp;&nbsp;&nbsp;<s:reset value="恢复"></s:reset>
 								</p>
 								<p>
 									注：<font color="#FF0000">*</font>号为必填项

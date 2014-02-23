@@ -38,7 +38,7 @@ public class GroupTest {
 	{
 		User user=_userService.findUserById(1); 
 		Group gp=new Group();
-		gp.setGroupName("testNewGroup");
+		gp.setGroupName("aaa");
 		gp.setOwner(user);
 		_groupService.newGroup(gp);
 	}
@@ -106,4 +106,10 @@ public class GroupTest {
 		}
 	}
 	
+	@Test
+	public void testGetGroupByGroupName()
+	{
+		String str = "aaaa";
+		System.out.println(_groupService.getGroupByGroupName(str).getId());
+	}
 }

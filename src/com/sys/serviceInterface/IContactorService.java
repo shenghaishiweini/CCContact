@@ -24,6 +24,22 @@ public interface IContactorService {
 	public boolean addContactorDefault(Contactor contactor);
 	
 	/**
+	 * 新增联系人到Contactor表中
+	 * @param contactor 新增的联系人
+	 * @return
+	 */
+	public boolean addContactor(Contactor contactor);
+	
+	/**
+	 * 新增联系人到Contactor表中，并且新增对应的Group_Contactor对象到Group_Contactor表中
+	 * @param contactor 新增的联系人
+	 * @param group 联系人对应的分组，不包含default分组
+	 * @return
+	 * add by Fu Yu, 2014/2/22
+	 */
+//	public boolean addContactorToGroup(Contactor contactor,Group group);
+	
+	/**
 	 * 修改联系人信息
 	 * @param contactor 修改的联系人
 	 * @return boolean

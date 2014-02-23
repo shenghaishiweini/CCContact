@@ -56,14 +56,29 @@
 		</action>
 		
 		<action name="addContactor1" class="contactorAction" method="addContactor1">
-			<result name="success">/tab/contactorInfo.jsp</result>
+			<result name="success">/tab/addContactor.jsp</result>
 		</action>
 		
 		<action name="addContactor2" class="contactorAction" method="addContactor2">
-			<!-- <result name="success" type="redirectAction">
-				<param name="actionName">listAllGroups</param>
-			</result> -->
-			<result name="success">/test.html</result>
+			<result name="success" type="chain">
+				<param name="actionName">listAllContactors</param>
+			</result>
+		</action>
+		
+		<action name="getSingleContactor" class="contactorAction" method="getSingleContactor">
+			<result>/tab/updateContactor.jsp</result>
+		</action>
+		
+		<action name="updateContactor" class="contactorAction" method="updateContactor">
+			<result name="success" type="chain">
+				<param name="actionName">listAllContactors</param>
+			</result>
+		</action>
+		
+		<action name="deleteContactor" class="contactorAction" method="deleteContactor">
+			<result name="success" type="chain">
+				<param name="actionName">listAllContactors</param>
+			</result>
 		</action>
 		
 		<action name="listAllContactors" class="contactorAction" method="findAllContactorsByUserId">
@@ -72,7 +87,9 @@
 			</result> -->
 			<result name="success">/tab/contactortab.jsp</result>
 		</action>
-		
+		<action name="getConversationList" class="shortMsgAction" method="getConversationList">
+			<result name="success">/shortMsgLeft.jsp</result>
+		</action>
 		<!--
 			<interceptors> <interceptor name="userInter"
 			class="com.sys.myinterceptor.myInterceptor"></interceptor>

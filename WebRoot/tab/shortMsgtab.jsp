@@ -176,7 +176,7 @@ for(i=0;i<cs.length;i++){
             <td width="46%" valign="middle"><table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td width="5%"><div align="center"><img src="images/tb.gif" width="16" height="16" /></div></td>
-                <td width="95%" class="STYLE1"><span class="STYLE3">你当前的位置</span>：[业务中心]-[图书管理]</td>
+                <td width="95%" class="STYLE1"><span class="STYLE3">你当前的位置</span>：[短信]-[详细会话]</td>
               </tr>
             </table></td>
             <td width="54%"><table border="0" align="right" cellpadding="0" cellspacing="0">
@@ -216,58 +216,10 @@ for(i=0;i<cs.length;i++){
     </table></td>
   </tr>
   <tr>
-    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td width="8" background="images/tab_12.gif">&nbsp;</td>
-        <td><table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="b5d6e6" onMouseOver="changeto()"  onmouseout="changeback()">
-            
-            <form name="searchForm" id="searchForm">
-            <input type="hidden" name="command" value="search">
-            &nbsp;<span class="STYLE1">按
-            <select name="select" id="select">
-          <option value="bookId">图书编号</option>
-          <option value="bookName">图书书名</option>
-        </select>
-        来查询 ：<input type="text" name="searchText" id="searchText"/>&nbsp;
-            <input name="searchBtn" class="button1" type="button" id="searchBtn" value="查询" onClick="search()"></span>
-            </form>
-            
-          <tr>
-            <td width="3%" height="22" background="images/bg.gif" bgcolor="#FFFFFF"><div align="center">
-              <input type="checkbox" name="ifAll" id="ifAll" onClick="checkAll()" />
-            </div></td>
-            <td width="14%" height="22" background="images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">图书编号</span></div></td>
-            <td width="15%" height="22" background="images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">图书书名</span></div></td>
-            <td width="20%" height="22" background="images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">ISBN</span></div></td>
-            <td width="20%" height="22" background="images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">库存数量</span></div></td>
-            <td width="10%" height="22" background="images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">已被借数量</span></div></td>
-            <td width="20%" height="22" background="images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">入库日期</span></div></td>
-            <!-- <td width="15%" height="22" background="images/bg.gif" bgcolor="#FFFFFF" class="STYLE1"><div align="center">基本操作</div></td> -->
-          </tr>
-          <form name="bookform" id="bookform">
-  
-          <tr>
-            
-            <input type="hidden" name="command" value="del">
-            <td height="20" bgcolor="#FFFFFF"><div align="center">
-              <input type="checkbox" name="selectFlag" value="" />
-            </div></td>
-            <td height="20" bgcolor="#FFFFFF"><div align="center" class="STYLE1">
-              <div align="center"></div>
-            </div></td>
-            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"></span></div></td>
-            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"> </span></div></td>
-            <td bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"></span></div></td>
-            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"></span></div></td>
-            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"></span></div></td>
-            
-          </tr>
-   
-        </form>  
-        </table></td>
-        <td width="8" background="images/tab_15.gif">&nbsp;</td>
-      </tr>
-    </table></td>
+    <td>
+    	
+    
+   </td>
   </tr>
 </table>
 </body>

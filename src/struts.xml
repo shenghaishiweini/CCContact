@@ -96,7 +96,7 @@
 		</action>
 		
 		<action name="getConversationDetailMsg" class="shortMsgAction" method="getConversationDetailMsgs">
-			<result name="success">/shortMsgmiddle.html</result>
+			<result name="success" type="redirect">../shortMsgmiddle.html</result>
 		</action>
 		
 		<!--

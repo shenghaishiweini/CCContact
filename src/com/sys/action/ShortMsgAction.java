@@ -6,8 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.servlet.ServletRequestContext;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -79,6 +82,9 @@ public class ShortMsgAction extends ActionSupport{
 			recipipentCellphoneNumber=sMsg.getFrom();
 		}
         List<ShortMsg> list=_isIShortMsgService.readConversationDetailMsgs(recipipentCellphoneNumber, user.getId());
+        
+        HttpSession httpSession=ServletActionContext.getRequest().getSession();
+        httpSession.setAttribute("conversationDetailMsgs", list);
 		return "success";
 	}
 

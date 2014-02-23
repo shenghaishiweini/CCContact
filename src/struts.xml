@@ -55,6 +55,10 @@
 			<result name="success">/test.html</result>
 		</action>
 		
+		<action name="listContactorsOfGroup" class="groupAction" method="listContactorsOfGroup">
+			<result name="success">/tab/contactortab.jsp</result>
+		</action>
+		
 		<action name="addContactor1" class="contactorAction" method="addContactor1">
 			<result name="success">/tab/addContactor.jsp</result>
 		</action>
@@ -82,11 +86,11 @@
 		</action>
 		
 		<action name="listAllContactors" class="contactorAction" method="findAllContactorsByUserId">
-			<!-- <result name="success" type="redirectAction">
-				<param name="actionName">listAllGroups</param>
-			</result> -->
 			<result name="success">/tab/contactortab.jsp</result>
 		</action>
+		
+		
+		
 		<action name="getConversationList" class="shortMsgAction" method="getConversationList">
 			<result name="success">/shortMsgLeft.jsp</result>
 		</action>

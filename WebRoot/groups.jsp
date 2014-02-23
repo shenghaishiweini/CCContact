@@ -116,8 +116,7 @@ a:active {
 																		<td height="20" style="cursor:hand"
 																			onmouseover="this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#7bc4d3'; "
 																			onmouseout="this.style.borderStyle='none'"><span
-																			class="STYLE3"><a href="./readermiddle.html"
-																				target="_parent"><s:property value="groupName"/></a> </span></td>
+																			class="STYLE3"><s:a href="listContactorsOfGroup.action?id=%{#group.id}&groupName=%{#group.groupName}" target="contactorFrame"><s:property value="groupName"/></s:a> </span></td>
 																	</tr>
 																</table></td>
 															</tr>

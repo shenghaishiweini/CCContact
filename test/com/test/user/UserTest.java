@@ -38,8 +38,8 @@ public class UserTest {
 	public void testRegisterUser()
 	{
 		User user=new User();
-		user.setUsername("gjf0");
-		user.setPassword("123456");
+		user.setUsername("fuyu");
+		user.setPassword("fy");
 		Contactor contactor=new Contactor();
 		contactor.setName("myself");
 		user.setDetailInfor(contactor);

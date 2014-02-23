@@ -38,7 +38,7 @@ public class GroupTest {
 	{
 		User user=_userService.findUserById(1); 
 		Group gp=new Group();
-		gp.setGroupName("aaa");
+		gp.setGroupName("group02");
 		gp.setOwner(user);
 		_groupService.newGroup(gp);
 	}

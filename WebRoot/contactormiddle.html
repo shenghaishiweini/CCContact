@@ -37,18 +37,19 @@ body {
 </head>
 
 <body style="overflow:hidden">
+<form id="form1">
 	<table width="100%" height="100%" border="0" cellpadding="0"
 		cellspacing="0" style="table-layout:fixed;">
-		<tr>
+		<tr>		
 			<td width="171" id=frmTitle noWrap name="fmTitle" align="center"
 				valign="top"><table width="171" height="100%" border="0"
 					cellpadding="0" cellspacing="0" style="table-layout:fixed;">
 					<tr>
 						<td bgcolor="#1873aa" style="width:6px;">&nbsp;</td>
 						<td width="165"><iframe name="I1" height="100%" width="165"
-								src="sys/listAllGroups.action" border="0" frameborder="0" scrolling="no">
+								src="sys/listAllGroups.action" border="0" frameborder="0" scrolling="no" >
 								浏览器不支持嵌入式框架，或被配置为不显示嵌入式框架。</iframe>
-						</td>
+						</td>						 
 					</tr>
 				</table></td>
 			<td width="6" style="width:6px;" valign="middle" bgcolor="1873aa"
@@ -57,11 +58,12 @@ body {
 					width=6 height=40 id=img1>
 			</SPAN>
 			</td>
-			<td width="100%" align="center" valign="top"><iframe name="I2"
-					height="100%" width="100%" border="0" frameborder="0"
-					src="sys/listAllContactors.action"> 浏览器不支持嵌入式框架，或被配置为不显示嵌入式框架。</iframe>
-			</td>
+			<td width="100%" align="center" valign="top">
+			<iframe name="contactorFrame" id="contactorFrame" height="100%" width="100%" border="0" frameborder="0" src="sys/listAllContactors.action"> 
+			浏览器不支持嵌入式框架，或被配置为不显示嵌入式框架。</iframe>
+			</td>			
 		</tr>
 	</table>
+</form>
 </body>
 </html>

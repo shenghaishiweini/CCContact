@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.annotation.Resource;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,10 +45,13 @@ public class GroupService implements IGroupService {
 	public List<Contactor> getGroupContactors(int groupID) {// test ok 2014.2.19
 		Group group = (Group) sessionFactory.getCurrentSession().get(
 				Group.class, groupID);
-		String hql = "select id from Group_Contactors where groupId=:gid";
-		Query q = sessionFactory.getCurrentSession().createSQLQuery(hql);
-		q.setParameter("gid", group.getId());
-		List<Integer> contactids = q.list();
+		
+		//String hql = "select id from Group_Contactors where groupId=:gid"; //此句有错，改为下面1句，edit by Fu Yu,2014/2/23
+		String hql = "select contactorid from Group_Contactors where groupId=:gid";
+		
+		Query q = sessionFactory.getCurrentSession().createSQLQuery(hql); 		
+		q.setParameter("gid", group.getId());		
+		List<Integer> contactids = q.list(); 		
 		if (contactids.size() <= 0) {
 			return null;
 		}

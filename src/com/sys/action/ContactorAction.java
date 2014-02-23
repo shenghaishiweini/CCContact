@@ -202,37 +202,7 @@ public class ContactorAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
-//	public String getSingleContactor() throws Exception
-//	{
-//		Contactor contactor = contactorService.getSingleContactorById(id);
-//
-//		HttpServletRequest request = ServletActionContext.getRequest();
-//
-//		request.setAttribute("contactor", contactor);
-//
-//		return SUCCESS;
-//	}
-//	
-//	public String updateContactor() throws Exception
-//	{
-//		Contactor contactor = contactorService.getSingleContactorById(id);
-//		
-//		contactor.setName(name);
-//		contactor.setCellphoneNumber(cellphoneNumber);
-//		contactor.setQQ(QQ);
-//		
-//		contactorService.updateContactor(contactor);
-//		
-//		return SUCCESS;
-//	}
-//	
-//	public String deleteContactor() throws Exception
-//	{
-//		contactorService.delete(id);
-//
-//		return SUCCESS;
-//	}
-//	
+
 //	public String listSearchResults() throws Exception
 //	{
 //		List<Contactor> list = contactorService.listSearchResults(name);

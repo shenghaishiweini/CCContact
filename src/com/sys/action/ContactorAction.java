@@ -108,11 +108,17 @@ public class ContactorAction extends ActionSupport {
 	{
 		Contactor temp = contactorService.findContactorById(id);
 		
-		List<Group> groups = groupService.getAllGroupsByContactorId(id);
+		List<Group> groupsOfContactor = groupService.getAllGroupsByContactorId(id);
+		
+		List<Group> groups = groupService.getAllGroupByUserId(temp.getOwner().getId());
+		groups.remove(0); //在groups中删除default分组，因为在联系人信息页面中不需要显示“未分组”这个选项
+		
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		session.put("groups", groups);
 		
 		HttpServletRequest request = ServletActionContext.getRequest();
 		request.setAttribute("contactor", temp);
-		request.setAttribute("groups", groups);
+		request.setAttribute("groups", groupsOfContactor);
 		
 		return SUCCESS;
 	}
@@ -153,8 +159,12 @@ public class ContactorAction extends ActionSupport {
 	
 	public String deleteContactor() throws Exception
 	{
-		System.out.println(selectedContactor.size());
-		System.out.println(selectedContactor.get(0));
+		//System.out.println(selectedContactor.size());
+		//System.out.println(selectedContactor.get(0));
+		for(int i=0;i<selectedContactor.size();i++){
+			contactorService.deleteContactor(Integer.parseInt(selectedContactor.get(i)));
+		}		
+		
 		return SUCCESS;
 	}
 	

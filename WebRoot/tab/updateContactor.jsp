@@ -136,7 +136,7 @@ for(i=0;i<cs.length;i++){
 														<img src="tab/images/tb.gif" width="16" height="16" />
 													</div>
 												</td>
-												<td width="95%" class="STYLE1"><span class="STYLE3">添加联系人												
+												<td width="95%" class="STYLE1"><span class="STYLE3">联系人信息												
 												</td>
 											</tr>
 										</table>

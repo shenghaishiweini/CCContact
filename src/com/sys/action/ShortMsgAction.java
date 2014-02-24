@@ -84,6 +84,7 @@ public class ShortMsgAction extends ActionSupport{
         List<ShortMsg> list=_isIShortMsgService.readConversationDetailMsgs(recipipentCellphoneNumber, user.getId());
         
         HttpSession httpSession=ServletActionContext.getRequest().getSession();
+        httpSession.removeAttribute("conversationDetailMsgs");
         httpSession.setAttribute("conversationDetailMsgs", list);
 		return "success";
 	}

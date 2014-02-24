@@ -36,6 +36,8 @@
 		<action name="user_*" class="userAction" method="{1}">
 			<result name="success" type="redirect">/main.html</result>
 			<result name="login" >/login.jsp</result>
+			<result name="modifyPwd" type="redirect">/main.html</result>
+			<result name="alterFail" type="redirect">/main.html</result>
 		</action>
 		
 		<action name="register" class="userAction" method="register">
@@ -53,18 +55,48 @@
 			<result name="success">/test.html</result>
 		</action>
 		
-		<action name="addContactor" class="contactorAction" method="addContactor">
-			<!-- <result name="success" type="redirectAction">
-				<param name="actionName">listAllGroups</param>
-			</result> -->
-			<result name="success">/test.html</result>
+		<action name="listContactorsOfGroup" class="groupAction" method="listContactorsOfGroup">
+			<result name="success">/tab/contactortab.jsp</result>
+		</action>
+		
+		<action name="addContactor1" class="contactorAction" method="addContactor1">
+			<result name="success">/tab/addContactor.jsp</result>
+		</action>
+		
+		<action name="addContactor2" class="contactorAction" method="addContactor2">
+			<result name="success" type="chain">
+				<param name="actionName">listAllContactors</param>
+			</result>
+		</action>
+		
+		<action name="getSingleContactor" class="contactorAction" method="getSingleContactor">
+			<result name="success">/tab/updateContactor.jsp</result>
+		</action>
+		
+		<action name="updateContactor" class="contactorAction" method="updateContactor">
+			<result name="success" type="chain">
+				<param name="actionName">listAllContactors</param>
+			</result>
+		</action>
+		
+		<action name="deleteContactor" class="contactorAction" method="deleteContactor">
+			<result name="success" type="chain">
+				<param name="actionName">listAllContactors</param>
+			</result>
 		</action>
 		
 		<action name="listAllContactors" class="contactorAction" method="findAllContactorsByUserId">
-			<!-- <result name="success" type="redirectAction">
-				<param name="actionName">listAllGroups</param>
-			</result> -->
 			<result name="success">/tab/contactortab.jsp</result>
+		</action>
+		
+		
+		
+		<action name="getConversationList" class="shortMsgAction" method="getConversationList">
+			<result name="success">/shortMsgLeft.jsp</result>
+		</action>
+		
+		<action name="getConversationDetailMsg" class="shortMsgAction" method="getConversationDetailMsgs">
+			<result name="success" type="redirect">../shortMsgmiddle.html</result>
 		</action>
 		
 		<!--

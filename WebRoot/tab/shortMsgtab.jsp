@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.*" %>    
+<%@ page import="java.util.* ,com.sys.model.ShortMsg" %>    
 <%@ page import="java.text.*" %>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -217,10 +217,20 @@ for(i=0;i<cs.length;i++){
   </tr>
   <tr>
     <td>
-    	
-    
+
    </td>
   </tr>
 </table>
+    <% 
+     List<ShortMsg> list=(List<ShortMsg>)request.getSession().getAttribute("conversationDetailMsgs");
+     
+     for(int i=0;i<list.size();i++)
+     {
+     %>	
+     <dir align="center">
+     <%=list.get(i).getContent() %>
+     <%=list.size() %>
+     </dir>
+    <%} %>
 </body>
 </html>

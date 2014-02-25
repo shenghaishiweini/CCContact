@@ -17,12 +17,14 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.sys.model.Contactor;
 import com.sys.model.Group;
 import com.sys.model.User;
+import com.sys.serviceInterface.IContactorService;
 import com.sys.serviceInterface.IGroupService;
 
 @Controller @Scope("prototype")
 public class GroupAction extends ActionSupport {
 	
 	@Resource IGroupService groupService;
+	@Resource IContactorService contactorService;
 	
 	private int id;
 	private String groupName;
@@ -57,8 +59,19 @@ public class GroupAction extends ActionSupport {
         Map<String, Object> session = ActionContext.getContext().getSession();
         User user = (User)session.get("user");
 		List<Group> list = groupService.getAllGroupByUserId(user.getId());
+		
+		Map<Integer,Integer> contactorNumbers = new HashMap<Integer,Integer>();
+		List<Contactor> allContactors = contactorService.findAllContactorsByUserId(user.getId());
+		contactorNumbers.put(0, allContactors.size());
+		for(int i=0;i<list.size();i++){
+			int groupId = list.get(i).getId();
+			int number = groupService.getGroupContactors(groupId).size();
+			contactorNumbers.put(groupId,number);
+		}
+		System.out.println(contactorNumbers.get(0));
 		HttpServletRequest request = ServletActionContext.getRequest();
 		request.setAttribute("list", list);
+		request.setAttribute("numbers", contactorNumbers);
 		
 		return SUCCESS;
 	}

@@ -88,12 +88,12 @@ a:active {
 							<tr>
 								<td height="23" background="../images/main_47.gif" id="imgmenu1"
 									class="menu_title" onMouseOver="this.className='menu_title2';"
-									onClick="showsubmenu(1)"
+									onClick=""
 									onMouseOut="this.className='menu_title';" style="cursor:hand"><table
 										width="100%" border="0" cellspacing="0" cellpadding="0">
 										<tr>
 											<td width="18%">&nbsp;</td>
-											<td width="82%" class="STYLE1">全部分组</td>
+											<td width="82%" class="STYLE1"><s:a href="listAllContactors.action" target="contactorFrame">全部分组[<s:property value="#request.numbers.get(0)"/>]</s:a></td>
 										</tr>
 									</table></td>
 							</tr>
@@ -116,89 +116,15 @@ a:active {
 																		<td height="20" style="cursor:hand"
 																			onmouseover="this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#7bc4d3'; "
 																			onmouseout="this.style.borderStyle='none'"><span
-																			class="STYLE3"><s:a href="listContactorsOfGroup.action?id=%{#group.id}&groupName=%{#group.groupName}" target="contactorFrame"><s:property value="groupName"/></s:a> </span></td>
+																			class="STYLE3"><s:a href="listContactorsOfGroup.action?id=%{#group.id}&groupName=%{#group.groupName}" target="contactorFrame"><s:property value="groupName"/></s:a>[<s:property value="#request.numbers.get(#group.id)"/>] </span></td>
 																	</tr>
 																</table></td>
 															</tr>
 														</s:iterator>
 
-														<!-- <tr>
-															<td width="16%" height="25"><div align="center">
-																	<img src="images/left.gif" width="10" height="10" />
-																</div></td>
-															<td width="84%" height="23"><table width="95%"
-																	border="0" cellspacing="0" cellpadding="0">
-																	<tr>
-																		<td height="20" style="cursor:hand"
-																			onmouseover="this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#7bc4d3'; "
-																			onmouseout="this.style.borderStyle='none'"><span
-																			class="STYLE3"><a href="./readermiddle.html"
-																				target="_parent">读者管理</a> </span></td>
-																	</tr>
-																</table></td>
-														</tr>
-														<tr>
-															<td height="23"><div align="center">
-																	<img src="images/left.gif" width="10" height="10" />
-																</div></td>
-															<td height="23"><table width="95%" border="0"
-																	cellspacing="0" cellpadding="0">
-																	<tr>
-																		<td height="20" style="cursor:hand"
-																			onmouseover="this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#7bc4d3'; "
-																			onmouseout="this.style.borderStyle='none'"><span
-																			class="STYLE3"><a href="./bookmiddle.html"
-																				target="_parent">图书管理</a> </span></td>
-																	</tr>
-																</table></td>
-														</tr>
-														<tr>
-															<td height="23"><div align="center">
-																	<img src="images/left.gif" width="10" height="10" />
-																</div></td>
-															<td height="23"><table width="95%" border="0"
-																	cellspacing="0" cellpadding="0">
-																	<tr>
-																		<td height="20" style="cursor:hand"
-																			onmouseover="this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#7bc4d3'; "
-																			onmouseout="this.style.borderStyle='none'"><span
-																			class="STYLE3"><a href="./borrowmiddle.html"
-																				target="_parent">借书</a> </span></td>
-																	</tr>
-																</table></td>
-														</tr>
-														<tr>
-															<td height="23"><div align="center">
-																	<img src="images/left.gif" width="10" height="10" />
-																</div></td>
-															<td height="23"><table width="95%" border="0"
-																	cellspacing="0" cellpadding="0">
-																	<tr>
-																		<td height="20" style="cursor:hand"
-																			onmouseover="this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#7bc4d3'; "
-																			onmouseout="this.style.borderStyle='none'"><span
-																			class="STYLE3"><a href="./returnmiddle.html"
-																				target="_parent">还书</a> </span></td>
-																	</tr>
-																</table></td>
-														</tr>
-														<tr>
-															<td height="23"><div align="center">
-																	<img src="images/left.gif" width="10" height="10" />
-																</div></td>
-															<td height="23"><table width="95%" border="0"
-																	cellspacing="0" cellpadding="0">
-																	<tr>
-																		<td height="20" style="cursor:hand"
-																			onmouseover="this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#7bc4d3'; "
-																			onmouseout="this.style.borderStyle='none'"><span
-																			class="STYLE3"><a href="./searchmiddle.html"
-																				target="_parent">借还记录查询</a> </span></td>
-																	</tr>
-																</table></td>
-														</tr> -->
 													</table></td>
 											</tr>
+											<tr><td align="center"><input align="middle" type="button" value="新建分组" style="width:143px;" onclick="window.location.href='listAllGroups.action'"/></td></tr>
 											<tr>
 												<td height="5"><img src="../images/main_52.gif"
 													width="151" height="5" /></td>
@@ -209,63 +135,8 @@ a:active {
 
 						</table></td>
 				</tr>
-				<!-- <tr>
-					<td><table width="100%" border="0" cellspacing="0"
-							cellpadding="0">
-							<tr>
-								<td height="23" background="images/main_47.gif" id="imgmenu2"
-									class="menu_title" onmouseover="this.className='menu_title2';"
-									onclick="showsubmenu(2)"
-									onmouseout="this.className='menu_title';" style="cursor:hand"><table
-										width="100%" border="0" cellspacing="0" cellpadding="0">
-										<tr>
-											<td width="18%">&nbsp;</td>
-											<td width="82%" class="STYLE1">系统管理</td>
-										</tr>
-									</table>
-								</td>
-							</tr>
-							<tr>
-								<td background="images/main_51.gif" id="submenu2"><div
-										class="sec_menu">
-										<table width="100%" border="0" cellspacing="0" cellpadding="0">
-											<tr>
-												<td><table width="90%" border="0" align="center"
-														cellpadding="0" cellspacing="0">
-														<tr>
-															<td width="16%" height="25"><div align="center">
-																	<img src="images/left.gif" width="10" height="10" />
-																</div>
-															</td>
-															<td width="84%" height="23"><table width="95%"
-																	border="0" cellspacing="0" cellpadding="0">
-																	<tr>
-																		<td height="20" style="cursor:hand"
-																			onmouseover="this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#7bc4d3'; "
-																			onmouseout="this.style.borderStyle='none'"><span
-																			class="STYLE3"><a href="./usermiddle.html"
-																				target="_parent">系统维护</a>
-																		</span>
-																		</td>
-																	</tr>
-																</table>
-															</td>
-														</tr>														
-													</table>
-												</td>
-											</tr>
-											<tr>
-												<td height="5"><img src="images/main_52.gif"
-													width="151" height="5" />
-												</td>
-											</tr>
-										</table>
-									</div>
-								</td>
-							</tr>
-						</table></td>
-				</tr> -->
-			</table></td>
+			</table>
+			</td>
 	</tr>
 	<tr>
 		<td height="18" background="../images/main_58.gif"><table

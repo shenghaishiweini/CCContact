@@ -178,6 +178,9 @@ public class ContactorAction extends ActionSupport {
 		ActionContext actionContext = ActionContext.getContext();
         Map<String, Object> session = actionContext.getSession();
         User user = (User)session.get("user");
+        if(user == null){
+        	return INPUT;
+        }
         
 		List<Contactor> list = contactorService.findAllContactorsByUserId(user.getId());
 		

@@ -58,6 +58,11 @@ public class GroupAction extends ActionSupport {
 	{
         Map<String, Object> session = ActionContext.getContext().getSession();
         User user = (User)session.get("user");
+        
+        if(user == null){
+        	return INPUT;
+        }
+        
 		List<Group> list = groupService.getAllGroupByUserId(user.getId());
 		
 		Map<Integer,Integer> contactorNumbers = new HashMap<Integer,Integer>();
@@ -65,7 +70,12 @@ public class GroupAction extends ActionSupport {
 		contactorNumbers.put(0, allContactors.size());
 		for(int i=0;i<list.size();i++){
 			int groupId = list.get(i).getId();
-			int number = groupService.getGroupContactors(groupId).size();
+			List<Contactor> temp = groupService.getGroupContactors(groupId);
+			int number = 0;
+			if(temp != null){
+				number = temp.size();
+			}
+			
 			contactorNumbers.put(groupId,number);
 		}
 		System.out.println(contactorNumbers.get(0));
@@ -76,16 +86,55 @@ public class GroupAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
-	public String newGroup()
+	public String newGroup1()
+	{
+		Map<String, Object> session = ActionContext.getContext().getSession();
+        User user = (User)session.get("user");
+        
+        if(user == null){
+        	return INPUT;
+        }
+        
+		List<Group> list = groupService.getAllGroupByUserId(user.getId());
+		
+		Map<Integer,Integer> contactorNumbers = new HashMap<Integer,Integer>();
+		List<Contactor> allContactors = contactorService.findAllContactorsByUserId(user.getId());
+		contactorNumbers.put(0, allContactors.size());
+		for(int i=0;i<list.size();i++){
+			int groupId = list.get(i).getId();
+			List<Contactor> temp = groupService.getGroupContactors(groupId);
+			int number = 0;
+			if(temp != null){
+				number = temp.size();
+			}
+			
+			contactorNumbers.put(groupId,number);
+		}
+		System.out.println(contactorNumbers.get(0));
+		HttpServletRequest request = ServletActionContext.getRequest();
+		request.setAttribute("list", list);
+		request.setAttribute("numbers", contactorNumbers);
+		
+		return SUCCESS;
+	}
+	
+	public String newGroup2()
 	{
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		User owner = (User)session.get("user");
 		
-		Group group = new Group();
-		group.setGroupName("bbbbb");
-		group.setOwner(owner);
-		
-		groupService.newGroup(group);
+		Group temp = groupService.getGroupByGroupName(groupName);
+		if(temp == null){
+			Group group = new Group();
+			group.setGroupName(groupName);
+			group.setOwner(owner);
+			
+			groupService.newGroup(group);
+		}else if(temp != null){
+			HttpServletRequest request = ServletActionContext.getRequest();
+			request.setAttribute("tipMessage", "分组名重复！");
+			return INPUT;
+		}
 		
 		return SUCCESS;
 	}

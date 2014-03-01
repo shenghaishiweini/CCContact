@@ -301,17 +301,7 @@ for(i=0;i<cs.length;i++){
 									onmouseout="changeback()">
 
 									<form name="searchForm" id="searchForm">
-										<input type="hidden" name="command" value="search">
-										&nbsp;
-										<span class="STYLE1">按 <select name="select"
-												id="select">
-												<option value="contactorId">
-													读者编号
-												</option>
-												<option value="contactorName">
-													读者姓名
-												</option>
-											</select> 来查询 ：<input type="text" name="searchText" id="searchText" />&nbsp;
+										<span class="STYLE1"><input type="text" name="searchText" id="searchText" />&nbsp;
 											<input name="searchBtn" class="button1" type="button"
 												id="searchBtn" value="查询" onClick="search()"> </span>
 									</form>

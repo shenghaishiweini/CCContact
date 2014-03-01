@@ -46,13 +46,20 @@
 		
 		<action name="listAllGroups" class="groupAction" method="listAllGroups">
 			<result name="success">/groups.jsp</result>
+			<result name="input">/jumpToLogin.jsp</result>
 		</action>
 		
-		<action name="newGroup" class="groupAction" method="newGroup">
-			<!-- <result name="success" type="redirectAction">
+		<action name="newGroup1" class="groupAction" method="newGroup1">
+			<result name="success">/tab/addGroup.jsp</result>
+		</action>
+		
+		<action name="newGroup2" class="groupAction" method="newGroup2">
+			<result name="success" type="chain">
 				<param name="actionName">listAllGroups</param>
-			</result> -->
-			<result name="success">/test.html</result>
+			</result>
+			<result name="input" type="chain">
+				<param name="actionName">newGroup1</param>
+			</result>
 		</action>
 		
 		<action name="listContactorsOfGroup" class="groupAction" method="listContactorsOfGroup">
@@ -87,6 +94,7 @@
 		
 		<action name="listAllContactors" class="contactorAction" method="findAllContactorsByUserId">
 			<result name="success">/tab/contactortab.jsp</result>
+			<result name="input">/jumpToLogin.jsp</result>
 		</action>
 		
 		

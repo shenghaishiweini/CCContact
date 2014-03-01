@@ -63,11 +63,33 @@ a:active {
 	TOP: 2px
 }
 </style>
-<script>
+<!--<script>
 	var he = document.body.clientHeight - 105
 	document.write("<div id=tt style=height:"+he+";overflow:hidden>")
 </script>
+
+--><script src="../script/client_validate.js"></script>
+<script type="text/javascript">
+	
+	var msg="${requestScope.tipMessage}";
+	if(msg!=""){
+		alert(msg);
+	}
+	
+	function validate(){
+		var nameField =document.getElementsByName("groupName")[0];
+		if(trim(nameField.value) == "")
+		{
+			alert("分组名不能为空");
+			nameField.focus();
+       		return false;
+		}
+		return true;
+	}
+</script>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<s:form action="newGroup2.action" theme="simple" onsubmit = "return validate();">
 <table width="165" height="100%" border="0" cellpadding="0"
 	cellspacing="0">
 	<tr>
@@ -100,6 +122,7 @@ a:active {
 							<tr>
 								<td background="../images/main_51.gif" id="submenu1">
 									<div class="sec_menu">
+										
 										<table width="100%" border="0" cellspacing="0" cellpadding="0">
 											<tr>
 												<td><table width="90%" border="0" align="center"
@@ -121,15 +144,38 @@ a:active {
 																</table></td>
 															</tr>
 														</s:iterator>
-
+														
+															<tr>
+																<td width="16%" height="25"><div align="center">
+																		<img src="../images/left.gif" width="10" height="10" />
+																	</div></td>
+																<td width="84%" height="23"><table width="95%"
+																		border="0" cellspacing="0" cellpadding="0">
+																		<tr>
+																			<td height="20" style="cursor:hand"
+																				onmouseover="this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#7bc4d3'; "
+																				onmouseout="this.style.borderStyle='none'">
+																					<s:textfield cssStyle="width:100px" name="groupName" />
+																			</td>
+																		</tr>
+																	</table></td>
+															</tr>
+														
 													</table></td>
 											</tr>
-											<tr><td align="center"><input align="middle" type="button" value="新建分组" style="width:143px;" onclick="window.location.href='newGroup1.action'"/></td></tr>
+											<tr>
+											<td align="center">
+												<s:submit value="确定" cssStyle="width:60px"></s:submit>
+												<input align="middle" type="button" value="取消" style="width:60px;" onclick="window.location.href='listAllGroups.action'"/>
+											</td>
+											</tr>
+											
 											<tr>
 												<td height="5"><img src="../images/main_52.gif"
 													width="151" height="5" /></td>
 											</tr>
 										</table>
+										
 									</div></td>
 							</tr>
 
@@ -148,6 +194,7 @@ a:active {
 			</table></td>
 	</tr>
 </table>
+</s:form>
 <script>
 	function showsubmenu(sid) {
 		whichEl = eval("submenu" + sid);

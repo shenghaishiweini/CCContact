@@ -2,11 +2,24 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*,com.sys.model.*"%>
 <%@ page import="java.text.*"%>
-
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>无标题文档</title>
+		<script src="../script/jquery-1.8.3.min.js" type="text/javascript"></script>
+		<script type="text/javascript">
+
+		$(document).ready(function() {
+		
+			var sendX=$(window).height();
+			
+			
+		
+		});
+		
+</script>
+
 		<style type="text/css">
 <!--
 body {
@@ -14,6 +27,7 @@ body {
 	margin-top: 0px;
 	margin-right: 0px;
 	margin-bottom: 0px;
+	background-image:url('../images/msgb2.png');
 }
 
 .STYLE1 {
@@ -171,6 +185,8 @@ for(i=0;i<cs.length;i++){
 }
 </script>
 
+
+
 	</head>
 
 	<body onLoad="init()">
@@ -287,34 +303,55 @@ for(i=0;i<cs.length;i++){
 				</td>
 			</tr>
 		</table>
-		<table align="center">
+		<table align="right" style="padding-right: 120px;background-image:url('../images/msgb.jpg'); ">
 			<%
-				List<ShortMsg> list = (List<ShortMsg>) request.getSession().getAttribute("conversationDetailMsgs");
-				if (list!=null&&list.size() > 0) {
+				List<ShortMsg> list = (List<ShortMsg>) request.getSession()
+						.getAttribute("conversationDetailMsgs");
+				if (list != null && list.size() > 0) {
 					User user = (User) request.getSession().getAttribute("user");
-					for (int i = 0; i < list.size(); i++) {
+					int j = 0;
+					while (j < 10) {
+						for (int i = 0; i < list.size(); i++) {
 			%>
 			<tr>
 				<%
 					if (list.get(i).getFrom().equals(
-									user.getDetailInfor().getCellphoneNumber())) {
+										user.getDetailInfor().getCellphoneNumber())) {
 				%>
-				<td align="left" style="width: 250px;height: 100px;">
-					<div style="margin-top: 30px;background-image: url('../images/bmsg.jpg')">
-						<%=list.get(i).getContent()%>
+				<td align="left" style="width: 350px; height: 100px;">
+					<div
+						style="margin-top: 30px; background-image: url('../images/bmsg.jpg')">
+						<s:checkbox name="selectedContactor" value="false" theme="simple"
+							fieldValue="%{#contactor.id}"></s:checkbox>
+						<span style=""></span>
+						<span style="font-size: 20px; padding-left: 10px;"><%=list.get(i).getContent()%></span>
+						<br />
+						<br />
+						<span style="font-size: 12px;"> 发件人：<%=list.get(i).getConversation()%>
+							接收时间：<%=list.get(i).getCreateTime()%></span>
 					</div>
 				</td>
 				<td></td>
 				<%
 					} else {
 				%>
-				<td>
-					<div style="width: 100px;"></div>
+				<td align="left" style="width: 350px; height: 100px;">
+					<div style="margin-top: 30px;"></div>
 				</td>
 				<td align="right">
-					<div style="margin-top: 30px;">
-						<%=list.get(i).getContent()%>
-					</div>
+					<td align="left" style="width: 350px; height: 100px;">
+						<div
+							style="margin-top: 30px; background-image: url('../images/bmsg.jpg')">
+							<s:checkbox name="selectedContactor" value="false" theme="simple"
+								fieldValue="%{#contactor.id}"></s:checkbox>
+							<span style="font-size: 20px; padding-left: 10px;"><%=list.get(i).getContent()%></span>
+							<br />
+							<br />
+							<span style="font-size: 12px;"> 发件人：我 发送时间：<%=list.get(i).getCreateTime()%></span>
+						</div>
+					</td>
+
+
 					<%
 						}
 					%>
@@ -322,14 +359,36 @@ for(i=0;i<cs.length;i++){
 			</tr>
 			<%
 				}
+						j++;
+					}
 				} else {
 			%>
 			<tr>
-			<td><span>在电脑上也可以查看手机上的短信啦，亲，还是实时的哦。。。</span></td>
+				<td>
+					<span>在电脑上也可以查看手机上的短信啦，亲，还是实时的哦。。。</span>
+				</td>
 			</tr>
 			<%
 				}
 			%>
 		</table>
+		<div style="position: fixed; margin-top: 80px;" >
+	
+			<div style="padding-left: 20px;">
+			收件人：
+			name:<span>${user.detailInfor.cellphoneNumber }</span>
+			<input value="${user.detailInfor.cellphoneNumber }" type="hidden" /></div>
+			<br/>
+			<div style="padding-left: 20px;">
+		<s:textarea  cols="30" rows="10"  >
+		</s:textarea><br>
+		
+		<div align="right"><input type="button" value="发送" style="width: 150px; height: 50px;" /></div>
+	
+</div> 
+
+		</div>
 	</body>
+
+
 </html>

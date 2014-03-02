@@ -4,8 +4,10 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
+import org.junit.runner.Request;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -27,91 +29,53 @@ public class UserAction extends ActionSupport {
 		this.user = user;
 	}
 
-	public String login() {
-		return LOGIN;
+	public String alterUser() {
+		HttpServletRequest req = ServletActionContext.getRequest();
+		// 获取此请求的地址，请求地址包含application name，进行subString操作，去除application name
+		String path = req.getRequestURI();
+
+		System.out.print(user);
+		User olduser = _userService.findUserById(user.getId());
+		olduser.setDetailInfor(user.getDetailInfor());
+		if (_userService.alterUser(olduser)) {
+			ActionContext actionContext = ActionContext.getContext();
+			Map<String, Object> session = actionContext.getSession();
+			session.put("user", olduser);// update the user in session
+			session.put("prePage", path);
+		}
+		return "alterFail";
 	}
 
-	public String checkLogin() {
+	public String modifyPwd() {
 		ActionContext actionContext = ActionContext.getContext();
 		Map<String, Object> session = actionContext.getSession();
+		User olduser = _userService.findUserById(user.getId());
+		if (user.getPassword().equals(olduser.getPassword())) {
+			olduser.setPassword(user.getDetailInfor().getOther1());
+			if (_userService.alterUser(olduser)) {
+				session.put("user", olduser);// update the user in session
+				session.put("msg", "修改成功");
+			}
+		} else {
+			session.put("msg", "您的原密码输入有误，请重新输入！");
 
-		if (user == null) {
-			session.put("mesg", "登录失败，请检查用户名密码！");
-			return LOGIN;
 		}
-		User temp = _userService.checkLogin(user);
-		if (temp == null) {
-			session.put("mesg", "登录失败，请检查用户名密码！");
-			return LOGIN;
-		}
-		session.put("user", temp);
-		return SUCCESS;
+		return "modifyPwd";
 	}
-	
-	public String logout()
-	{
+
+	public String checkUserName() {
+		HttpServletRequest request = ServletActionContext.getRequest();
+		String reString = (String) request.getParameter("u");
+		System.out.print(reString);
+		return "ok";
+	}
+
+	public String logout() {
 		ActionContext actionContext = ActionContext.getContext();
 		Map<String, Object> session = actionContext.getSession();
 		session.remove("user");
 		session.clear();
 		return LOGIN;
 	}
-	
-	public String alterUser()
-	{
-		HttpServletRequest req = ServletActionContext.getRequest();
-		// 获取此请求的地址，请求地址包含application name，进行subString操作，去除application name
-		String path = req.getRequestURI();
-		
-		System.out.print(user);
-		User olduser=_userService.findUserById(user.getId());
-		olduser.setDetailInfor(user.getDetailInfor());
-		if(_userService.alterUser(olduser))
-		{
-			ActionContext actionContext = ActionContext.getContext();
-			Map<String, Object> session = actionContext.getSession();
-			session.put("user", olduser);//update the user in session
-			session.put("prePage", path);
-		}
-		return "alterFail";
-	}
-	
-	public String modifyPwd()
-	{
-		ActionContext actionContext = ActionContext.getContext();
-		Map<String, Object> session = actionContext.getSession();
-		User olduser=_userService.findUserById(user.getId());
-		if(user.getPassword().equals(olduser.getPassword()))
-		{
-			olduser.setPassword(user.getDetailInfor().getOther1());
-			if(_userService.alterUser(olduser))
-			{
-				session.put("user", olduser);//update the user in session
-				session.put("msg", "修改成功");
-			}
-		}
-		else
-		{
-			session.put("msg", "您的原密码输入有误，请重新输入！");
-			
-		}
-		return "modifyPwd";
-	}
-
-	// public String checklogin()
-	// {
-	// System.out.print("got a message from android client");
-	// System.out.print(user);
-	// //ActionContext.getContext().put("a", "hello");
-	// try {
-	// PrintWriter pw=ServletActionContext.getResponse().getWriter();
-	// pw.print(user)
-	// } catch (Exception e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	// return "ok";
-	// }
-
 
 }

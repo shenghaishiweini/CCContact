@@ -12,6 +12,7 @@ import com.sys.model.Contactor;
 import com.sys.model.Group;
 import com.sys.model.ShortMsg;
 import com.sys.model.User;
+
 import com.sys.serviceInterface.IShortMsgService;
 
 /**

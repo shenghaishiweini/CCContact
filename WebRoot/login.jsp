@@ -9,7 +9,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>图书管理系统_用户登录</title>
+<title>圈圈通讯录_用户登录</title>
 
 <script src="../script/client_validate.js"></script>
 <SCRIPT language=JavaScript>
@@ -98,12 +98,13 @@ body {
               </tr>
             </table></td>
             <td width="362" background="../images/login_07.gif">&nbsp;</td>
+            
           </tr>
         </table></td>
       </tr>
       <tr align="center" valign="top">
         <td height="213" background="../images/login_08.gif">&nbsp;<span id="errorSpan"><font color='red'>${ mesg}</font></span></td>
-      </tr>	  
+      </tr>	
     </table></td>
   </tr>
 </table>

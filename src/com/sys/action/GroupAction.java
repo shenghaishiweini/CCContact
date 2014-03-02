@@ -71,11 +71,13 @@ public class GroupAction extends ActionSupport {
 		for(int i=0;i<list.size();i++){
 			int groupId = list.get(i).getId();
 			List<Contactor> temp = groupService.getGroupContactors(groupId);
-			int number = 0;
-			if(temp != null){
-				number = temp.size();
-			}
+//			int number = 0;
+//			if(temp != null){
+//				number = temp.size();
+//			}
 			
+			int number = groupService.getGroupContactors(groupId).size();
+
 			contactorNumbers.put(groupId,number);
 		}
 		System.out.println(contactorNumbers.get(0));

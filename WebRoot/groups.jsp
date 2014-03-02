@@ -124,7 +124,11 @@ a:active {
 
 													</table></td>
 											</tr>
+
 											<tr><td align="center"><input align="middle" type="button" value="新建分组" style="width:143px;" onclick="window.location.href='newGroup1.action'"/></td></tr>
+
+<!--											<tr><td align="center"><input align="middle" type="button" value="新建分组" style="width:143px;" onclick="window.location.href='listAllGroups.action'"/></td></tr>-->
+
 											<tr>
 												<td height="5"><img src="../images/main_52.gif"
 													width="151" height="5" /></td>

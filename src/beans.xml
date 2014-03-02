@@ -53,6 +53,7 @@
 	<tx:annotation-driven transaction-manager="txManager" />
 
 	<!-- 注册Action -->
+	<bean id="loginAction" class="com.sys.action.LoginAction" scope="prototype" />
 	<bean id="userAction" class="com.sys.action.UserAction" scope="prototype" />
 	<bean id="groupAction" class="com.sys.action.GroupAction" scope="prototype" />
 	<bean id="contactorAction" class="com.sys.action.ContactorAction" scope="prototype" />

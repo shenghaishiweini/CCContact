@@ -31,74 +31,133 @@
 
 	<constant name="struts.objectFactory" value="spring" />
 
+
 	<package name="sys" namespace="/sys" extends="struts-default">
 
-		<action name="user_*" class="userAction" method="{1}">
-			<result name="success" type="redirect">/main.html</result>
-			<result name="login" >/login.jsp</result>
-			<result name="modifyPwd" type="redirect">/main.html</result>
-			<result name="alterFail" type="redirect">/main.html</result>
-		</action>
+		<interceptors>
+			<interceptor name="userInter" class="com.sys.myinterceptor.myInterceptor"></interceptor>
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="userInter"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+
+		<default-interceptor-ref name="myStack"></default-interceptor-ref>
 		
-		<action name="register" class="userAction" method="register">
+		<global-results>
+			<result name="user_login" >/login.jsp</result>
+		</global-results>
+
+		<action name="register" class="loginAction" method="register">
 			<result name="success">/login.jsp</result>
 		</action>
-		
+
+		<action name="user_login" class="loginAction" method="login">
+			<result name="login">/login.jsp</result>
+		</action>
+
+		<action name="user_checkLogin" class="loginAction" method="checkLogin">
+			<result name="login">/login.jsp</result>
+			<result name="success" type="redirect">/main.html</result>
+		</action>
+
+		<action name="user_logout" class="userAction" method="logout">
+			<result name="login">/login.jsp</result>
+		</action>
+
+		<action name="user_modifyPwd" class="userAction" method="modifyPwd">
+			<result name="modifyPwd" type="redirect">/main.html</result>
+		</action>
+
+
+
+		<action name="user_checkUserName" class="userAction" method="checkUserName">
+			<result name="ok" type="chain">
+				<param name="sData">1</param>
+			</result>
+		</action>
+		<action name="user_alterUser" class="userAction" method="alterUser">
+			<result name="alterFail" type="redirect">/main.html</result>
+		</action>
+
+
 		<action name="listAllGroups" class="groupAction" method="listAllGroups">
 			<result name="success">/groups.jsp</result>
+			<result name="input">/jumpToLogin.jsp</result>
+		</action>
+	
+		<action name="newGroup1" class="groupAction" method="newGroup1">
+			<result name="success">/tab/addGroup.jsp</result>
 		</action>
 		
-		<action name="newGroup" class="groupAction" method="newGroup">
-			<!-- <result name="success" type="redirectAction">
+		<action name="newGroup2" class="groupAction" method="newGroup2">
+			<result name="success" type="chain">
 				<param name="actionName">listAllGroups</param>
-			</result> -->
-			<result name="success">/test.html</result>
+			</result>
+			<result name="input" type="chain">
+				<param name="actionName">newGroup1</param>
+			</result>
 		</action>
-		
-		<action name="listContactorsOfGroup" class="groupAction" method="listContactorsOfGroup">
+
+		<action name="newGroup" class="groupAction" method="newGroup">
+			<!--
+				<result name="success" type="redirectAction"> <param
+				name="actionName">listAllGroups</param> </result>
+			-->
+			<result name="success">/test.html</result>
+
+		</action>
+
+		<action name="listContactorsOfGroup" class="groupAction"
+			method="listContactorsOfGroup">
 			<result name="success">/tab/contactortab.jsp</result>
 		</action>
-		
+
 		<action name="addContactor1" class="contactorAction" method="addContactor1">
 			<result name="success">/tab/addContactor.jsp</result>
 		</action>
-		
+
 		<action name="addContactor2" class="contactorAction" method="addContactor2">
 			<result name="success" type="chain">
 				<param name="actionName">listAllContactors</param>
 			</result>
 		</action>
-		
-		<action name="getSingleContactor" class="contactorAction" method="getSingleContactor">
+
+		<action name="getSingleContactor" class="contactorAction"
+			method="getSingleContactor">
 			<result name="success">/tab/updateContactor.jsp</result>
 		</action>
-		
+
 		<action name="updateContactor" class="contactorAction" method="updateContactor">
 			<result name="success" type="chain">
 				<param name="actionName">listAllContactors</param>
 			</result>
 		</action>
-		
+
 		<action name="deleteContactor" class="contactorAction" method="deleteContactor">
 			<result name="success" type="chain">
 				<param name="actionName">listAllContactors</param>
 			</result>
 		</action>
-		
-		<action name="listAllContactors" class="contactorAction" method="findAllContactorsByUserId">
+
+		<action name="listAllContactors" class="contactorAction"
+			method="findAllContactorsByUserId">
 			<result name="success">/tab/contactortab.jsp</result>
+			<result name="input">/jumpToLogin.jsp</result>
 		</action>
-		
-		
-		
-		<action name="getConversationList" class="shortMsgAction" method="getConversationList">
+
+
+
+		<action name="getConversationList" class="shortMsgAction"
+			method="getConversationList">
 			<result name="success">/shortMsgLeft.jsp</result>
 		</action>
-		
-		<action name="getConversationDetailMsg" class="shortMsgAction" method="getConversationDetailMsgs">
+
+		<action name="getConversationDetailMsg" class="shortMsgAction"
+			method="getConversationDetailMsgs">
 			<result name="success" type="redirect">../shortMsgmiddle.html</result>
 		</action>
-		
+
 		<!--
 			<interceptors> <interceptor name="userInter"
 			class="com.sys.myinterceptor.myInterceptor"></interceptor>

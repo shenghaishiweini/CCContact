@@ -1,31 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import="java.util.* ,com.sys.model.ShortMsg" %>    
-<%@ page import="java.text.*" %>
+	pageEncoding="UTF-8"%>
+<%@ page import="java.util.*,com.sys.model.*"%>
+<%@ page import="java.text.*"%>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>无标题文档</title>
-<style type="text/css">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>无标题文档</title>
+		<style type="text/css">
 <!--
 body {
-  margin-left: 0px;
-  margin-top: 0px;
-  margin-right: 0px;
-  margin-bottom: 0px;
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
 }
-.STYLE1 {font-size: 12px}
-.STYLE3 {font-size: 12px; font-weight: bold; }
+
+.STYLE1 {
+	font-size: 12px
+}
+
+.STYLE3 {
+	font-size: 12px;
+	font-weight: bold;
+}
+
 .STYLE4 {
-  color: #03515d;
-  font-size: 12px;
+	color: #03515d;
+	font-size: 12px;
 }
 -->
 </style>
 
-<script src="../script/client_validate.js"></script>
-<script>
+		<script src="../script/client_validate.js"></script>
+		<script>
   
   
   //查询图书
@@ -163,74 +171,165 @@ for(i=0;i<cs.length;i++){
 }
 </script>
 
-</head>
+	</head>
 
-<body onLoad="init()">
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td height="30" background="images/tab_05.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td width="12" height="30"><img src="images/tab_03.gif" width="12" height="30" /></td>
-        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td width="46%" valign="middle"><table width="100%" border="0" cellspacing="0" cellpadding="0">
-              <tr>
-                <td width="5%"><div align="center"><img src="images/tb.gif" width="16" height="16" /></div></td>
-                <td width="95%" class="STYLE1"><span class="STYLE3">你当前的位置</span>：[短信]-[详细会话]</td>
-              </tr>
-            </table></td>
-            <td width="54%"><table border="0" align="right" cellpadding="0" cellspacing="0">
-              <tr>
-                <td width="60"><table width="87%" border="0" cellpadding="0" cellspacing="0">
-                  <tr>
-                    <td class="STYLE1"><div align="center">
-                      <input type="checkbox" name="topIfAll" id="topIfAll" onClick="topCheckAll()"/>
-                    </div></td>
-                    <td class="STYLE1"><div align="center">全选</div></td>
-                  </tr>
-                </table></td>
-                <td width="60"><table width="90%" border="0" cellpadding="0" cellspacing="0">
-                  <tr>
-                    <td class="STYLE1"><div align="center"><img src="images/22.gif" width="14" height="14" /></div></td>
-                    <td class="STYLE1"><div align="center"><a href="addBook.jsp">新增</a></div></td>
-                  </tr>
-                </table></td>
-                <td width="60"><table width="90%" border="0" cellpadding="0" cellspacing="0">
-                  <tr>
-                    <td class="STYLE1"><div align="center"><img src="images/33.gif" width="14" height="14" /></div></td>
-                    <td class="STYLE1"><div align="center"><a href="javascript:modifyBook()">修改</a></div></td>
-                  </tr>
-                </table></td>
-                <td width="52"><table width="88%" border="0" cellpadding="0" cellspacing="0">
-                  <tr>
-                    <td class="STYLE1"><div align="center"><img src="images/11.gif" width="14" height="14" /></div></td>
-                    <td class="STYLE1"><div align="center"><a href="javascript:deleteBook()">删除</a></div></td>
-                  </tr>
-                </table></td>
-              </tr>
-            </table></td>
-          </tr>
-        </table></td>
-        <td width="16"><img src="images/tab_07.gif" width="16" height="30" /></td>
-      </tr>
-    </table></td>
-  </tr>
-  <tr>
-    <td>
-
-   </td>
-  </tr>
-</table>
-    <% 
-     List<ShortMsg> list=(List<ShortMsg>)request.getSession().getAttribute("conversationDetailMsgs");
-     
-     for(int i=0;i<list.size();i++)
-     {
-     %>	
-     <dir align="center">
-     <%=list.get(i).getContent() %>
-     <%=list.size() %>
-     </dir>
-    <%} %>
-</body>
+	<body onLoad="init()">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td height="30" background="images/tab_05.gif">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td width="12" height="30">
+								<img src="images/tab_03.gif" width="12" height="30" />
+							</td>
+							<td>
+								<table width="100%" border="0" cellspacing="0" cellpadding="0">
+									<tr>
+										<td width="46%" valign="middle">
+											<table width="100%" border="0" cellspacing="0"
+												cellpadding="0">
+												<tr>
+													<td width="5%">
+														<div align="center">
+															<img src="images/tb.gif" width="16" height="16" />
+														</div>
+													</td>
+													<td width="95%" class="STYLE1">
+														<span class="STYLE3">你当前的位置</span>：[短信]-[详细会话]
+													</td>
+												</tr>
+											</table>
+										</td>
+										<td width="54%">
+											<table border="0" align="right" cellpadding="0"
+												cellspacing="0">
+												<tr>
+													<td width="60">
+														<table width="87%" border="0" cellpadding="0"
+															cellspacing="0">
+															<tr>
+																<td class="STYLE1">
+																	<div align="center">
+																		<input type="checkbox" name="topIfAll" id="topIfAll"
+																			onClick="topCheckAll()" />
+																	</div>
+																</td>
+																<td class="STYLE1">
+																	<div align="center">
+																		全选
+																	</div>
+																</td>
+															</tr>
+														</table>
+													</td>
+													<td width="60">
+														<table width="90%" border="0" cellpadding="0"
+															cellspacing="0">
+															<tr>
+																<td class="STYLE1">
+																	<div align="center">
+																		<img src="images/22.gif" width="14" height="14" />
+																	</div>
+																</td>
+																<td class="STYLE1">
+																	<div align="center">
+																		<a href="addBook.jsp">新增</a>
+																	</div>
+																</td>
+															</tr>
+														</table>
+													</td>
+													<td width="60">
+														<table width="90%" border="0" cellpadding="0"
+															cellspacing="0">
+															<tr>
+																<td class="STYLE1">
+																	<div align="center">
+																		<img src="images/33.gif" width="14" height="14" />
+																	</div>
+																</td>
+																<td class="STYLE1">
+																	<div align="center">
+																		<a href="javascript:modifyBook()">修改</a>
+																	</div>
+																</td>
+															</tr>
+														</table>
+													</td>
+													<td width="52">
+														<table width="88%" border="0" cellpadding="0"
+															cellspacing="0">
+															<tr>
+																<td class="STYLE1">
+																	<div align="center">
+																		<img src="images/11.gif" width="14" height="14" />
+																	</div>
+																</td>
+																<td class="STYLE1">
+																	<div align="center">
+																		<a href="javascript:deleteBook()">删除</a>
+																	</div>
+																</td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+								</table>
+							</td>
+							<td width="16">
+								<img src="images/tab_07.gif" width="16" height="30" />
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<table align="center">
+			<%
+				List<ShortMsg> list = (List<ShortMsg>) request.getSession().getAttribute("conversationDetailMsgs");
+				if (list!=null&&list.size() > 0) {
+					User user = (User) request.getSession().getAttribute("user");
+					for (int i = 0; i < list.size(); i++) {
+			%>
+			<tr>
+				<%
+					if (list.get(i).getFrom().equals(
+									user.getDetailInfor().getCellphoneNumber())) {
+				%>
+				<td align="left" style="width: 250px;height: 100px;">
+					<div style="margin-top: 30px;background-image: url('../images/bmsg.jpg')">
+						<%=list.get(i).getContent()%>
+					</div>
+				</td>
+				<td></td>
+				<%
+					} else {
+				%>
+				<td>
+					<div style="width: 100px;"></div>
+				</td>
+				<td align="right">
+					<div style="margin-top: 30px;">
+						<%=list.get(i).getContent()%>
+					</div>
+					<%
+						}
+					%>
+				</td>
+			</tr>
+			<%
+				}
+				} else {
+			%>
+			<tr>
+			<td><span>在电脑上也可以查看手机上的短信啦，亲，还是实时的哦。。。</span></td>
+			</tr>
+			<%
+				}
+			%>
+		</table>
+	</body>
 </html>

@@ -31,6 +31,8 @@ public class ShortMsgAction extends ActionSupport{
 		
 	      	Map<String, Object> session = ActionContext.getContext().getSession();
 	        User user = (User)session.get("user");
+	        if(user!=null)
+	        {
 	        List<ShortMsg> list=_isIShortMsgService.readAllConversations(user.getId());
 	        List<ShortMsg> res = new ArrayList<ShortMsg>();
 	        for(int i=0;i<list.size();i++)
@@ -50,6 +52,8 @@ public class ShortMsgAction extends ActionSupport{
 	        }
 			HttpServletRequest request = ServletActionContext.getRequest();
 			request.setAttribute("conversationlist", res);
+			request.setAttribute("conversationDetailMsgs", null);
+	        }
 			return SUCCESS;
 	}
 	
@@ -88,7 +92,7 @@ public class ShortMsgAction extends ActionSupport{
         httpSession.setAttribute("conversationDetailMsgs", list);
 		return "success";
 	}
-
+	
 	public void setShortMsg(ShortMsg shortMsg) {
 		this.shortMsg = shortMsg;
 	}

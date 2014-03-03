@@ -104,12 +104,36 @@ public class GroupService implements IGroupService {
 							"select * from group_contactors where groupid='"
 									+ groupID + "'").addEntity(
 							Group_Contactor.class).list();
+			
+			String hql = "select id from Groups where groupName='default' and userId=:uid";
+			Query q = sessionFactory.getCurrentSession().createSQLQuery(hql); 		
+			q.setParameter("uid", group.getOwner().getId());		
+			//List<Integer> contactids = q.list();
+			int defaultGroupId = (Integer) q.list().get(0);
+			
 			for (int i = 0; i < list.size(); i++) {
-				// sessionFactory.getCurrentSession().delete(list.get(i));
-				Group_Contactor gc = list.get(i);
-				gc.setGroupId(0);
-				sessionFactory.getCurrentSession().merge(gc);
+				sessionFactory.getCurrentSession().delete(list.get(i));
 			}
+			
+			for (int i = 0; i < list.size(); i++) {
+				List<Group_Contactor> temp = sessionFactory.getCurrentSession()
+				.createSQLQuery(
+						"select * from group_contactors where contactorid='"
+								+ list.get(i).getContactorId() + "'").addEntity(
+						Group_Contactor.class).list();
+				if(temp.size() == 0){
+					Group_Contactor gc = list.get(i);
+					gc.setGroupId(defaultGroupId);
+					sessionFactory.getCurrentSession().merge(gc);
+				}
+			}
+			
+//			for (int i = 0; i < list.size(); i++) {
+//				// sessionFactory.getCurrentSession().delete(list.get(i));
+//				Group_Contactor gc = list.get(i);
+//				gc.setGroupId(defaultGroupId);
+//				sessionFactory.getCurrentSession().merge(gc);
+//			}
 			return true;
 		} catch (Exception e) {
 			System.out.print(e.getMessage());

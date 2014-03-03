@@ -107,18 +107,31 @@ a:active {
 
 														<s:iterator value="#request.list" id="group">
 															<tr>
-															<td width="16%" height="25"><div align="center">
+															<td width="16%" height="25">
+																<div align="center">
 																	<img src="../images/left.gif" width="10" height="10" />
-																</div></td>
-															<td width="84%" height="23"><table width="95%"
-																	border="0" cellspacing="0" cellpadding="0">
+																</div>
+															</td>
+															<td width="64%" height="23">
+																<table width="95%" border="0" cellspacing="0" cellpadding="0">
 																	<tr>
 																		<td height="20" style="cursor:hand"
 																			onmouseover="this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#7bc4d3'; "
 																			onmouseout="this.style.borderStyle='none'"><span
-																			class="STYLE3"><s:a href="listContactorsOfGroup.action?id=%{#group.id}&groupName=%{#group.groupName}" target="contactorFrame"><s:property value="groupName"/></s:a>[<s:property value="#request.numbers.get(#group.id)"/>] </span></td>
-																	</tr>
-																</table></td>
+																			class="STYLE3"><s:a href="listContactorsOfGroup.action?id=%{#group.id}&groupName=%{#group.groupName}" target="contactorFrame"><s:property value="groupName"/></s:a>[<s:property value="#request.numbers.get(#group.id)"/>] </span>
+																		</td>
+																		<!--<td><img src="../tab/images/11.gif" width="10" height="10" /></td>
+																	--></tr>
+																</table>
+															</td>
+															<td width="20%" height="25">
+																<div align="center" style="float: left">
+																	<img src="../tab/images/33.gif" width="10" height="10" title="重命名"/>
+																</div>
+																<div align="center" >
+																	<s:a href="deleteGroup.action?id=%{#group.id}"><img src="../tab/images/11.gif" width="10" height="10" title="删除"/></s:a>
+																</div>
+															</td>
 															</tr>
 														</s:iterator>
 
@@ -126,8 +139,6 @@ a:active {
 											</tr>
 
 											<tr><td align="center"><input align="middle" type="button" value="新建分组" style="width:143px;" onclick="window.location.href='newGroup1.action'"/></td></tr>
-
-<!--											<tr><td align="center"><input align="middle" type="button" value="新建分组" style="width:143px;" onclick="window.location.href='listAllGroups.action'"/></td></tr>-->
 
 											<tr>
 												<td height="5"><img src="../images/main_52.gif"

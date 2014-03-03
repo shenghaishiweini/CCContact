@@ -98,6 +98,12 @@
 				<param name="actionName">newGroup1</param>
 			</result>
 		</action>
+		
+		<action name="deleteGroup" class="groupAction" method="deleteGroup">
+			<result name="success" type="chain">
+				<param name="actionName">listAllGroups</param>
+			</result>
+		</action>
 
 		<action name="newGroup" class="groupAction" method="newGroup">
 			<!--

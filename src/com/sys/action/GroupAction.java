@@ -71,6 +71,7 @@ public class GroupAction extends ActionSupport {
 		for(int i=0;i<list.size();i++){
 			int groupId = list.get(i).getId();
 			List<Contactor> temp = groupService.getGroupContactors(groupId);
+			
 			int number = 0;
 			if(temp != null){
 				number = temp.size();
@@ -135,6 +136,12 @@ public class GroupAction extends ActionSupport {
 			return INPUT;
 		}
 		
+		return SUCCESS;
+	}
+	
+	public String deleteGroup()
+	{
+		groupService.deleteGroup(id);
 		return SUCCESS;
 	}
 	

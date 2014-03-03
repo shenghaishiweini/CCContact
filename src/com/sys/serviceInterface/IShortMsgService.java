@@ -47,4 +47,7 @@ public interface IShortMsgService {
 	 */
 	public ShortMsg getShortMsgById(int shortmsgid);
 	
+	
+	public boolean deleteShortMsg(ShortMsg shortMsg);
+	
 }

@@ -43,9 +43,9 @@
 		</interceptors>
 
 		<default-interceptor-ref name="myStack"></default-interceptor-ref>
-		
+
 		<global-results>
-			<result name="user_login" >/login.jsp</result>
+			<result name="user_login">/login.jsp</result>
 		</global-results>
 
 		<action name="register" class="loginAction" method="register">
@@ -85,11 +85,11 @@
 			<result name="success">/groups.jsp</result>
 			<result name="input">/jumpToLogin.jsp</result>
 		</action>
-	
+
 		<action name="newGroup1" class="groupAction" method="newGroup1">
 			<result name="success">/tab/addGroup.jsp</result>
 		</action>
-		
+
 		<action name="newGroup2" class="groupAction" method="newGroup2">
 			<result name="success" type="chain">
 				<param name="actionName">listAllGroups</param>
@@ -155,6 +155,11 @@
 
 		<action name="getConversationDetailMsg" class="shortMsgAction"
 			method="getConversationDetailMsgs">
+			<result name="success" type="redirect">../shortMsgmiddle.html</result>
+		</action>
+
+		<action name="deleteShortMsg" class="shortMsgAction"
+			method="deleteShortMsg">
 			<result name="success" type="redirect">../shortMsgmiddle.html</result>
 		</action>
 

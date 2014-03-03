@@ -8,11 +8,8 @@ import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sys.model.Contactor;
-import com.sys.model.Group;
 import com.sys.model.ShortMsg;
 import com.sys.model.User;
-
 import com.sys.serviceInterface.IShortMsgService;
 
 /**
@@ -92,5 +89,20 @@ public class ShortMsgService implements IShortMsgService {
 			return null;
 		}
 	}
+
+	public boolean deleteShortMsg(ShortMsg shortMsg) {
+		
+		try {
+			sessionFactory.getCurrentSession().delete(shortMsg);
+			return true;
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+			sessionFactory.getCurrentSession().getTransaction().rollback();
+			return false;
+		}
+	}
+	
+	
+	
 
 }

@@ -25,6 +25,8 @@ public class ShortMsgAction extends ActionSupport{
 	@Resource
 	private IShortMsgService _isIShortMsgService;
 	private ShortMsg shortMsg;
+	private List<ShortMsg> selectedShortMsg=new ArrayList<ShortMsg>();
+	private List<String> selectedShortMsgs=new ArrayList<String>();
 	
 	public String getConversationList()
 	{
@@ -93,12 +95,36 @@ public class ShortMsgAction extends ActionSupport{
 		return "success";
 	}
 	
+	
+	public String deleteShortMsg()
+	{
+		for(int i=0;i<selectedShortMsg.size();i++)
+		_isIShortMsgService.deleteShortMsg(shortMsg);
+		return "success";
+	}
+	
 	public void setShortMsg(ShortMsg shortMsg) {
 		this.shortMsg = shortMsg;
 	}
 
 	public ShortMsg getShortMsg() {
 		return shortMsg;
+	}
+
+	public void setSelectedShortMsg(List<ShortMsg> selectedShortMsg) {
+		this.selectedShortMsg = selectedShortMsg;
+	}
+
+	public List<ShortMsg> getSelectedShortMsg() {
+		return selectedShortMsg;
+	}
+
+	public void setSelectedShortMsgs(List<String> selectedShortMsgs) {
+		this.selectedShortMsgs = selectedShortMsgs;
+	}
+
+	public List<String> getSelectedShortMsgs() {
+		return selectedShortMsgs;
 	}
 	
 }

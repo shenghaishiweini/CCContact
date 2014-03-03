@@ -27,7 +27,7 @@ body {
 	margin-top: 0px;
 	margin-right: 0px;
 	margin-bottom: 0px;
-	background-image:url('../images/msgb2.png');
+	background-image: url('../images/msgb2.png');
 }
 
 .STYLE1 {
@@ -94,8 +94,8 @@ body {
     window.self.location = "editBook.jsp?bookId=" + selectFlags[index].value;
   }
   
-  function deleteBook() {
-    var selectFlags = document.getElementsByName("selectFlag");
+  function deleteShortMsg() {
+    var selectFlags = document.getElementsByName("selectedShortMsg");
     var flag = false;
     for (var i=0; i<selectFlags.length; i++) {
       if (selectFlags[i].checked) {
@@ -105,16 +105,18 @@ body {
       }
     }
     if (!flag) {
-      alert("请选择需要删除的数据！");
+      alert("请选择需要删除的短信！");
       return;
     } 
     //删除提示
     if (window.confirm("确认删除？")) {
-      with(document.getElementById("bookform")) {
-        action="booktab.jsp";
-        method="post";
-        submit();
-      }
+        //window.self.location = "../sys/deleteShortMsg";
+       with(document.getElementById("delform")) {
+				method="post";
+				action="../sys/deleteShortMsg";
+				submit();
+			} 
+        
     }
   }
     
@@ -283,7 +285,7 @@ for(i=0;i<cs.length;i++){
 																</td>
 																<td class="STYLE1">
 																	<div align="center">
-																		<a href="javascript:deleteBook()">删除</a>
+																		<a href="javascript:deleteShortMsg()">删除</a>
 																	</div>
 																</td>
 															</tr>
@@ -303,15 +305,19 @@ for(i=0;i<cs.length;i++){
 				</td>
 			</tr>
 		</table>
-		<table align="right" style="padding-right: 120px;background-image:url('../images/msgb.jpg'); ">
+		<form id="delform">
+		<table align="right"
+			style="padding-right: 120px; background-image: url('../images/msgb.jpg');">
 			<%
 				List<ShortMsg> list = (List<ShortMsg>) request.getSession()
 						.getAttribute("conversationDetailMsgs");
 				if (list != null && list.size() > 0) {
 					User user = (User) request.getSession().getAttribute("user");
+					ShortMsg t=null;
 					int j = 0;
 					while (j < 10) {
 						for (int i = 0; i < list.size(); i++) {
+						t=list.get(i);
 			%>
 			<tr>
 				<%
@@ -321,8 +327,8 @@ for(i=0;i<cs.length;i++){
 				<td align="left" style="width: 350px; height: 100px;">
 					<div
 						style="margin-top: 30px; background-image: url('../images/bmsg.jpg')">
-						<s:checkbox name="selectedContactor" value="false" theme="simple"
-							fieldValue="%{#contactor.id}"></s:checkbox>
+						<s:checkbox name="selectedShortMsg" value="false" theme="simple"
+							fieldValue="{#t}"></s:checkbox>
 						<span style=""></span>
 						<span style="font-size: 20px; padding-left: 10px;"><%=list.get(i).getContent()%></span>
 						<br />
@@ -342,8 +348,8 @@ for(i=0;i<cs.length;i++){
 					<td align="left" style="width: 350px; height: 100px;">
 						<div
 							style="margin-top: 30px; background-image: url('../images/bmsg.jpg')">
-							<s:checkbox name="selectedContactor" value="false" theme="simple"
-								fieldValue="%{#contactor.id}"></s:checkbox>
+							<s:checkbox name="selectedShortMsg" value="false" theme="simple"
+								fieldValue="{#t}"></s:checkbox>
 							<span style="font-size: 20px; padding-left: 10px;"><%=list.get(i).getContent()%></span>
 							<br />
 							<br />
@@ -372,22 +378,30 @@ for(i=0;i<cs.length;i++){
 				}
 			%>
 		</table>
-		<div style="position: fixed; margin-top: 80px;" >
-	
-			<div style="padding-left: 20px;">
-			收件人：
-			name:<span>${user.detailInfor.cellphoneNumber }</span>
-			<input value="${user.detailInfor.cellphoneNumber }" type="hidden" /></div>
-			<br/>
-			<div style="padding-left: 20px;">
-		<s:textarea  cols="30" rows="10"  >
-		</s:textarea><br>
-		
-		<div align="right"><input type="button" value="发送" style="width: 150px; height: 50px;" /></div>
-	
-</div> 
+		</form>
+		<div style="position: fixed; margin-top: 80px;">
+			<form action="sendShortMsg">
+				<div style="padding-left: 20px;">
+					收件人： name:
+					<span>${user.detailInfor.cellphoneNumber }</span>
+					<input value="${ user.detailInfor.cellphoneNumber}" type="hidden" name="shortMsg.to"/>
+					<input value="${ user.detailInfor.cellphoneNumber}" type="hidden" name="shortMsg.from"/>
+					<input value="1" type="hidden" name="shortMsg.msgType"/>
+				</div>
+				<br />
+				<div style="padding-left: 20px;">
+					<s:textarea cols="30" rows="10" name="shortMsg.content">
+					</s:textarea>
+					<br>
 
+					<div align="right">
+						<input type="submit" value="发送"
+							style="width: 150px; height: 50px;" />
+					</div>
+				</div>
+			</form>
 		</div>
+
 	</body>
 
 

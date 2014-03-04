@@ -77,35 +77,33 @@ public interface IContactorService {
 	
 	/**
 	 * 根据联系人名字查找
-	 *  内部查询机制，应该是先查出某用户的所有分组的联系人，或者用户已经指定了分组
-	 * 	然后再在这其中查找。可以将用户ID放入SESSION中，后台使用时再取出
-	 *  或者将用户ID作为参数传入，或者将结果取出，再比较用户ID；
-	 *  再或者给每个用户在数据库中建一个视图。相关情况，再做讨论
 	 * @param contactorName
 	 * @return List<Contactor> 
 	 * 可能存在同名的联系人，采用模糊查找
-	 *        
+	 * 
 	 */
 	public List<Contactor> findContactorByName(String contactorName,int userid);
 	
 	/**
 	 * 根据联系人手机号码查找
-	 * 	 内部查询机制，应该是先查出某用户的所有分组的联系人，或者用户已经指定了分组
-	 * 	然后再在这其中查找。可以将用户ID放入SESSION中，后台使用时再取出
-	 *  或者将用户ID作为参数传入，或者将结果取出，再比较用户ID；
-	 *  再或者给每个用户在数据库中建一个视图。相关情况，再做讨论
 	 * @param contactorCellphoneNumber
 	 * @return List<Contactor> 
 	 * 理论上来说一个号码对应一个联系人，但是存在用户输入号码不完全，所以可能存在多个结果。采用模糊查找
 	 */
-	public List<Contactor> findContactorByCellphoneNumber(String contactorCellphoneNumber,int userid);
+	public List<Contactor> findContactorsByCellphoneNumber(String contactorCellphoneNumber,int userid);
+	
+	
+	/**
+	 * 根据联系人手机号码查找
+	 * @param contactorCellphoneNumber
+	 * @return Contactor 
+	 * 精确查找
+	 */
+	public Contactor findContactorByCellphoneNumber(String contactorCellphoneNumber,int userid);
+	
 	
 	/**
 	 * 根据联系人电话号码查找
-	 * 	内部查询机制，应该是先查出某用户的所有分组的联系人，或者用户已经指定了分组
-	 * 	然后再在这其中查找。可以将用户ID放入SESSION中，后台使用时再取出
-	 *  或者将用户ID作为参数传入，或者将结果取出，再比较用户ID；
-	 *  再或者给每个用户在数据库中建一个视图。相关情况，再做讨论
 	 * @param contactorTelephoneNumber
 	 * @return List<Contactor>
 	 */
@@ -113,10 +111,6 @@ public interface IContactorService {
 	
 	/**
 	 * 根据联系人所在组名查找
-	 * 	内部查询机制，应该是先查出某用户的所有分组的联系人，或者用户已经指定了分组
-	 * 	然后再在这其中查找。可以将用户ID放入SESSION中，后台使用时再取出
-	 *  或者将用户ID作为参数传入，或者将结果取出，再比较用户ID；
-	 *  再或者给每个用户在数据库中建一个视图。相关情况，再做讨论
 	 * @param GroupName,userId 查找分组联系人的时候 需要根据用户来查找
 	 * @return List<Contactor>
 	 */
@@ -124,10 +118,6 @@ public interface IContactorService {
 	
 	/**
 	 * 根据联系人所在组的ID查找
-	 * 	 内部查询机制，应该是先查出某用户的所有分组的联系人，或者用户已经指定了分组
-	 * 	然后再在这其中查找。可以将用户ID放入SESSION中，后台使用时再取出
-	 *  或者将用户ID作为参数传入，或者将结果取出，再比较用户ID；
-	 *  再或者给每个用户在数据库中建一个视图。相关情况，再做讨论
 	 * @param GroupId,userId 查找分组联系人的时候 需要根据用户来查找
 	 * @return List<Contactor>
 	 */

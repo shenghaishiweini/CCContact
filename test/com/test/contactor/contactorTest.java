@@ -44,10 +44,10 @@ public class ContactorTest {
 	@Test
 	public void testAddContactorDefault() {
 		
-		User user = _userService.findUserById(1);
+		User user = _userService.findUserById(2);
 		Contactor contactor = new Contactor();
-		contactor.setName("default111");
-		contactor.setCellphoneNumber("111111");
+		contactor.setName("liMing");
+		contactor.setCellphoneNumber("15056998915");
 		contactor.setOwner(user);
 
 		_contactorService.addContactorDefault(contactor);
@@ -74,7 +74,7 @@ public class ContactorTest {
 	@Test
 	public void testFindContactorByCellphoneNumber()
 	{
-		List<Contactor> res=_contactorService.findContactorByCellphoneNumber("1", 1);
+		List<Contactor> res=_contactorService.findContactorsByCellphoneNumber("1", 1);
 		for(int i=0;i<res.size();i++)
 		{
 			System.out.println(res.get(i).getName());

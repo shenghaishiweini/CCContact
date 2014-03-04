@@ -306,87 +306,92 @@ for(i=0;i<cs.length;i++){
 			</tr>
 		</table>
 		<form id="delform">
-		<table align="right"
-			style="padding-right: 120px; background-image: url('../images/msgb.jpg');">
-			<%
-				List<ShortMsg> list = (List<ShortMsg>) request.getSession()
-						.getAttribute("conversationDetailMsgs");
-				if (list != null && list.size() > 0) {
-					User user = (User) request.getSession().getAttribute("user");
-					ShortMsg t=null;
-					int j = 0;
-					while (j < 10) {
-						for (int i = 0; i < list.size(); i++) {
-						t=list.get(i);
-			%>
-			<tr>
+			<table align="right"
+				style="padding-right: 120px; background-image: url('../images/msgb.jpg');">
 				<%
-					if (list.get(i).getFrom().equals(
-										user.getDetailInfor().getCellphoneNumber())) {
+					List<ShortMsg> list = (List<ShortMsg>) request.getSession()
+							.getAttribute("conversationDetailMsgs");
+					if (list != null && list.size() > 0) {
+						User user = (User) request.getSession().getAttribute("user");
+						ShortMsg t = null;
+						int j = 0;
+						while (j < 10) {
+							for (int i = 0; i < list.size(); i++) {
+								t = list.get(i);
 				%>
-				<td align="left" style="width: 350px; height: 100px;">
-					<div
-						style="margin-top: 30px; background-image: url('../images/bmsg.jpg')">
-						<s:checkbox name="selectedShortMsg" value="false" theme="simple"
-							fieldValue="{#t}"></s:checkbox>
-						<span style=""></span>
-						<span style="font-size: 20px; padding-left: 10px;"><%=list.get(i).getContent()%></span>
-						<br />
-						<br />
-						<span style="font-size: 12px;"> 发件人：<%=list.get(i).getConversation()%>
-							接收时间：<%=list.get(i).getCreateTime()%></span>
-					</div>
-				</td>
-				<td></td>
-				<%
-					} else {
-				%>
-				<td align="left" style="width: 350px; height: 100px;">
-					<div style="margin-top: 30px;"></div>
-				</td>
-				<td align="right">
+				<tr>
+					<%
+						if (list.get(i).getFrom().equals(
+											user.getDetailInfor().getCellphoneNumber())) {
+					%>
 					<td align="left" style="width: 350px; height: 100px;">
 						<div
 							style="margin-top: 30px; background-image: url('../images/bmsg.jpg')">
 							<s:checkbox name="selectedShortMsg" value="false" theme="simple"
 								fieldValue="{#t}"></s:checkbox>
+							<span style=""></span>
 							<span style="font-size: 20px; padding-left: 10px;"><%=list.get(i).getContent()%></span>
 							<br />
 							<br />
-							<span style="font-size: 12px;"> 发件人：我 发送时间：<%=list.get(i).getCreateTime()%></span>
+							<span style="font-size: 12px;"> 发件人：<%=list.get(i).getConversation()%>
+								接收时间：<%=list.get(i).getCreateTime()%></span>
 						</div>
 					</td>
-
-
+					<td></td>
 					<%
-						}
+						} else {
 					%>
-				</td>
-			</tr>
-			<%
-				}
-						j++;
+					<td align="left" style="width: 350px; height: 100px;">
+						<div style="margin-top: 30px;"></div>
+					</td>
+					<td align="right">
+						<td align="left" style="width: 350px; height: 100px;">
+							<div
+								style="margin-top: 30px; background-image: url('../images/bmsg.jpg')">
+								<s:checkbox name="selectedShortMsg" value="false" theme="simple"
+									fieldValue="{#t}"></s:checkbox>
+								<span style="font-size: 20px; padding-left: 10px;"><%=list.get(i).getContent()%></span>
+								<br />
+								<br />
+								<span style="font-size: 12px;"> 发件人：我 发送时间：<%=list.get(i).getCreateTime()%></span>
+							</div>
+						</td>
+
+
+						<%
+							}
+						%>
+					</td>
+				</tr>
+				<%
 					}
-				} else {
-			%>
-			<tr>
-				<td>
-					<span>在电脑上也可以查看手机上的短信啦，亲，还是实时的哦。。。</span>
-				</td>
-			</tr>
-			<%
-				}
-			%>
-		</table>
+							j++;
+						}
+					} else {
+				%>
+				<tr>
+					<td>
+						<span>在电脑上也可以查看手机上的短信啦，亲，还是实时的哦。。。</span>
+					</td>
+				</tr>
+				<%
+					}
+				%>
+			</table>
 		</form>
+		<%
+			if (list != null) {
+		%>
 		<div style="position: fixed; margin-top: 80px;">
 			<form action="sendShortMsg">
 				<div style="padding-left: 20px;">
 					收件人： name:
 					<span>${user.detailInfor.cellphoneNumber }</span>
-					<input value="${ user.detailInfor.cellphoneNumber}" type="hidden" name="shortMsg.to"/>
-					<input value="${ user.detailInfor.cellphoneNumber}" type="hidden" name="shortMsg.from"/>
-					<input value="1" type="hidden" name="shortMsg.msgType"/>
+					<input value="${ user.detailInfor.cellphoneNumber}" type="hidden"
+						name="shortMsg.to" />
+					<input value="${ user.detailInfor.cellphoneNumber}" type="hidden"
+						name="shortMsg.from" />
+					<input value="1" type="hidden" name="shortMsg.msgType" />
 				</div>
 				<br />
 				<div style="padding-left: 20px;">
@@ -401,7 +406,9 @@ for(i=0;i<cs.length;i++){
 				</div>
 			</form>
 		</div>
-
+		<%
+			}
+		%>
 	</body>
 
 

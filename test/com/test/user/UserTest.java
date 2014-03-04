@@ -38,12 +38,12 @@ public class UserTest {
 	public void testRegisterUser()
 	{
 		User user=new User();
-		user.setUsername("fuyu");
-		user.setPassword("fy");
+		user.setUsername("gjf");
+		user.setPassword("123456");
 		Contactor contactor=new Contactor();
 		contactor.setName("myself");
 		user.setDetailInfor(contactor);
-		user.getDetailInfor().setCellphoneNumber("987654321");
+		user.getDetailInfor().setCellphoneNumber("15056998911");
 //		ShortMsg sh=new ShortMsg();
 //		sh.setContent("hello !");
 //		sh.setOwner(user);
@@ -56,8 +56,10 @@ public class UserTest {
 	public void tsetAlterUser()
 	{
 		User user=_userService.findUserById(3);
+		
 		user.getDetailInfor().setAddress("ustc");
 		user.getDetailInfor().setName("aaa");
+		user.getDetailInfor().setCellphoneNumber("15056998911");
 		_userService.alterUser(user);
 	}
 	@Test

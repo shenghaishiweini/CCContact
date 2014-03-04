@@ -37,7 +37,7 @@ public class ShortMsgAction extends ActionSupport{
 	        {
 	        List<ShortMsg> list=_isIShortMsgService.readAllConversations(user.getId());
 	        List<ShortMsg> res = new ArrayList<ShortMsg>();
-	        for(int i=0;i<list.size();i++)
+	        for(int i=0;list!=null&&i<list.size();i++)
 	        {
 	        	if(!ifExist(list.get(i), res))
 	        	{

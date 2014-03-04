@@ -30,11 +30,11 @@ public class ContactorService implements IContactorService {
 	public boolean addContactorToNewGroup(Contactor contactor, Group group) {
 
 		try {
-				Group_Contactor group_contactor = new Group_Contactor();
-				group_contactor.setGroupId(group.getId());
-				group_contactor.setContactorId(contactor.getId());
-				sessionFactory.getCurrentSession().persist(group_contactor);
-				return true;
+			Group_Contactor group_contactor = new Group_Contactor();
+			group_contactor.setGroupId(group.getId());
+			group_contactor.setContactorId(contactor.getId());
+			sessionFactory.getCurrentSession().persist(group_contactor);
+			return true;
 
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
@@ -115,7 +115,7 @@ public class ContactorService implements IContactorService {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Contactor> findContactorByCellphoneNumber(
+	public List<Contactor> findContactorsByCellphoneNumber(
 			String contactorCellphoneNumber, int userid) {
 		try {
 			String hql = "select * from Contactors where cellphoneNumber like :cnumber and userID=:userid";
@@ -184,7 +184,6 @@ public class ContactorService implements IContactorService {
 		}
 	}
 
-
 	@SuppressWarnings("unchecked")
 	public List<Contactor> findAllContactorsByUserId(int userId) {
 		return sessionFactory.getCurrentSession().createSQLQuery(
@@ -194,9 +193,9 @@ public class ContactorService implements IContactorService {
 
 	public List<Contactor> findSearchContactors(String searchStr, int userid) {
 		try {
-			String hql = "select * from Contactors " +
-					"where ( telephoneNumber like :str or name like :str or cellphoneNumber like :str or QQ like :str )" +
-					"and userID=:userid";
+			String hql = "select * from Contactors "
+					+ "where ( telephoneNumber like :str or name like :str or cellphoneNumber like :str or QQ like :str )"
+					+ "and userID=:userid";
 			Query q = sessionFactory.getCurrentSession().createSQLQuery(hql)
 					.addEntity(Contactor.class);
 			q.setParameter("str", "%" + searchStr + "%", Hibernate.STRING);
@@ -219,19 +218,37 @@ public class ContactorService implements IContactorService {
 		}
 	}
 
-//	public boolean addContactorToGroup(Contactor contactor, Group group) {
-//		try {
-//			sessionFactory.getCurrentSession().persist(contactor);
-//			Group_Contactor group_contactor = new Group_Contactor();
-//			group_contactor.setGroupId(group.getId());
-//			group_contactor.setContactorId(contactor.getId());
-//			sessionFactory.getCurrentSession().persist(group_contactor);
-//			return true;
-//		} catch (Exception e) {
-//			System.out.print(e.getMessage());
-//			sessionFactory.getCurrentSession().getTransaction().rollback();
-//			return false;
-//		}
-//	}
+	public Contactor findContactorByCellphoneNumber(
+			String contactorCellphoneNumber, int userid) {
+		try {
+			String hql = "select * from Contactors where cellphoneNumber =:cnumber and userID=:userid";
+			Query q = sessionFactory.getCurrentSession().createSQLQuery(hql)
+					.addEntity(Contactor.class);
+			q.setParameter("cnumber", contactorCellphoneNumber,
+					Hibernate.STRING);
+			q.setParameter("userid", userid);
+			Contactor res = (Contactor) q.list().get(0);
+			return res;
+		} catch (Exception e) {
+			System.err.println(e);
+			return null;
+		}
+
+	}
+
+	// public boolean addContactorToGroup(Contactor contactor, Group group) {
+	// try {
+	// sessionFactory.getCurrentSession().persist(contactor);
+	// Group_Contactor group_contactor = new Group_Contactor();
+	// group_contactor.setGroupId(group.getId());
+	// group_contactor.setContactorId(contactor.getId());
+	// sessionFactory.getCurrentSession().persist(group_contactor);
+	// return true;
+	// } catch (Exception e) {
+	// System.out.print(e.getMessage());
+	// sessionFactory.getCurrentSession().getTransaction().rollback();
+	// return false;
+	// }
+	// }
 
 }

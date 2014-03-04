@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.sys.model.Contactor;
 import com.sys.model.ShortMsg;
 import com.sys.model.User;
 import com.sys.serviceInterface.IContactorService;
@@ -38,13 +39,29 @@ public class ShortMsgTest {
 	@Test
 	public void testAdd() {
 		User user = _userService.findUserById(1);
-		String sender = "111";//
-		String receiver = "911";
+		String sender = "15056998911";//
+		String receiver = "15056998912";
 		// User receiver= _userService.findUserById(4);
 		ShortMsg shortmsg = new ShortMsg();
-		shortmsg.setContent("yes test3!");
+		shortmsg.setContent("me too");
 		shortmsg.setFrom(receiver);
 		shortmsg.setTo(sender);
+//		shortmsg.setFrom(sender);
+//		shortmsg.setTo(receiver);
+		
+		Contactor contactor=_contactorService.findContactorByCellphoneNumber(receiver, user.getId());
+		if(contactor!=null)
+		{
+			shortmsg.setFromName(contactor.getName());
+			shortmsg.setToName(user.getDetailInfor().getName());
+		}
+		else
+		{
+			shortmsg.setFromName(receiver);
+			shortmsg.setToName(user.getDetailInfor().getName());
+		}
+		
+		
 		shortmsg.setOwner(user);
 		java.util.Date utilDate = new java.util.Date();
 		Timestamp sqlDate = new java.sql.Timestamp(utilDate.getTime());

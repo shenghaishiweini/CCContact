@@ -159,8 +159,6 @@ public class ContactorAction extends ActionSupport {
 	
 	public String deleteContactor() throws Exception
 	{
-		//System.out.println(selectedContactor.size());
-		//System.out.println(selectedContactor.get(0));
 		for(int i=0;i<selectedContactor.size();i++){
 			contactorService.deleteContactor(Integer.parseInt(selectedContactor.get(i)));
 		}		

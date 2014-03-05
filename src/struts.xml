@@ -83,7 +83,6 @@
 
 		<action name="listAllGroups" class="groupAction" method="listAllGroups">
 			<result name="success">/groups.jsp</result>
-			<result name="input">/jumpToLogin.jsp</result>
 		</action>
 
 		<action name="newGroup1" class="groupAction" method="newGroup1">

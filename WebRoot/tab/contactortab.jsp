@@ -49,7 +49,7 @@ body {
 </style>
 
 		<script src="../script/client_validate.js"></script>
-		<script>
+		<script language="javascript">
   
 	var msg="${requestScope.tipMessage}";
 	if(msg!=""){
@@ -57,10 +57,7 @@ body {
 	}
   
   function init(){
-    var mesg = "xxxxxx";
-    if(mesg != ""){
-      alert(mesg);
-    }
+    document.getElementById("autolink").click();
   } 
   
   //查询读者
@@ -192,7 +189,8 @@ for(i=0;i<cs.length;i++){
 
 	</head>
 
-	<body>
+	<body onLoad="init()">
+		<s:a href="sys/listAllGroups.action" id="autolink" target="groupFrame"></s:a>
 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
 			<tr>
 				<td height="30" background="tab/images/tab_05.gif">

@@ -93,7 +93,7 @@ a:active {
 										width="100%" border="0" cellspacing="0" cellpadding="0">
 										<tr>
 											<td width="18%">&nbsp;</td>
-											<td width="82%" class="STYLE1"><s:a href="listAllContactors.action" target="contactorFrame">全部分组[<s:property value="#request.numbers.get(0)"/>]</s:a></td>
+											<td width="82%" class="STYLE1"><s:a href="listAllContactors.action" target="contactorFrame">全部联系人[<s:property value="#request.numbers.get(0)"/>]</s:a></td>
 										</tr>
 									</table></td>
 							</tr>
@@ -105,6 +105,25 @@ a:active {
 												<td><table width="90%" border="0" align="center"
 														cellpadding="0" cellspacing="0">
 
+														<tr>
+															<td width="16%" height="25">
+																<div align="center">
+																	<img src="../images/left.gif" width="10" height="10" />
+																</div>
+															</td>
+															<td width="64%" height="23">
+																<table width="95%" border="0" cellspacing="0" cellpadding="0">
+																	<tr>
+																		<td height="20" style="cursor:hand"
+																			onmouseover="this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#7bc4d3'; "
+																			onmouseout="this.style.borderStyle='none'"><span
+																			class="STYLE3"><s:a href="listContactorsOfGroup.action?id=1" target="contactorFrame">未分组</s:a>[<s:property value="#request.defaultGroup.getMemberNum()"/>] </span>
+																		</td>
+																		<!--<td><img src="../tab/images/11.gif" width="10" height="10" /></td>
+																	--></tr>
+																</table>
+															</td>
+															</tr>
 														<s:iterator value="#request.list" id="group">
 															<tr>
 															<td width="16%" height="25">

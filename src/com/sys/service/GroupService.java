@@ -274,8 +274,14 @@ public class GroupService implements IGroupService {
 		try {
 			String hql = "select * from Group_Contactors where contactorId='"+contactorId+"'";
 			List<Group_Contactor> temp = sessionFactory.getCurrentSession().createSQLQuery(hql).addEntity(Group_Contactor.class).list();
+			Group group = null;
+			int memberNumber = 0;
 			for(int i=0;i<temp.size();i++){
 				sessionFactory.getCurrentSession().delete(temp.get(i));
+				group = (Group) sessionFactory.getCurrentSession().get(Group.class, temp.get(i).getGroupId());
+				memberNumber = group.getMemberNum();
+				group.setMemberNum(memberNumber-1);
+				sessionFactory.getCurrentSession().update(group);
 			}			
 			return true;
 		} catch (Exception e) {

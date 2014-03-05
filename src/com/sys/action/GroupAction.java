@@ -70,16 +70,19 @@ public class GroupAction extends ActionSupport {
 		contactorNumbers.put(0, allContactors.size());
 		for(int i=0;i<list.size();i++){
 			int groupId = list.get(i).getId();
-			List<Contactor> temp = groupService.getGroupContactors(groupId);
-			
-			int number = 0;
-			if(temp != null){
-				number = temp.size();
-			}
-			contactorNumbers.put(groupId,number);
+//			List<Contactor> temp = groupService.getGroupContactors(groupId);
+//			
+//			int number = 0;
+//			if(temp != null){
+//				number = temp.size();
+//			}
+//			contactorNumbers.put(groupId,number);
+			contactorNumbers.put(groupId,list.get(i).getMemberNum());
 		}
-		System.out.println(contactorNumbers.get(0));
+//		System.out.println(contactorNumbers.get(0));
 		HttpServletRequest request = ServletActionContext.getRequest();
+		request.setAttribute("defaultGroup", list.get(0));
+		list.remove(0); //移除default分组，default要单独列出来显示，因为不允许修改和删除
 		request.setAttribute("list", list);
 		request.setAttribute("numbers", contactorNumbers);
 		

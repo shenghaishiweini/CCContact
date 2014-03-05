@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,11 +31,16 @@ public class ContactorService implements IContactorService {
 	public boolean addContactorToNewGroup(Contactor contactor, Group group) {
 
 		try {
-			Group_Contactor group_contactor = new Group_Contactor();
-			group_contactor.setGroupId(group.getId());
-			group_contactor.setContactorId(contactor.getId());
-			sessionFactory.getCurrentSession().persist(group_contactor);
-			return true;
+				Group_Contactor group_contactor = new Group_Contactor();
+				group_contactor.setGroupId(group.getId());
+				group_contactor.setContactorId(contactor.getId());
+				sessionFactory.getCurrentSession().persist(group_contactor);
+				
+				int memberNumber = group.getMemberNum();
+				group.setMemberNum(memberNumber+1);
+				sessionFactory.getCurrentSession().update(group);
+				
+				return true;
 
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
@@ -50,19 +56,32 @@ public class ContactorService implements IContactorService {
 			sessionFactory.getCurrentSession().persist(contactor);
 			// throw new Exception();
 			User owner = contactor.getOwner();
-			String hql = "select id from Groups where userID=:userid and groupName='default'";
-			Query q = sessionFactory.getCurrentSession().createSQLQuery(hql);
+			
+//			String hql = "select id from Groups where userID=:userid and groupName='default'";
+//			Query q = sessionFactory.getCurrentSession().createSQLQuery(hql);
+//			q.setParameter("userid", owner.getId());// owner.getId()
+//			List<Integer> res = q.list();
+			
+			String hql = "select * from Groups where userID=:userid and groupName='default'";
+			Query q = sessionFactory.getCurrentSession().createSQLQuery(hql).addEntity(Group.class);
 			q.setParameter("userid", owner.getId());// owner.getId()
-			List<Integer> res = q.list();
+			List<Group> res = q.list();
+			
 			if (res.size() <= 0) {
 				return false;
 			}
 			Group_Contactor group_contactor = new Group_Contactor();
-			group_contactor.setGroupId(res.get(0));// default
+			//group_contactor.setGroupId(res.get(0));// default
+			group_contactor.setGroupId(res.get(0).getId());
 			group_contactor.setContactorId(contactor.getId());
 
-			// sessionFactory.getCurrentSession().persist(contactor);
 			sessionFactory.getCurrentSession().persist(group_contactor);
+			
+			Group group = res.get(0);
+			int memberNumber = group.getMemberNum();
+			group.setMemberNum(memberNumber+1);
+			sessionFactory.getCurrentSession().update(group);
+			
 			return true;
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
@@ -102,8 +121,14 @@ public class ContactorService implements IContactorService {
 							"select * from Group_Contactors where contactorid='"
 									+ contactorID + "'").addEntity(
 							Group_Contactor.class).list();
+			Group group = null;
+			int memberNumber = 0;
 			for (int i = 0; i < list.size(); i++) {
 				sessionFactory.getCurrentSession().delete(list.get(i));
+				group = (Group) sessionFactory.getCurrentSession().get(Group.class, list.get(i).getGroupId());
+				memberNumber = group.getMemberNum();
+				group.setMemberNum(memberNumber-1);
+				sessionFactory.getCurrentSession().update(group);
 			}
 
 			return true;

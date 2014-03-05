@@ -44,10 +44,10 @@ public class ContactorTest {
 	@Test
 	public void testAddContactorDefault() {
 		
-		User user = _userService.findUserById(2);
+		User user = _userService.findUserById(1);
 		Contactor contactor = new Contactor();
 		contactor.setName("liMing");
-		contactor.setCellphoneNumber("15056998915");
+		contactor.setCellphoneNumber("15056998910");
 		contactor.setOwner(user);
 
 		_contactorService.addContactorDefault(contactor);

@@ -47,7 +47,19 @@ public interface IShortMsgService {
 	 */
 	public ShortMsg getShortMsgById(int shortmsgid);
 	
-	
+	/**
+	 * 删除一条短信记录
+	 * @param shortMsg
+	 * @return
+	 */
 	public boolean deleteShortMsg(ShortMsg shortMsg);
+	
+	/**
+	 * 删除一个会话，包括会话的所有短信
+	 * @param userid
+	 * @param talkerCellphoneNumber
+	 * @return
+	 */
+    public boolean deleteConversation(int userid,String talkerCellphoneNumber);
 	
 }

@@ -163,16 +163,23 @@
 			method="getConversationDetailMsgs">
 			<result name="success" type="redirect">../shortMsgmiddle.html</result>
 		</action>
-
+		<!-- 删除短信 -->
 		<action name="deleteShortMsg" class="shortMsgAction" method="deleteShortMsg">
 			<result name="success" type="redirect">../shortMsgmiddle.html</result>
 		</action>
 
+		<!-- 发送短信 -->
 		<action name="sendShortMsg" class="shortMsgAction" method="sendShortMsg">
 			<result name="success" type="redirect">../shortMsgmiddle.html</result>
 			<result name="failed" type="redirect">../shortMsgmiddle.html</result>
 		</action>
 
+		<!-- 删除会话 -->
+		<action name="deleteConversation" class="shortMsgAction"
+			method="deleteConversation">
+			<result name="success" type="redirect">../shortMsgmiddle.html</result>
+			<result name="failed" type="redirect">../shortMsgmiddle.html</result>
+		</action>
 		<!--
 			<interceptors> <interceptor name="userInter"
 			class="com.sys.myinterceptor.myInterceptor"></interceptor>

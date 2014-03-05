@@ -37,48 +37,47 @@ public class ShortMsgService implements IShortMsgService {
 
 	@SuppressWarnings("unchecked")
 	public List<ShortMsg> readAllConversations(int userid) {
-		try{
-		String hql = "select * from ShortMsgs where userID=:userid order by createTime desc";
-		Query q = sessionFactory.getCurrentSession().createSQLQuery(hql)
-				.addEntity(ShortMsg.class);
-		q.setParameter("userid", userid);
-		List<ShortMsg> res = q.list();
-		if (res.size() <= 0) {
-			return null;
-		} else {
-			return res;
-		}
-		}catch(Exception e)
-		{
+		try {
+			String hql = "select * from ShortMsgs where userID=:userid order by createTime desc";
+			Query q = sessionFactory.getCurrentSession().createSQLQuery(hql)
+					.addEntity(ShortMsg.class);
+			q.setParameter("userid", userid);
+			List<ShortMsg> res = q.list();
+			if (res.size() <= 0) {
+				return null;
+			} else {
+				return res;
+			}
+		} catch (Exception e) {
 			System.err.println(e);
 			return null;
 		}
 	}
 
-	public List<ShortMsg> readConversationDetailMsgs(String recipipentCellphoneNumber,
-			int userid) {
-//		Contactor contactor = (Contactor) sessionFactory.getCurrentSession().get(Contactor.class, 
-//							recipipentId);
+	public List<ShortMsg> readConversationDetailMsgs(
+			String recipipentCellphoneNumber, int userid) {
+		// Contactor contactor = (Contactor)
+		// sessionFactory.getCurrentSession().get(Contactor.class,
+		// recipipentId);
 		User user = (User) sessionFactory.getCurrentSession().get(User.class,
-					userid);
-		
-		
-		String hql="select * from ShortMsgs where (fromnumber=:usernumber and tonumber=:recnumber) or (tonumber=:usernumber and fromnumber=:recnumber) order by createTime";
+				userid);
+
+		String hql = "select * from ShortMsgs where (fromnumber=:usernumber and tonumber=:recnumber) or (tonumber=:usernumber and fromnumber=:recnumber) order by createTime";
 		Query q = sessionFactory.getCurrentSession().createSQLQuery(hql)
-				.addEntity(ShortMsg.class);		
-		q.setParameter("usernumber", user.getDetailInfor().getCellphoneNumber());
-		q.setParameter("recnumber",recipipentCellphoneNumber);
-		
+				.addEntity(ShortMsg.class);
+		q
+				.setParameter("usernumber", user.getDetailInfor()
+						.getCellphoneNumber());
+		q.setParameter("recnumber", recipipentCellphoneNumber);
+
 		List<ShortMsg> res = q.list();
 		if (res.size() <= 0) {
 			return null;
 		} else {
 			return res;
 		}
-		
-	
+
 	}
-	
 
 	public ShortMsg readFirstConversationMsgs(int recipipentId, int userid) {
 		// TODO Auto-generated method stub
@@ -97,7 +96,7 @@ public class ShortMsgService implements IShortMsgService {
 	}
 
 	public boolean deleteShortMsg(ShortMsg shortMsg) {
-		
+
 		try {
 			sessionFactory.getCurrentSession().delete(shortMsg);
 			return true;
@@ -107,8 +106,24 @@ public class ShortMsgService implements IShortMsgService {
 			return false;
 		}
 	}
-	
-	
-	
+
+	public boolean deleteConversation(int userid, String talkerCellphoneNumber) {
+
+		List<ShortMsg> temp = this.readConversationDetailMsgs(
+				talkerCellphoneNumber, userid);
+		try {
+			for (int i = 0; i < temp.size(); i++) {
+				if (!this.deleteShortMsg(temp.get(i)))//删除会话，要么全删，要么全不删
+				{
+					throw new Exception();
+				}
+			}
+			return true;
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+//			sessionFactory.getCurrentSession().getTransaction().rollback();这里不需要，因为删除函数里面已经有了回滚操作
+			return false;
+		}
+	}
 
 }

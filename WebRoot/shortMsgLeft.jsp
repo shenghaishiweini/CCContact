@@ -153,6 +153,17 @@ onmouseout=
 	
 																							</span>
 																						</td>
+																						
+																						<td width="20%" height="25">
+																<div align="center" style="float: left">
+																</div>
+																<div align="center" >
+																	<c:if test="%{#item.ifSender}==1">
+																		aaa
+																	</c:if>
+																	<s:a href="deleteConversation?talkerCellphoneNumber=(%{#item.ifSender}==1?%{#item.to}:%{#item.from})"><img src="../tab/images/11.gif" width="10" height="10" title="删除会话"/></s:a>
+																</div>
+															</td>
 																					</tr>
 																				</table>
 																			</td>

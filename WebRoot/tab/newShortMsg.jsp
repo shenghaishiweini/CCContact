@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+
 <%@ page import="java.util.*" %>    
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ page contentType="text/html; charset=gb2312" pageEncoding="UTF-8"%> 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -169,6 +169,7 @@ for(i=0;i<cs.length;i++){
 				</div>
 				<br />
 				<div style="padding-left: 20px;">
+				
 					<s:textarea cols="40" rows="10" name="shortMsg.content"></s:textarea>
 					<br>
 

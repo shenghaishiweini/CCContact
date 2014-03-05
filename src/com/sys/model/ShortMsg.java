@@ -105,8 +105,9 @@ public class ShortMsg {
 	public void setIfSender(int ifSender) {
 		this.ifSender = ifSender;
 	}
-	public int isIfSender() {
+	public int getIfSender() {
 		return ifSender;
 	}
+
 	
 }

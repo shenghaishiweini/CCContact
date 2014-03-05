@@ -251,7 +251,7 @@ for(i=0;i<cs.length;i++){
 																</td>
 																<td class="STYLE1">
 																	<div align="center">
-																		<a href="addBook.jsp">新增</a>
+																		<a href="newShortMsg.jsp">新增</a>
 																	</div>
 																</td>
 															</tr>

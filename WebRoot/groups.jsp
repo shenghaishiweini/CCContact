@@ -117,7 +117,7 @@ a:active {
 																		<td height="20" style="cursor:hand"
 																			onmouseover="this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#7bc4d3'; "
 																			onmouseout="this.style.borderStyle='none'"><span
-																			class="STYLE3"><s:a href="listContactorsOfGroup.action?id=1" target="contactorFrame">未分组</s:a>[<s:property value="#request.defaultGroup.getMemberNum()"/>] </span>
+																			class="STYLE3"><s:a href="listContactorsOfGroup.action?id=%{#request.defaultGroup.getId()}" target="contactorFrame">未分组</s:a>[<s:property value="#request.defaultGroup.getMemberNum()"/>] </span>
 																		</td>
 																		<!--<td><img src="../tab/images/11.gif" width="10" height="10" /></td>
 																	--></tr>

@@ -1,43 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>    
-<%@ page import="bms.sysmgr.domain.*" %>   
-<%@ page import="bms.sysmgr.manager.*" %>
-
-<%
-    //解决乱码问题
-	request.setCharacterEncoding("UTF-8");
-	
-	String command = request.getParameter("command");
-	String bookId = "";
-	String bookName = "";
-	String ISBN = "";
-	String totalNumbers = "";
-	String mesg1 = "";
-	String mesg2 = "";
-	if ("add".equals(command)) {
-		if (BookManager.getInstance().findBookById(request.getParameter("bookId")) == null) {
-			Book book = new Book();
-			book.setBookId(request.getParameter("bookId"));
-			book.setBookName(request.getParameter("bookName"));
-			book.setISBN(request.getParameter("ISBN"));
-			book.setTotalNumbers(Integer.parseInt(request.getParameter("totalNumbers")));
-			book.setBorrowedNumbers(0);
-			book.setStoreDate(new Date());
-			
-			BookManager.getInstance().addBook(book);
-			mesg1 = "添加图书成功";
-		}else {
-			bookId = request.getParameter("bookId");
-			bookName = request.getParameter("bookName");
-			ISBN = request.getParameter("ISBN");
-			totalNumbers = request.getParameter("totalNumbers");
-			mesg1 = "添加图书失败";
-			mesg2 = "图书编号 "+bookId+" 已存在";
-		}
-	}
-%>  
-
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -176,7 +140,7 @@ for(i=0;i<cs.length;i++){
             <td width="46%" valign="middle"><table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td width="5%"><div align="center"><img src="images/tb.gif" width="16" height="16" /></div></td>
-                <td width="95%" class="STYLE1"><span class="STYLE3">你当前的位置</span>：[业务中心]-[<a href="booktab.jsp">图书管理</a>]-[增加图书]</td>
+                <td width="95%" class="STYLE1"><span class="STYLE3">你当前的位置</span>：[短信]-[新建短信]</td>
               </tr>
             </table></td>
             <td width="54%"><table border="0" align="right" cellpadding="0" cellspacing="0">
@@ -188,48 +152,32 @@ for(i=0;i<cs.length;i++){
       </tr>
     </table></td>
   </tr>
-  <tr>
-    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr>	
-        <td width="8" background="images/tab_12.gif">&nbsp;</td>
-        <td>
-          <p><span id="mesg"><font color='red'><%=mesg1 %></font></span></p>
-          <form id="bookForm" name="bookForm">
-          <p>编&nbsp;&nbsp;&nbsp;&nbsp;号：<input type="text" name="bookId" id="bookId" value="<%=bookId %>" /><font color="#FF0000">*</font>&nbsp;<span id="bookIdSpan"><font color='red'><%=mesg2 %></font></p>
-          <p>书&nbsp;&nbsp;&nbsp;&nbsp;名：<input type="text" name="bookName" id="bookName" value="<%=bookName %>"/><font color="#FF0000">*</font>&nbsp;<span id="bookNameSpan"></p>
-          <p>&nbsp;I&nbsp;S&nbsp;B&nbsp;N：<input type="text" name="ISBN" id="ISBN" value="<%=ISBN %>"/>&nbsp;<span id="ISBNSpan"></p>
-          <p>库&nbsp;存&nbsp;量：<input type="text" name="totalNumbers" id="totalNumbers" value="<%=totalNumbers %>"/><font color="#FF0000">*</font>&nbsp;<span id="totalNumbersSpan"></p>
-		  <p><input name="addBtn" class="button1" type="button" id="addBtn" value="添加" onClick="addBook()">&nbsp;&nbsp;&nbsp;<input type="reset" value="清空" /></p>
-		  <p>注：<font color="#FF0000">*</font>号为必填项</p>
-		  </form>
-		</td>
-        <td width="8" background="images/tab_15.gif">&nbsp;</td>
-      </tr>
-    </table></td>
-  </tr>
-  <tr>
-    <td height="35" background="images/tab_19.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td width="12" height="35"><img src="images/tab_18.gif" width="12" height="35" /></td>
-        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="STYLE4">&nbsp;&nbsp;</td>
-            <td><table border="0" align="right" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td width="40">&nbsp;</td>
-                  <td width="45">&nbsp;</td>
-                  <td width="45">&nbsp;</td>
-                  <td width="40">&nbsp;</td>
-                  <td width="100">&nbsp;</td>
-                  <td width="40">&nbsp;</td>
-                </tr>
-            </table></td>
-          </tr>
-        </table></td>
-        <td width="16"><img src="images/tab_20.gif" width="16" height="35" /></td>
-      </tr>
-    </table></td>
-  </tr>
+ 
+
 </table>
+
+	<div style=" margin-top: 80px;">
+			<form action="../sys/sendShortMsg">
+				<div style="padding-left: 20px;">
+					收件人：
+					<s:textfield name="shortMsg.to" size="23px;"></s:textfield><input type="button" value="选择联系人"/>
+					
+					<input value="${ user.detailInfor.cellphoneNumber}" type="hidden"
+						name="shortMsg.from" />
+					<input value="1" type="hidden" name="shortMsg.msgType" />
+					<input value="1" type="hidden" name="shortMsg.ifSender" />
+				</div>
+				<br />
+				<div style="padding-left: 20px;">
+					<s:textarea cols="40" rows="10" name="shortMsg.content"></s:textarea>
+					<br>
+
+					<div>
+						<input type="submit" value="发送"
+							style="width: 250px; height: 50px;" />
+					</div>
+				</div>
+			</form>
+		</div>
 </body>
 </html>

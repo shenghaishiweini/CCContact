@@ -98,7 +98,7 @@
 				<param name="actionName">newGroup1</param>
 			</result>
 		</action>
-		
+
 		<action name="deleteGroup" class="groupAction" method="deleteGroup">
 			<result name="success" type="chain">
 				<param name="actionName">listAllGroups</param>
@@ -164,9 +164,13 @@
 			<result name="success" type="redirect">../shortMsgmiddle.html</result>
 		</action>
 
-		<action name="deleteShortMsg" class="shortMsgAction"
-			method="deleteShortMsg">
+		<action name="deleteShortMsg" class="shortMsgAction" method="deleteShortMsg">
 			<result name="success" type="redirect">../shortMsgmiddle.html</result>
+		</action>
+
+		<action name="sendShortMsg" class="shortMsgAction" method="sendShortMsg">
+			<result name="success" type="redirect">../shortMsgmiddle.html</result>
+			<result name="failed" type="redirect">../shortMsgmiddle.html</result>
 		</action>
 
 		<!--

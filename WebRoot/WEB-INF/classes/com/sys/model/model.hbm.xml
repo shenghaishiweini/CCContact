@@ -131,6 +131,7 @@
 		<property name="createTime" column="createTime"  not-null="false" />
 		<property name="content" column="detailContent" not-null="false" />
 		<property name="msgType" column="msgType" not-null="false" />
+		<property name="ifSender" column="ifSender" not-null="false" />
 		<many-to-one name="owner" column="userID" class="User"></many-to-one>
 	</class>
 

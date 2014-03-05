@@ -33,6 +33,11 @@ public class ShortMsg {
 	private String content;
 	private int msgType;//短信类型，可能是彩信或语音
 	
+	/**
+	 * 判断是否是该用户发送的
+	 * 1 YES, 0 NO
+	 */
+	private int ifSender;
 	private User owner;
 	
 	private String conversation; 
@@ -96,6 +101,12 @@ public class ShortMsg {
 	}
 	public String getConversation() {
 		return conversation;
+	}
+	public void setIfSender(int ifSender) {
+		this.ifSender = ifSender;
+	}
+	public int isIfSender() {
+		return ifSender;
 	}
 	
 }

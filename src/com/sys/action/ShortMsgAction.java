@@ -15,15 +15,20 @@ import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.sys.model.Contactor;
 import com.sys.model.Group;
 import com.sys.model.ShortMsg;
 import com.sys.model.User;
+import com.sys.serviceInterface.IContactorService;
 import com.sys.serviceInterface.IShortMsgService;
+import com.sys.utils.TimeUtils;
 
 public class ShortMsgAction extends ActionSupport{
 
 	@Resource
 	private IShortMsgService _isIShortMsgService;
+	@Resource 
+	private IContactorService _iContactorService;
 	private ShortMsg shortMsg;
 	private List<ShortMsg> selectedShortMsg=new ArrayList<ShortMsg>();
 	private List<String> selectedShortMsgs=new ArrayList<String>();
@@ -93,6 +98,28 @@ public class ShortMsgAction extends ActionSupport{
         httpSession.removeAttribute("conversationDetailMsgs");
         httpSession.setAttribute("conversationDetailMsgs", list);
 		return "success";
+	}
+	
+	
+	public String sendShortMsg()
+	{
+		Map<String, Object> session = ActionContext.getContext().getSession();
+        User user = (User)session.get("user");
+		String sender=user.getDetailInfor().getCellphoneNumber();
+		String reciver=shortMsg.getTo();
+		
+		shortMsg.setFromName(user.getDetailInfor().getName());
+		Contactor contactor=_iContactorService.findContactorByCellphoneNumber(reciver, user.getId());
+		if(contactor!=null)
+			shortMsg.setToName(contactor.getName());
+		else
+			shortMsg.setToName(reciver);
+		shortMsg.setCreateTime(TimeUtils.getNowTime());
+		shortMsg.setOwner(user);
+		if(_isIShortMsgService.add(shortMsg))
+		return "success";
+		else
+			return "failed";
 	}
 	
 	

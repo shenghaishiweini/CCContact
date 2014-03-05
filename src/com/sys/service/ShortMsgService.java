@@ -37,6 +37,7 @@ public class ShortMsgService implements IShortMsgService {
 
 	@SuppressWarnings("unchecked")
 	public List<ShortMsg> readAllConversations(int userid) {
+		try{
 		String hql = "select * from ShortMsgs where userID=:userid order by createTime desc";
 		Query q = sessionFactory.getCurrentSession().createSQLQuery(hql)
 				.addEntity(ShortMsg.class);
@@ -46,6 +47,11 @@ public class ShortMsgService implements IShortMsgService {
 			return null;
 		} else {
 			return res;
+		}
+		}catch(Exception e)
+		{
+			System.err.println(e);
+			return null;
 		}
 	}
 

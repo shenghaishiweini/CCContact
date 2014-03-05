@@ -315,7 +315,7 @@ for(i=0;i<cs.length;i++){
 						User user = (User) request.getSession().getAttribute("user");
 						ShortMsg t = null;
 						int j = 0;
-						while (j < 10) {
+				
 							for (int i = 0; i < list.size(); i++) {
 								t = list.get(i);
 				%>
@@ -324,7 +324,7 @@ for(i=0;i<cs.length;i++){
 						if (list.get(i).getFrom().equals(
 											user.getDetailInfor().getCellphoneNumber())) {
 					%>
-					<td align="left" style="width: 350px; height: 100px;">
+					<td align="center" style="width: 350px; height: 100px;">
 						<div
 							style="margin-top: 30px; background-image: url('../images/bmsg.jpg')">
 							<s:checkbox name="selectedShortMsg" value="false" theme="simple"
@@ -365,8 +365,8 @@ for(i=0;i<cs.length;i++){
 				</tr>
 				<%
 					}
-							j++;
-						}
+						
+						
 					} else {
 				%>
 				<tr>

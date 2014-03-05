@@ -218,6 +218,7 @@ public class ContactorService implements IContactorService {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public Contactor findContactorByCellphoneNumber(
 			String contactorCellphoneNumber, int userid) {
 		try {
@@ -227,8 +228,10 @@ public class ContactorService implements IContactorService {
 			q.setParameter("cnumber", contactorCellphoneNumber,
 					Hibernate.STRING);
 			q.setParameter("userid", userid);
-			Contactor res = (Contactor) q.list().get(0);
-			return res;
+			List<Contactor> res =(List<Contactor>) q.list();
+			if(res!=null&&res.size()==1)
+				return res.get(0);
+			return null;
 		} catch (Exception e) {
 			System.err.println(e);
 			return null;

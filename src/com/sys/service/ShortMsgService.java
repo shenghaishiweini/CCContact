@@ -5,9 +5,11 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sys.model.Contactor;
 import com.sys.model.ShortMsg;
 import com.sys.model.User;
 import com.sys.serviceInterface.IShortMsgService;
@@ -122,6 +124,23 @@ public class ShortMsgService implements IShortMsgService {
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
 //			sessionFactory.getCurrentSession().getTransaction().rollback();这里不需要，因为删除函数里面已经有了回滚操作
+			return false;
+		}
+	}
+
+	public boolean updateShortMsg(ShortMsg shortMsg) {
+		try {
+			Session session = sessionFactory.getCurrentSession();
+			ShortMsg temp = shortMsg;
+			if (temp != null) {
+				session.update(temp);
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+			sessionFactory.getCurrentSession().getTransaction().rollback();
 			return false;
 		}
 	}

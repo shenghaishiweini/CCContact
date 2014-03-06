@@ -61,5 +61,12 @@ public interface IShortMsgService {
 	 * @return
 	 */
     public boolean deleteConversation(int userid,String talkerCellphoneNumber);
+    
+    /**
+     * 更新短信，主要是新增联系人时
+     * @param shortMsg
+     * @return
+     */
+    public boolean updateShortMsg(ShortMsg shortMsg);
 	
 }

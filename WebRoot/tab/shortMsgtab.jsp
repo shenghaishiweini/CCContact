@@ -5,20 +5,8 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>无标题文档</title>
 		<script src="../script/jquery-1.8.3.min.js" type="text/javascript"></script>
-		<script type="text/javascript">
-
-		$(document).ready(function() {
-		
-			var sendX=$(window).height();
-			
-			
-		
-		});
-		
-</script>
 
 		<style type="text/css">
 <!--
@@ -48,51 +36,6 @@ body {
 
 		<script src="../script/client_validate.js"></script>
 		<script>
-  
-  
-  //查询图书
-  function search(){
-    var searchField = document.getElementById("searchText");
-    //图书代码不能为空
-    if (trim(searchField.value) == "") {
-      alert("查询条件不能为空");
-      searchField.focus();
-      return;
-    }else{
-      with(document.getElementById("searchForm")) {
-        method="get";
-        action="booktab.jsp";
-        submit();
-      }
-    }
-  }
-  
-  //修改图书信息
-  function modifyBook() {
-    var selectFlags = document.getElementsByName("selectFlag");
-    //计数器
-    var count = 0;
-    //记录选中的checkbox索引号
-    var index = 0;
-    for (var i=0; i<selectFlags.length; i++) {
-      if (selectFlags[i].checked) {
-          //记录选中的checkbox
-        count++;
-        index = i;
-      }
-    }
-    if(count == 0) {
-      alert("请选择需要修改的数据！");
-      return;
-    }
-    if (count > 1) {
-      alert("一次只能修改一个图书！");
-      return;
-    }
-    //alert(selectFlags[index].value);
-    
-    window.self.location = "editBook.jsp?bookId=" + selectFlags[index].value;
-  }
   
   function deleteShortMsg() {
     var selectFlags = document.getElementsByName("selectedShortMsg");
@@ -129,62 +72,10 @@ body {
     }
   }
   
-  function topCheckAll() {
-    var selectFlags = document.getElementsByName("selectFlag");
-    for (var i=0; i<selectFlags.length; i++) {
-      selectFlags[i].checked = document.getElementById("topIfAll").checked;
-      //采用getElementsByName代替getElementById
-      //selectFlags[i].checked = document.getElementsByName("ifAll")[0].checked;
-    }
+function init(){
+  //  document.getElementById("autolink").click();
   }
-
   
-var  highlightcolor='#c1ebff';
-//此处clickcolor只能用win系统颜色代码才能成功,如果用#xxxxxx的代码就不行,还没搞清楚为什么:(
-var  clickcolor='#51b2f6';
-function  changeto(){
-source=event.srcElement;
-if  (source.tagName=="TR"||source.tagName=="TABLE")
-return;
-while(source.tagName!="TD")
-source=source.parentElement;
-source=source.parentElement;
-cs  =  source.children;
-//alert(cs.length);
-if  (cs[1].style.backgroundColor!=highlightcolor&&source.id!="nc"&&cs[1].style.backgroundColor!=clickcolor)
-for(i=0;i<cs.length;i++){
-  cs[i].style.backgroundColor=highlightcolor;
-}
-}
-
-function  changeback(){
-if  (event.fromElement.contains(event.toElement)||source.contains(event.toElement)||source.id=="nc")
-return
-if  (event.toElement!=source&&cs[1].style.backgroundColor!=clickcolor)
-//source.style.backgroundColor=originalcolor
-for(i=0;i<cs.length;i++){
-  cs[i].style.backgroundColor="";
-}
-}
-
-function  clickto(){
-source=event.srcElement;
-if  (source.tagName=="TR"||source.tagName=="TABLE")
-return;
-while(source.tagName!="TD")
-source=source.parentElement;
-source=source.parentElement;
-cs  =  source.children;
-//alert(cs.length);
-if  (cs[1].style.backgroundColor!=clickcolor&&source.id!="nc")
-for(i=0;i<cs.length;i++){
-  cs[i].style.backgroundColor=clickcolor;
-}
-else
-for(i=0;i<cs.length;i++){
-  cs[i].style.backgroundColor="";
-}
-}
 </script>
 
 
@@ -192,6 +83,7 @@ for(i=0;i<cs.length;i++){
 	</head>
 
 	<body onLoad="init()">
+		<!--	<s:a href="../sys/getConversationList" id="autolink" target="shortMsgMiddleFrame"></s:a>-->
 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
 			<tr>
 				<td height="30" background="images/tab_05.gif">
@@ -309,20 +201,28 @@ for(i=0;i<cs.length;i++){
 			<table align="right"
 				style="padding-right: 120px; background-image: url('../images/msgb.jpg');">
 				<%
+					
 					List<ShortMsg> list = (List<ShortMsg>) request.getSession()
 							.getAttribute("conversationDetailMsgs");
+
+					String reciver = "", name = "";
+
 					if (list != null && list.size() > 0) {
 						User user = (User) request.getSession().getAttribute("user");
-						ShortMsg t = null;
-						int j = 0;
-				
-							for (int i = 0; i < list.size(); i++) {
-								t = list.get(i);
+
+						if (list.get(0).getIfSender() != 1) {
+							reciver = list.get(0).getFrom();
+							name = list.get(0).getFromName();
+						} else {
+							reciver = list.get(0).getTo();
+							name = list.get(0).getToName();
+						}
+
+						for (int i = 0; i < list.size(); i++) {
 				%>
 				<tr>
 					<%
-						if (list.get(i).getFrom().equals(
-											user.getDetailInfor().getCellphoneNumber())) {
+						if (list.get(i).getIfSender() != 1) {
 					%>
 					<td align="center" style="width: 350px; height: 100px;">
 						<div
@@ -333,8 +233,7 @@ for(i=0;i<cs.length;i++){
 							<span style="font-size: 20px; padding-left: 10px;"><%=list.get(i).getContent()%></span>
 							<br />
 							<br />
-							<span style="font-size: 12px;"> 发件人：<%=list.get(i).getConversation()%>
-								接收时间：<%=list.get(i).getCreateTime()%></span>
+							<span style="font-size: 12px;"> 发件人：<%=name%> 接收时间：<%=list.get(i).getCreateTime()%></span>
 						</div>
 					</td>
 					<td></td>
@@ -365,8 +264,7 @@ for(i=0;i<cs.length;i++){
 				</tr>
 				<%
 					}
-						
-						
+
 					} else {
 				%>
 				<tr>
@@ -383,15 +281,15 @@ for(i=0;i<cs.length;i++){
 			if (list != null) {
 		%>
 		<div style="position: fixed; margin-top: 80px;">
-			<form action="sendShortMsg">
+			<form action="../sys/sendShortMsg">
 				<div style="padding-left: 20px;">
-					收件人： name:
-					<span>${user.detailInfor.cellphoneNumber }</span>
-					<input value="${ user.detailInfor.cellphoneNumber}" type="hidden"
-						name="shortMsg.to" />
+					收件人：
+					<span>'<%=name%>'<%=reciver%></span>
+					<input value="<%=reciver%>" type="hidden" name="shortMsg.to" />
 					<input value="${ user.detailInfor.cellphoneNumber}" type="hidden"
 						name="shortMsg.from" />
 					<input value="1" type="hidden" name="shortMsg.msgType" />
+					<input value="1" type="hidden" name="shortMsg.ifSender" />
 				</div>
 				<br />
 				<div style="padding-left: 20px;">
@@ -410,6 +308,4 @@ for(i=0;i<cs.length;i++){
 			}
 		%>
 	</body>
-
-
 </html>

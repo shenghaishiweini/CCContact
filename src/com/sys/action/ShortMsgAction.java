@@ -1,22 +1,18 @@
 package com.sys.action;
 
 import java.util.ArrayList;
-import java.util.Dictionary;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.fileupload.servlet.ServletRequestContext;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.sys.model.Contactor;
-import com.sys.model.Group;
 import com.sys.model.ShortMsg;
 import com.sys.model.User;
 import com.sys.serviceInterface.IContactorService;
@@ -25,6 +21,10 @@ import com.sys.utils.TimeUtils;
 
 public class ShortMsgAction extends ActionSupport {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Resource
 	private IShortMsgService _isIShortMsgService;
 	@Resource

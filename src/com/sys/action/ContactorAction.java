@@ -16,21 +16,28 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.sys.model.Contactor;
 import com.sys.model.Group;
+import com.sys.model.ShortMsg;
 import com.sys.model.User;
 import com.sys.serviceInterface.IContactorService;
 import com.sys.serviceInterface.IGroupService;
+import com.sys.serviceInterface.IShortMsgService;
 
-@Controller @Scope("prototype")
+@Controller
+@Scope("prototype")
 public class ContactorAction extends ActionSupport {
-	
-	@Resource IContactorService contactorService;
-	@Resource IGroupService groupService;
+
+	@Resource
+	IContactorService contactorService;
+	@Resource
+	IGroupService groupService;
+	@Resource
+	IShortMsgService iShortMsgService;
 
 	private Contactor contactor;
 	private int id;
 	private String[] selectedGroups;
 	private List<String> selectedContactor = new ArrayList<String>();
-		
+
 	public List<String> getSelectedContactor() {
 		return selectedContactor;
 	}
@@ -63,68 +70,68 @@ public class ContactorAction extends ActionSupport {
 		this.contactor = contactor;
 	}
 
-	
-	public String addContactor1() throws Exception
-	{
+	public String addContactor1() throws Exception {
 		ActionContext actionContext = ActionContext.getContext();
-        Map<String, Object> session = actionContext.getSession();
-		User owner = (User)session.get("user");
-		
+		Map<String, Object> session = actionContext.getSession();
+		User owner = (User) session.get("user");
+
 		List<Group> groups = groupService.getAllGroupByUserId(owner.getId());
-		groups.remove(0); //在groups中删除default分组，因为在添加联系人页面中不需要显示“未分组”这个选项
-		
+		groups.remove(0); // 在groups中删除default分组，因为在添加联系人页面中不需要显示“未分组”这个选项
+
 		session.put("groups", groups);
-		
+
 		return SUCCESS;
 	}
-	
-	public String addContactor2() throws Exception
-	{
-		
+
+	public String addContactor2() throws Exception {
+
 		ActionContext actionContext = ActionContext.getContext();
-        Map<String, Object> session = actionContext.getSession();
-		User owner = (User)session.get("user");
-		
+		Map<String, Object> session = actionContext.getSession();
+		User owner = (User) session.get("user");
+
 		contactor.setOwner(owner);
 
-		if(selectedGroups.length==0){
+		if (selectedGroups.length == 0) {
 			contactorService.addContactorDefault(contactor);
-		}else{
+		} else {
 			contactorService.addContactor(contactor);
-			for(int i=0;i<selectedGroups.length;i++){
-				Group temp = groupService.getGroupByGroupName(selectedGroups[i]);
+			for (int i = 0; i < selectedGroups.length; i++) {
+				Group temp = groupService
+						.getGroupByGroupName(selectedGroups[i]);
 				contactorService.addContactorToNewGroup(contactor, temp);
 			}
-		}	
+		}
+        
+		this.updateShortMsg(contactor, owner);
 		
 		HttpServletRequest request = ServletActionContext.getRequest();
 		request.setAttribute("tipMessage", "添加成功！");
-		//session.put("tipMessage", "添加成功！");
+		// session.put("tipMessage", "添加成功！");
 
 		return SUCCESS;
-	}	
-	
-	public String getSingleContactor() throws Exception
-	{
+	}
+
+	public String getSingleContactor() throws Exception {
 		Contactor temp = contactorService.findContactorById(id);
-		
-		List<Group> groupsOfContactor = groupService.getAllGroupsByContactorId(id);
-		
-		List<Group> groups = groupService.getAllGroupByUserId(temp.getOwner().getId());
-		groups.remove(0); //在groups中删除default分组，因为在联系人信息页面中不需要显示“未分组”这个选项
-		
+
+		List<Group> groupsOfContactor = groupService
+				.getAllGroupsByContactorId(id);
+
+		List<Group> groups = groupService.getAllGroupByUserId(temp.getOwner()
+				.getId());
+		groups.remove(0); // 在groups中删除default分组，因为在联系人信息页面中不需要显示“未分组”这个选项
+
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		session.put("groups", groups);
-		
+
 		HttpServletRequest request = ServletActionContext.getRequest();
 		request.setAttribute("contactor", temp);
 		request.setAttribute("groups", groupsOfContactor);
-		
+
 		return SUCCESS;
 	}
-	
-	public String updateContactor() throws Exception
-	{
+
+	public String updateContactor() throws Exception {
 		Contactor temp = contactorService.findContactorById(id);
 		temp.setName(contactor.getName());
 		temp.setGender(contactor.getGender());
@@ -136,82 +143,102 @@ public class ContactorAction extends ActionSupport {
 		temp.setComments(contactor.getComments());
 		temp.setOther1(contactor.getOther1());
 		temp.setOther2(contactor.getOther2());
-		
+
 		contactorService.alterContactor(temp);
-		
+
 		groupService.removeGroupContactorItemOfContactor(id);
-		
-		if(selectedGroups.length==0){
+
+		if (selectedGroups.length == 0) {
 			Group temp1 = groupService.getGroupByGroupName("default");
-			contactorService.addContactorToNewGroup(temp,temp1);
-		}else{
-			for(int i=0;i<selectedGroups.length;i++){
-				Group temp2 = groupService.getGroupByGroupName(selectedGroups[i]);
+			contactorService.addContactorToNewGroup(temp, temp1);
+		} else {
+			for (int i = 0; i < selectedGroups.length; i++) {
+				Group temp2 = groupService
+						.getGroupByGroupName(selectedGroups[i]);
 				contactorService.addContactorToNewGroup(temp, temp2);
 			}
 		}
-		
+
 		HttpServletRequest request = ServletActionContext.getRequest();
 		request.setAttribute("tipMessage", "更改成功！");
-		
-		return SUCCESS;
-	}
-	
-	public String deleteContactor() throws Exception
-	{
-		for(int i=0;i<selectedContactor.size();i++){
-			contactorService.deleteContactor(Integer.parseInt(selectedContactor.get(i)));
-		}		
-		
-		return SUCCESS;
-	}
-	
-	public String findAllContactorsByUserId() throws Exception
-	{
 
-//		List<Contactor> list = contactorService.listAllContactors();
-//		HttpServletRequest request = ServletActionContext.getRequest();
-//		request.setAttribute("list", list);
+		return SUCCESS;
+	}
+
+	public String deleteContactor() throws Exception {
+		for (int i = 0; i < selectedContactor.size(); i++) {
+			contactorService.deleteContactor(Integer.parseInt(selectedContactor
+					.get(i)));
+		}
+
+		return SUCCESS;
+	}
+
+	public String findAllContactorsByUserId() throws Exception {
+
+		// List<Contactor> list = contactorService.listAllContactors();
+		// HttpServletRequest request = ServletActionContext.getRequest();
+		// request.setAttribute("list", list);
 
 		ActionContext actionContext = ActionContext.getContext();
-        Map<String, Object> session = actionContext.getSession();
-        User user = (User)session.get("user");
-        if(user == null){
-        	return INPUT;
-        }
-        
-		List<Contactor> list = contactorService.findAllContactorsByUserId(user.getId());
-		
+		Map<String, Object> session = actionContext.getSession();
+		User user = (User) session.get("user");
+		if (user == null) {
+			return INPUT;
+		}
+
+		List<Contactor> list = contactorService.findAllContactorsByUserId(user
+				.getId());
+
 		HttpServletRequest request = ServletActionContext.getRequest();
 		request.setAttribute("list", list);
 
-		Map<Integer,String> groupsOfContactor = new HashMap<Integer,String>();
-		for(int i=0;i<list.size();i++){
-			List<Group> groups = groupService.getAllGroupsByContactorId(list.get(i).getId());
+		Map<Integer, String> groupsOfContactor = new HashMap<Integer, String>();
+		for (int i = 0; i < list.size(); i++) {
+			List<Group> groups = groupService.getAllGroupsByContactorId(list
+					.get(i).getId());
 			StringBuffer str = new StringBuffer();
-			for(int j=0;j<groups.size();j++){
+			for (int j = 0; j < groups.size(); j++) {
 				String temp = groups.get(j).getGroupName();
-				if(!"default".equals(temp)){
+				if (!"default".equals(temp)) {
 					str.append(temp);
-					str.append("   "); //用3个空格作为间隔符
-				}				
+					str.append("   "); // 用3个空格作为间隔符
+				}
 			}
 			groupsOfContactor.put(list.get(i).getId(), str.toString());
 		}
 		request.setAttribute("groupsOfContactor", groupsOfContactor);
-		
+
 		return SUCCESS;
 	}
-	
 
-//	public String listSearchResults() throws Exception
-//	{
-//		List<Contactor> list = contactorService.listSearchResults(name);
-//		HttpServletRequest request = ServletActionContext.getRequest();
-//		request.setAttribute("list", list);
-//		
-//		return SUCCESS;
-//	}
-	
-	
+	private void updateShortMsg(Contactor contactor, User user) {
+
+		List<ShortMsg> list = iShortMsgService.readConversationDetailMsgs(
+				contactor.getCellphoneNumber(), user.getId());
+		for (int i = 0; list != null && i < list.size(); i++) {
+			ShortMsg t = list.get(i);
+			if (t.getIfSender() == 1
+					&& !t.getToName().equals(contactor.getName())) {
+				{
+					t.setToName(contactor.getName());
+					t.setFromName(user.getDetailInfor().getName());
+				}
+			} else {
+				t.setFromName(t.getFromName());
+				t.setToName(user.getDetailInfor().getName());
+			}
+			iShortMsgService.updateShortMsg(t);
+		}
+	}
+
+	// public String listSearchResults() throws Exception
+	// {
+	// List<Contactor> list = contactorService.listSearchResults(name);
+	// HttpServletRequest request = ServletActionContext.getRequest();
+	// request.setAttribute("list", list);
+	//		
+	// return SUCCESS;
+	// }
+
 }

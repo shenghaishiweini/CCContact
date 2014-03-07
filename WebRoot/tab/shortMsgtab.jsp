@@ -114,24 +114,7 @@ function init(){
 											<table border="0" align="right" cellpadding="0"
 												cellspacing="0">
 												<tr>
-													<td width="60">
-														<table width="87%" border="0" cellpadding="0"
-															cellspacing="0">
-															<tr>
-																<td class="STYLE1">
-																	<div align="center">
-																		<input type="checkbox" name="topIfAll" id="topIfAll"
-																			onClick="topCheckAll()" />
-																	</div>
-																</td>
-																<td class="STYLE1">
-																	<div align="center">
-																		全选
-																	</div>
-																</td>
-															</tr>
-														</table>
-													</td>
+												
 													<td width="60">
 														<table width="90%" border="0" cellpadding="0"
 															cellspacing="0">
@@ -219,6 +202,7 @@ function init(){
 						}
 
 						for (int i = 0; i < list.size(); i++) {
+						
 				%>
 				<tr>
 					<%
@@ -227,8 +211,7 @@ function init(){
 					<td align="center" style="width: 350px; height: 100px;">
 						<div
 							style="margin-top: 30px; background-image: url('../images/bmsg.jpg')">
-							<s:checkbox name="selectedShortMsg" value="false" theme="simple"
-								fieldValue="{#t}"></s:checkbox>
+						<input type="checkbox" value="<%=list.get(i).getId() %>" name="selectedShortMsg"> 	
 							<span style=""></span>
 							<span style="font-size: 20px; padding-left: 10px;"><%=list.get(i).getContent()%></span>
 							<br />
@@ -247,20 +230,18 @@ function init(){
 						<td align="left" style="width: 350px; height: 100px;">
 							<div
 								style="margin-top: 30px; background-image: url('../images/bmsg.jpg')">
-								<s:checkbox name="selectedShortMsg" value="false" theme="simple"
-									fieldValue="{#t}"></s:checkbox>
+								
+								 <input type="checkbox" value="<%=list.get(i).getId() %>" name="selectedShortMsg"> 	
 								<span style="font-size: 20px; padding-left: 10px;"><%=list.get(i).getContent()%></span>
 								<br />
 								<br />
 								<span style="font-size: 12px;"> 发件人：我 发送时间：<%=list.get(i).getCreateTime()%></span>
 							</div>
 						</td>
-
-
+					</td>
 						<%
 							}
 						%>
-					</td>
 				</tr>
 				<%
 					}

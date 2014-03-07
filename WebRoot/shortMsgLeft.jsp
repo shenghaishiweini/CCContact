@@ -1,7 +1,6 @@
 <%@ page language="java" import="java.util.* ,com.sys.model.ShortMsg,com.sys.model.User" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-
 <style type="text/css">
 <!--
 body {
@@ -122,6 +121,7 @@ style="cursor: hand">
 														cellpadding="0">
 														<tr>
 															<td>
+															
 																<table width="90%" border="0" align="center"
 																	cellpadding="0" cellspacing="0">
 																	<s:iterator value="#request.conversationlist" id="item" >																
@@ -158,8 +158,13 @@ onmouseout=
 																<div align="center" style="float: left">
 																</div>
 																<div align="center" >
+																	<s:a href="deleteConversation?shortMsgid=%{#item.id}">
+																	<img src="../tab/images/11.gif" width="10" height="10" title="删除会话"/>
+																	</s:a>
 																
-																	<s:a href="deleteConversation?talkerCellphoneNumber=(%{#item.ifSender}==1?%{#item.to}:%{#item.from})"><img src="../tab/images/11.gif" width="10" height="10" title="删除会话"/></s:a>
+																	
+																
+																	
 																</div>
 															</td>
 																					</tr>
@@ -184,62 +189,6 @@ onmouseout=
 									</table>
 								</td>
 							</tr>
-							<!-- <tr>
-					<td><table width="100%" border="0" cellspacing="0"
-							cellpadding="0">
-							<tr>
-								<td height="23" background="images/main_47.gif" id="imgmenu2"
-									class="menu_title" onmouseover="this.className='menu_title2';"
-									onclick="showsubmenu(2)"
-									onmouseout="this.className='menu_title';" style="cursor:hand"><table
-										width="100%" border="0" cellspacing="0" cellpadding="0">
-										<tr>
-											<td width="18%">&nbsp;</td>
-											<td width="82%" class="STYLE1">系统管理</td>
-										</tr>
-									</table>
-								</td>
-							</tr>
-							<tr>
-								<td background="images/main_51.gif" id="submenu2"><div
-										class="sec_menu">
-										<table width="100%" border="0" cellspacing="0" cellpadding="0">
-											<tr>
-												<td><table width="90%" border="0" align="center"
-														cellpadding="0" cellspacing="0">
-														<tr>
-															<td width="16%" height="25"><div align="center">
-																	<img src="images/left.gif" width="10" height="10" />
-																</div>
-															</td>
-															<td width="84%" height="23"><table width="95%"
-																	border="0" cellspacing="0" cellpadding="0">
-																	<tr>
-																		<td height="20" style="cursor:hand"
-																			onmouseover="this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#7bc4d3'; "
-																			onmouseout="this.style.borderStyle='none'"><span
-																			class="STYLE3"><a href="./usermiddle.html"
-																				target="_parent">系统维护</a>
-																		</span>
-																		</td>
-																	</tr>
-																</table>
-															</td>
-														</tr>														
-													</table>
-												</td>
-											</tr>
-											<tr>
-												<td height="5"><img src="images/main_52.gif"
-													width="151" height="5" />
-												</td>
-											</tr>
-										</table>
-									</div>
-								</td>
-							</tr>
-						</table></td>
-				</tr> -->
 						</table>
 					</td>
 				</tr>
@@ -257,7 +206,10 @@ onmouseout=
 					</td>
 				</tr>
 			</table>
+			</td>
+			</tr></table>
 			<script>
+			
 	function showsubmenu(sid) {
 		whichEl = eval("submenu" + sid);
 		imgmenu = eval("imgmenu" + sid);

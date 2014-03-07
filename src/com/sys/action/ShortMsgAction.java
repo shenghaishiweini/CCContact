@@ -10,6 +10,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
+import sun.nio.cs.ext.MS932DB.Decoder;
+
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.sys.model.Contactor;
@@ -43,7 +45,7 @@ public class ShortMsgAction extends ActionSupport {
 			List<ShortMsg> res = new ArrayList<ShortMsg>();
 			for (int i = 0; list != null && i < list.size(); i++) {
 				if (!ifExist(list.get(i), res)) {
-					if (list.get(i).getIfSender()==1) {
+					if (list.get(i).getIfSender() == 1) {
 						list.get(i).setConversation(list.get(i).getToName());
 					} else {
 						list.get(i).setConversation(list.get(i).getFromName());
@@ -77,7 +79,7 @@ public class ShortMsgAction extends ActionSupport {
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		User user = (User) session.get("user");
 		String recipipentCellphoneNumber = "";
-		if (sMsg.getIfSender()==1) {
+		if (sMsg.getIfSender() == 1) {
 			recipipentCellphoneNumber = sMsg.getTo();
 		} else {
 			recipipentCellphoneNumber = sMsg.getFrom();
@@ -114,10 +116,19 @@ public class ShortMsgAction extends ActionSupport {
 	}
 
 	public String deleteConversation() {
+
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		User user = (User) session.get("user");
-		String talkerCellphoneNumber = ServletActionContext.getRequest()
-				.getParameter("talkerCellphoneNumber");
+		int id = Integer.valueOf(ServletActionContext.getRequest()
+				.getParameter("shortMsgid"));
+		ShortMsg msg = _isIShortMsgService.getShortMsgById(id);
+		String talkerCellphoneNumber = "";
+		if (msg != null) {
+			if (msg.getIfSender() == 1)
+				talkerCellphoneNumber = msg.getTo();
+			else
+				talkerCellphoneNumber = msg.getTo();
+		}
 		if (_isIShortMsgService.deleteConversation(user.getId(),
 				talkerCellphoneNumber))
 			return "success";

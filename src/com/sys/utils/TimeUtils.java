@@ -19,4 +19,11 @@ public class TimeUtils {
 		return item.getCurrentTime();
 	}
 	
+	public static String getTime()
+	{
+	String t=TimeUtils.getNowTime().toString();
+	return t.substring(0,t.length()-4);
+	
+	}
+	
 }

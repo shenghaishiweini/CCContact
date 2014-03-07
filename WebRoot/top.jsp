@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*,com.sys.utils.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsf/core"%>
 <%
@@ -67,6 +67,19 @@ a:active {
 }
 -->
 </style>
+
+<script type="text/javascript" src="script/jquery-1.8.3.min.js"></script>
+<script>
+$(document).ready(function () {
+setInterval("startRequest()",1000);
+});
+function startRequest()
+{
+var date=new Date();
+
+$("#timespan").text(date.toLocaleDateString()+" "+date.toLocaleTimeString());
+}
+</script> 
 
 	</head>
 
@@ -140,8 +153,7 @@ a:active {
 													</td>
 													<td width="220" valign="bottom" nowrap="nowrap">
 														<div align="right">
-															<span class="STYLE1"><span class="STYLE2">■</span>
-																2014年2月18日</span>
+																<span class="STYLE1" id="timespan"></span>
 														</div>
 													</td>
 												</tr>

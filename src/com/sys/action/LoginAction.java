@@ -50,13 +50,18 @@ public class LoginAction extends ActionSupport{
 	}
 	
 
-	
-	 public String register()
-	 {
-		 System.out.print(user);
-		 if(_userService.registerUser(user))
-		 return "ok";
-		 else
-			 return "fail";
-	 }
+		public String registerUser() {
+			
+			if (_userService.registerUser(this.user))
+
+				return SUCCESS;
+			else
+				return INPUT;
+		}
+
+		public String registerUserGet() {
+				return SUCCESS;
+		}
+	 
+	 
 }

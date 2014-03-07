@@ -17,7 +17,7 @@
   <div id="head">
     <div class="logo"><a href="http://my.ifeng.com"><img src="http://ucimg.ifeng.com/resource/imagess/pic_logo.jpg" width="150" height="60" title="凤凰网个人中心" alt="凤凰网个人中心"/></a></div>
     <div class="login u_blue"><br />
-    <a href="sys/user_logout">登录</a> 丨 <a href="registerUser.jsp">注册</a></div>
+    <a href="sys/user_login">登录</a> 丨 <a href="registerUser.jsp">注册</a></div>
   </div><!--header end-->
 <!--main -->
   <div class="loginBox lh20" style="height:800px;">
@@ -29,11 +29,7 @@
       <table width="610" border="0" cellspacing="0" cellpadding="0" style="margin:20px 0 0 160px; color:#5E5E5E">
         <tr>
           <td colspan="4">&nbsp;</td>
-          </td>
-        
           </tr>
-        
-    
         <tr>
           <td width="100" height="35" class="u_blue bold" align="right"><span class="cred"></span>用户名</td>
           <td width="10"></td>

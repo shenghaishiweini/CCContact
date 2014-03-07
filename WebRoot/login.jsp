@@ -86,7 +86,14 @@ body {
                 <td width="57%" height="25"><div align="center">
                   <input type="text" name="user.username" id="userId" onkeydown="keyDown();" style="width:105px; height:17px; background-color:#292929; border:solid 1px #7dbad7; font-size:12px; color:#6cd0ff">
                 </div></td>
-                <td width="27%" height="25">&nbsp;</td>
+                <td height="25" width="100">
+                <div align="left">
+                <span style="font-size: 12px;">马上
+                <a href="../registerUser.jsp">注册</a>
+                </span>
+                </div>
+                </td>
+        
               </tr>
               <tr>
                 <td height="25"><div align="right"><span class="STYLE1">密码</span></div></td>

@@ -16,7 +16,6 @@ $(document).ready(function(){
 
 	$('#pass').focus(showPassTip);
 	$('#pass').blur(showPassTipBlur);
-	//$('#pass').keyup(passLevel);
 
 	$('#cpass').blur(showCpassTipBlur);
 	$('#cpass').focus(showCpassTip);
@@ -27,39 +26,22 @@ $(document).ready(function(){
 	$('#submit').click(checkForm);
 	$('#qtime').val(new Date().getTime());
 	
-	//新加问题验证
-	//$('#question').focus(showQuestionTip);
-	//$('#question').blur(showQuestionTipBlur);
-	
-	//$('#answer').focus(showAnswerTip);
-	//$('#answer').blur(showAnswerTipBlur);
-	
-	//$("#newQuestion").focus(showNewQuestionTip);
-	//$("#newQuestion").blur(checkNewQuestion);
 	
 });
 function checkForm(){
 	
-	//email
 	var iEmail = checkEmail(1);
 	var iUname = checkUname(1);
 	var iPass = checkPass();
 	var iCpass = checkCpass();
 	var iCode = checkCode();
-	//var iQuestion = checkQuestion();
-	//var iAnswer = checkAnswer();
-	alert(gProStatus);
-	alert(gProStatus2);
-	if(gProStatus != 1 || gProStatus2 != 1 || iEmail || iUname || iPass || iCpass || iCode ){
+	if(iEmail || iUname || iPass || iCpass || iCode ){//gProStatus != 1 || gProStatus2 != 1 || 
 		if(gProStatus != 1 && gProStatus != 2) checkUname();
 		if(gProStatus2 != 1 && gProStatus2 != 2) checkEmail();
 		alert("click");
 		return false;
 	}
 	else{
-//		if(checkIagree()) return false;
-//		if(checkNewQuestion()) return false;
-		//post step1
 		var sEmail = $.trim($('#email').val());
 		var sUname = $.trim($('#uname').val());
 		var sPass = $.trim($('#pass').val());
@@ -68,15 +50,13 @@ function checkForm(){
 		var sIdc = $.trim($('#idc').val());
 		var sContact = $.trim($('#contact').val());
 		var sAddress = $.trim($('#address').val());
-		//var sQuestion = $.trim($('#question').val());
-		//var sAnswer = $.trim($('#answer').val());
 		var sSec =  $.trim($('#tnumber').val());//hex_sha1(sEmail + sUname + sPass);
 		var sPid = $('#pid').val();
-		//var newQuestion = $.trim($("#newQuestion").val());
 		$('#submit').attr('disabled', true);
-		jQuery.post('sys/register',
+		jQuery.post('sys/registerUser',
 		{'user.detailInfor.email':sEmail, 'user.username':sUname, 'user.password':sPass, 'user.detailInfor.cellphoneNumber':sCode, 'user.detailInfor.telephoneNumber':sSec,'user.detailInfor.name':sTrueName,'user.detailInfor.comments':sIdc,'user.detailInfor.QQ':sContact,'user.detailInfor.address':sAddress,'user.detailInfor.gender':sPid},
 		function(sData){
+			alert(sData);
 			var $tipCode = $('#tip_code');
 			var aItem = sData.split("\n");
 			sValue = aItem[0];
@@ -290,9 +270,8 @@ function checkUname(){
 		}
 		jQuery.post('sys/user_checkUserName',
 		{'u':uname},
-	
 		function(sData){
-			alert("1"+sData);
+//			alert("1"+sData);
 //			if(sData == 1){
 				sTip = gRight;
 				tipRight('tip_uname');
@@ -305,7 +284,8 @@ function checkUname(){
 //			}
 			$tipUname.html(sTip);
 			gInputUname = uname;
-		});
+		}
+		);
 	}
 	if(error) {
 		sTip = gWrong + sTip;

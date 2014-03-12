@@ -212,7 +212,7 @@ for(i=0;i<cs.length;i++){
 														</div>
 													</td>
 													<td width="95%" class="STYLE1">
-														<span class="STYLE3">你当前的位置</span>：[业务中心]-[读者管理]
+														<span class="STYLE3">你当前的位置</span>：[通讯录]
 													</td>
 												</tr>
 											</table>

@@ -113,6 +113,19 @@
 			</result>
 		</action>
 
+		<action name="renameGroup" class="groupAction" method="renameGroup">
+			<result name="success">/tab/renameGroup.jsp</result>
+		</action>
+		
+		<action name="renameGroup2" class="groupAction" method="renameGroup2">
+			<result name="success" type="chain">
+				<param name="actionName">listAllGroups</param>
+			</result>
+			<result name="input" type="chain">
+				<param name="actionName">renameGroup</param>
+			</result>
+		</action>
+
 		<action name="newGroup" class="groupAction" method="newGroup">
 			<!--
 				<result name="success" type="redirectAction"> <param

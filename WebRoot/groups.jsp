@@ -128,11 +128,10 @@ a:active {
 																			onmouseout="this.style.borderStyle='none'"><span
 																			class="STYLE3"><s:a href="listContactorsOfGroup.action?id=%{#request.defaultGroup.getId()}" target="contactorFrame">未分组</s:a>[<s:property value="#request.defaultGroup.getMemberNum()"/>] </span>
 																		</td>
-																		<!--<td><img src="../tab/images/11.gif" width="10" height="10" /></td>
-																	--></tr>
+																	</tr>
 																</table>
 															</td>
-															</tr>
+														</tr>
 														<s:iterator value="#request.list" id="group">
 															<tr>
 															<td width="16%" height="25">

@@ -19,14 +19,14 @@ public class ContactorDaoImpl implements IContactorDao{
 		
 	}
 
-	public void findById(int contactorId) {
+	public void update(Contactor contactor) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void update(Contactor contactor) {
+	public Contactor findById(int contactorId) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 }

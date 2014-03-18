@@ -24,12 +24,12 @@ public interface IContactorDao {
 	 * 
 	 * @param contactorId
 	 */
-	public void findById(int contactorId);
+	public Contactor findById(int contactorId);
 	
 	/**
 	 * 
 	 * @param contactorId
 	 */
-	public void deleteById(int contactorId);
+	public  void deleteById(int contactorId);
 	
 }

@@ -160,8 +160,6 @@
 			<result name="input">/jumpToLogin.jsp</result>
 		</action>
 
-
-
 		<action name="getConversationList" class="shortMsgAction"
 			method="getConversationList">
 			<result name="success">/shortMsgLeft.jsp</result>
@@ -173,7 +171,9 @@
 		</action>
 		<!-- 删除短信 -->
 		<action name="deleteShortMsg" class="shortMsgAction" method="deleteShortMsg">
-			<result name="success" type="redirect">../shortMsgmiddle.html</result>
+<!--			<result name="success" type="chain">-->
+<!--				<param name="actionName">getConversationDetailMsg</param>-->
+<!--			</result>-->
 		</action>
 
 		<!-- 发送短信 -->

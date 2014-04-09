@@ -8,6 +8,8 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import net.sf.json.JSONArray;
+
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,7 @@ import com.sys.model.User;
 import com.sys.serviceInterface.IContactorService;
 import com.sys.serviceInterface.IGroupService;
 import com.sys.serviceInterface.IShortMsgService;
+import com.sys.utils.Constants;
 
 @Controller
 @Scope("prototype")
@@ -232,13 +235,16 @@ public class ContactorAction extends ActionSupport {
 		}
 	}
 
-	// public String listSearchResults() throws Exception
-	// {
-	// List<Contactor> list = contactorService.listSearchResults(name);
-	// HttpServletRequest request = ServletActionContext.getRequest();
-	// request.setAttribute("list", list);
-	//		
-	// return SUCCESS;
-	// }
+	public String  backupContactor()
+	{
+		
+		return Constants.RETURN_JSON;
+	}
+	
+	public String synchronousContactor()
+	{
+		JSONArray jsonArray=new JSONArray();
+		return Constants.RETURN_JSON;
+	}
 
 }

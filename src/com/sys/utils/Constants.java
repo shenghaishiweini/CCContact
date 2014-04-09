@@ -9,4 +9,6 @@ public class Constants {
 	
 	public static String RETURN_SMG_CONVERSATION_DETAIL="conversationDetailMsgs";
 	
+	public static String RETURN_JSON="json";
+	
 }

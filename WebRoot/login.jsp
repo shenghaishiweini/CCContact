@@ -1,11 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-<%
-	//String mesg = "";
-%>
-
-    
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -36,9 +30,6 @@
 			flag = true;
 			document.getElementById("errorSpan").innerHTML = "<font color='red'>用户名或密码不能为空</font>";
 		}
-		//if (document.getElementById("userIdSpan").innerHTML != "" || document.getElementById("passwordSpan").innerHTML != "") {
-		//	return;				
-		//} 
 		if (!flag) {
 			loginForm.action = "user_checkLogin";
 			loginForm.method = "post";

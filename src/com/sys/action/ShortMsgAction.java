@@ -152,7 +152,8 @@ public class ShortMsgAction extends ActionSupport {
 					.valueOf(str[i].trim()));
 			_isIShortMsgService.deleteShortMsg(t);
 		}
-
+//		HttpServletRequest request = ServletActionContext.getRequest();
+//		request.setAttribute("conversationlist", res);
 		return "success";
 	}
 

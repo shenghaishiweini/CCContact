@@ -33,7 +33,9 @@
 
 
 	<package name="sys" namespace="/sys" extends="struts-default">
-
+		<result-types>
+			<result-type name="json" class="org.apache.struts2.json.JSONResult" />
+		</result-types>
 		<interceptors>
 			<interceptor name="userInter" class="com.sys.myinterceptor.myInterceptor"></interceptor>
 			<interceptor-stack name="myStack">
@@ -48,9 +50,6 @@
 			<result name="user_login">/login.jsp</result>
 		</global-results>
 
-		<action name="register" class="loginAction" method="register">
-			<result name="success">/login.jsp</result>
-		</action>
 
 		<action name="user_login" class="loginAction" method="login">
 			<result name="login">/login.jsp</result>
@@ -69,12 +68,20 @@
 			<result name="modifyPwd" type="redirect">/main.html</result>
 		</action>
 
+		<action name="registerUser" class="loginAction" method="registerUser">
+			<result name="success" type="json">
+				<param name="sData">${1}
+				</param>
+			</result>
+			<result name="input">/registerUser.jsp</result>
+		</action>
 
+		<action name="registerUserGet" class="loginAction" method="registerUserGet">
+			<result name="success">/registerUser.jsp</result>
+		</action>
 
 		<action name="user_checkUserName" class="userAction" method="checkUserName">
-			<result name="ok" type="chain">
-				<param name="sData">1</param>
-			</result>
+
 		</action>
 		<action name="user_alterUser" class="userAction" method="alterUser">
 			<result name="alterFail" type="redirect">/main.html</result>
@@ -83,7 +90,6 @@
 
 		<action name="listAllGroups" class="groupAction" method="listAllGroups">
 			<result name="success">/groups.jsp</result>
-			<result name="input">/jumpToLogin.jsp</result>
 		</action>
 
 		<action name="newGroup1" class="groupAction" method="newGroup1">
@@ -152,8 +158,6 @@
 			<result name="input">/jumpToLogin.jsp</result>
 		</action>
 
-
-
 		<action name="getConversationList" class="shortMsgAction"
 			method="getConversationList">
 			<result name="success">/shortMsgLeft.jsp</result>
@@ -165,7 +169,9 @@
 		</action>
 		<!-- 删除短信 -->
 		<action name="deleteShortMsg" class="shortMsgAction" method="deleteShortMsg">
-			<result name="success" type="redirect">../shortMsgmiddle.html</result>
+<!--			<result name="success" type="chain">-->
+<!--				<param name="actionName">getConversationDetailMsg</param>-->
+<!--			</result>-->
 		</action>
 
 		<!-- 发送短信 -->
@@ -180,48 +186,6 @@
 			<result name="success" type="redirect">../shortMsgmiddle.html</result>
 			<result name="failed" type="redirect">../shortMsgmiddle.html</result>
 		</action>
-		<!--
-			<interceptors> <interceptor name="userInter"
-			class="com.sys.myinterceptor.myInterceptor"></interceptor>
-			<interceptor-stack name="myStack"> <interceptor-ref
-			name="userInter"></interceptor-ref> <interceptor-ref
-			name="defaultStack"></interceptor-ref> </interceptor-stack>
-			</interceptors> <default-interceptor-ref
-			name="myStack"></default-interceptor-ref> <global-results> <result
-			name="userLogin" type="chain">login_login</result> </global-results>
-
-			<action name="user_*" class="userAction" method="{1}"> <result
-			name="RegisterUser">/WEB-INF/user/RegisterUser.jsp</result> <result
-			name="user_manage">/WEB-INF/user/manage.jsp</result> <result
-			name="user_alter">/WEB-INF/user/userAlter.jsp</result> <result
-			name="user_manageAction" type="chain">user_manage</result> <result
-			name="userList">/WEB-INF/user/userList.jsp</result> </action> <action
-			name="commodity_*" class="commodityAction" method="{1}"> <result
-			name="comm_index">/WEB-INF/commodity/index.jsp</result> <result
-			name="comm_add">/WEB-INF/commodity/addCommodity.jsp</result> <result
-			name="comm_alter">/WEB-INF/commodity/updateCommodity.jsp</result>
-			<result name="comm_alterAction" type="chain">commodity_index</result>
-			<result
-			name="comm_addCommoditySuccess">/WEB-INF/commodity/addCommoditySuccess.jsp
-			</result> <result
-			name="comm_loginok">/WEB-INF/main/index.jsp</result> <result
-			name="comm_manage">/WEB-INF/commodity/manage.jsp</result> </action>
-
-
-			<action name="ordering_*" class="orderingAction" method="{1}">
-			<result name="ordering_create">/WEB-INF/ordering/create.jsp</result>
-
-			<result
-			name="showSelectedList">/WEB-INF/commodity/shoppinglist.jsp</result>
-			<result name="ordering_createOK"
-			type="redirectAction">commodity_index </result> <result name="list"
-			type="redirectAction">ordering_cartList </result> <result
-			name="orderinglist">/WEB-INF/ordering/curList.jsp</result> <result
-			name="tablelist">/WEB-INF/ordering/tableList.jsp</result> <result
-			name="orderingdetail">/WEB-INF/ordering/orderDetail.jsp</result>
-
-			</action>
-		-->
 
 	</package>
 	<package name="android" extends="json-default">

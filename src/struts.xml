@@ -81,9 +81,7 @@
 		</action>
 
 		<action name="user_checkUserName" class="userAction" method="checkUserName">
-			<result name="ok" type="chain">
-				<param name="sData">1</param>
-			</result>
+
 		</action>
 		<action name="user_alterUser" class="userAction" method="alterUser">
 			<result name="alterFail" type="redirect">/main.html</result>

@@ -63,7 +63,18 @@ a:active {
 	TOP: 2px
 }
 </style>
-<script><!--
+<script src="../script/client_validate.js"></script>
+<script type="text/javascript" language="JavaScript">
+	
+	var msg="${requestScope.tipMessage}";
+	if(msg!=""){
+		alert(msg);
+	}
+	
+	window.onload = function() { 
+     document.getElementById('groupName').focus(); 
+	}
+	
 	var he = document.body.clientHeight - 105
 	document.write("<div id=tt style=height:"+he+";overflow:hidden>")
 	
@@ -75,8 +86,25 @@ a:active {
 	}
 	
 	
---></script>
+
+	function validate()	{
+		var nameField =document.getElementsByName("groupName")[0];
+		if(trim(nameField.value) == ""){
+			alert("分组名不能为空");
+			nameField.focus();
+		}else if(inputvalue == trim(nameField.value)){
+			alert("分组名没有任何改变");
+			nameField.focus();
+		}else{
+			document.getElementById('renameForm').submit();
+		}
+		
+	}
+	
+		
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<s:form action="renameGroup2.action" theme="simple" onsubmit = "return validate();" id="renameForm">
 <table width="165" height="100%" border="0" cellpadding="0"
 	cellspacing="0">
 	<tr>
@@ -128,18 +156,51 @@ a:active {
 																			onmouseout="this.style.borderStyle='none'"><span
 																			class="STYLE3"><s:a href="listContactorsOfGroup.action?id=%{#request.defaultGroup.getId()}" target="contactorFrame">未分组</s:a>[<s:property value="#request.defaultGroup.getMemberNum()"/>] </span>
 																		</td>
-																	</tr>
+																		<!--<td><img src="../tab/images/11.gif" width="10" height="10" /></td>
+																	--></tr>
 																</table>
 															</td>
-														</tr>
+															</tr>
 														<s:iterator value="#request.list" id="group">
+															
+															<s:if test="%{#group.id==#request.editGroupId}">
+																<tr>
+																<td width="16%" height="25">
+																	<div align="center">
+																		<img src="../images/left.gif" width="10" height="10" />
+																	</div>
+																</td>
+																<td width="54%" height="23">
+																	<table width="95%" border="0" cellspacing="0" cellpadding="0">
+																		<tr>
+																			<td height="20" style="cursor:hand"
+																				onmouseover="this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#7bc4d3'; "
+																				onmouseout="this.style.borderStyle='none'">
+																				<s:textfield cssStyle="width:60px" name="groupName" id="groupName"/>
+																				<s:hidden name="id" value="%{#request.editGroupId}"></s:hidden>
+																			</td>
+																		</tr>
+																	</table>
+																</td>
+																<td width="30%" height="25">
+																	<div align="center" style="float: left">
+																		<s:a href="javascript:validate()"><img src="../images/icon_03c.gif" width="14" height="12" title="确认"/></s:a>
+																	</div>
+																	<div align="center" style="float: right" >
+																		<s:a href="listAllGroups.action"><img src="../images/icon_03b.gif" width="13" height="14" title="取消" /></s:a>
+																	</div>
+																</td>
+																</tr>
+															</s:if>
+															
+															<s:else>
 															<tr>
 															<td width="16%" height="25">
 																<div align="center">
 																	<img src="../images/left.gif" width="10" height="10" />
 																</div>
 															</td>
-															<td width="64%" height="23">
+															<td width="54%" height="23">
 																<table width="95%" border="0" cellspacing="0" cellpadding="0">
 																	<tr>
 																		<td height="20" style="cursor:hand"
@@ -151,7 +212,7 @@ a:active {
 																	--></tr>
 																</table>
 															</td>
-															<td width="20%" height="25">
+															<td width="30%" height="25">
 																<div align="center" style="float: left">
 																	<s:a href="renameGroup.action?id=%{#group.id}"><img src="../tab/images/33.gif" width="10" height="10" title="重命名"/></s:a>
 																</div>
@@ -160,6 +221,8 @@ a:active {
 																</div>
 															</td>
 															</tr>
+															</s:else>
+															
 														</s:iterator>
 
 													</table></td>
@@ -190,7 +253,11 @@ a:active {
 			</table></td>
 	</tr>
 </table>
+</s:form>
 <script>
+
+	var inputvalue = document.getElementById('groupName').value;
+	
 	function showsubmenu(sid) {
 		whichEl = eval("submenu" + sid);
 		imgmenu = eval("imgmenu" + sid);

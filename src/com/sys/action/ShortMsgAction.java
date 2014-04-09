@@ -17,6 +17,7 @@ import com.sys.model.ShortMsg;
 import com.sys.model.User;
 import com.sys.serviceInterface.IContactorService;
 import com.sys.serviceInterface.IShortMsgService;
+import com.sys.utils.Constants;
 import com.sys.utils.TimeUtils;
 
 public class ShortMsgAction extends ActionSupport {
@@ -32,6 +33,7 @@ public class ShortMsgAction extends ActionSupport {
 	private ShortMsg shortMsg;
 	private String selectedShortMsg;
 
+	
 	public String getSelectedShortMsg() {
 		return selectedShortMsg;
 	}
@@ -45,7 +47,7 @@ public class ShortMsgAction extends ActionSupport {
 	public String getConversationList() {
 
 		Map<String, Object> session = ActionContext.getContext().getSession();
-		User user = (User) session.get("user");
+		User user = (User) session.get(Constants.USER_KEY);
 		if (user != null) {
 			List<ShortMsg> list = _isIShortMsgService.readAllConversations(user
 					.getId());
@@ -61,8 +63,8 @@ public class ShortMsgAction extends ActionSupport {
 				}
 			}
 			HttpServletRequest request = ServletActionContext.getRequest();
-			request.setAttribute("conversationlist", res);
-			request.setAttribute("conversationDetailMsgs", null);
+			request.setAttribute(Constants.RETURN_SMG_CONVERSATION, res);
+			request.setAttribute(Constants.RETURN_SMG_CONVERSATION_DETAIL, null);
 		}
 		return SUCCESS;
 	}
@@ -84,7 +86,7 @@ public class ShortMsgAction extends ActionSupport {
 		ShortMsg sMsg = _isIShortMsgService.getShortMsgById(this.shortMsg
 				.getId());
 		Map<String, Object> session = ActionContext.getContext().getSession();
-		User user = (User) session.get("user");
+		User user = (User) session.get(Constants.USER_KEY);
 		String recipipentCellphoneNumber = "";
 		if (sMsg.getIfSender() == 1) {
 			recipipentCellphoneNumber = sMsg.getTo();
@@ -96,8 +98,8 @@ public class ShortMsgAction extends ActionSupport {
 
 		HttpSession httpSession = ServletActionContext.getRequest()
 				.getSession();
-		httpSession.removeAttribute("conversationDetailMsgs");
-		httpSession.setAttribute("conversationDetailMsgs", list);
+		httpSession.removeAttribute(Constants.RETURN_SMG_CONVERSATION_DETAIL);
+		httpSession.setAttribute(Constants.RETURN_SMG_CONVERSATION_DETAIL, list);
 		return "success";
 	}
 

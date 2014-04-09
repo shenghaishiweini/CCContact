@@ -148,6 +148,46 @@ public class GroupAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	public String renameGroup()
+	{
+		Map<String, Object> session = ActionContext.getContext().getSession();
+        User user = (User)session.get("user");
+		List<Group> list = groupService.getAllGroupByUserId(user.getId());
+		
+		Map<Integer,Integer> contactorNumbers = new HashMap<Integer,Integer>();
+		List<Contactor> allContactors = contactorService.findAllContactorsByUserId(user.getId());
+		contactorNumbers.put(0, allContactors.size());
+		for(int i=0;i<list.size();i++){
+			int groupId = list.get(i).getId();
+			contactorNumbers.put(groupId,list.get(i).getMemberNum());
+		}
+		HttpServletRequest request = ServletActionContext.getRequest();
+		request.setAttribute("defaultGroup", list.get(0));
+		list.remove(0); //移除default分组，default要单独列出来显示，因为不允许修改和删除
+		request.setAttribute("list", list);
+		request.setAttribute("numbers", contactorNumbers);
+		request.setAttribute("editGroupId", id);
+		
+		return SUCCESS;
+	}
+	
+	public String renameGroup2()
+	{
+		Group temp = groupService.getGroupByGroupName(groupName);
+		if(temp == null){
+			Group editGroup = groupService.getGroupByGroupId(id);
+			editGroup.setGroupName(groupName);
+			
+			groupService.alterGroup(editGroup);
+		}else if(temp != null){
+			HttpServletRequest request = ServletActionContext.getRequest();
+			request.setAttribute("tipMessage", "分组名重复！");
+			return INPUT;
+		}
+		
+		return SUCCESS;
+	}
+	
 	public String listContactorsOfGroup() throws Exception
 	{
 		List<Contactor> list = groupService.getGroupContactors(id);

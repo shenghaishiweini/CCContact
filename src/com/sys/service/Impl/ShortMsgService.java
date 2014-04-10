@@ -1,4 +1,4 @@
-package com.sys.service;
+package com.sys.service.Impl;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sys.model.Contactor;
 import com.sys.model.ShortMsg;
 import com.sys.model.User;
-import com.sys.serviceInterface.IShortMsgService;
+import com.sys.service.Interface.IShortMsgService;
 
 /**
  * 短信接口实现类

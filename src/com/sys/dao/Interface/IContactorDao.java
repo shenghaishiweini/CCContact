@@ -32,4 +32,6 @@ public interface IContactorDao {
 	 */
 	public  void deleteById(int contactorId);
 	
+	public Contactor findByCellphoneNumber(String contactorTelephoneNumber);
+	
 }

@@ -60,8 +60,12 @@
 	<bean id="shortMsgAction" class="com.sys.action.ShortMsgAction" scope="prototype" />
 
 	<!-- 注册 Interface-->
-	<bean id="IUserService" class="com.sys.service.UserService" />
-	<bean id="IGroupService" class="com.sys.service.GroupService" />
-	<bean id="IContactorService" class="com.sys.service.ContactorService" />
-	<bean id="IShortMsgService" class="com.sys.service.ShortMsgService" />
+	<bean id="IUserService" class="com.sys.service.Impl.UserService" />
+	<bean id="IGroupService" class="com.sys.service.Impl.GroupService" />
+	<bean id="IContactorService" class="com.sys.service.Impl.ContactorService" />
+	<bean id="IShortMsgService" class="com.sys.service.Impl.ShortMsgService" />
+	
+	<!-- DAO层 Interface-->
+	<bean id="ContactorDAO" class="com.sys.dao.Impl.ContactorDaoImpl" />
+	
 </beans>

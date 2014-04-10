@@ -1,4 +1,4 @@
-package com.sys.service;
+package com.sys.service.Impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ import com.sys.model.Contactor;
 import com.sys.model.Group;
 import com.sys.model.Group_Contactor;
 import com.sys.model.User;
-import com.sys.serviceInterface.IGroupService;
+import com.sys.service.Interface.IGroupService;
 
 /**
  * 组接口实现类

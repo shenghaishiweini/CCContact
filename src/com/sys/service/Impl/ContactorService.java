@@ -1,4 +1,4 @@
-package com.sys.service;
+package com.sys.service.Impl;
 
 import java.util.List;
 
@@ -11,11 +11,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sys.dao.Interface.IContactorDao;
 import com.sys.model.Contactor;
 import com.sys.model.Group;
 import com.sys.model.Group_Contactor;
 import com.sys.model.User;
-import com.sys.serviceInterface.IContactorService;
+import com.sys.service.Interface.IContactorService;
 
 /**
  * 联系人接口实现类
@@ -27,6 +28,9 @@ public class ContactorService implements IContactorService {
 
 	@Resource
 	private SessionFactory sessionFactory;
+	
+	@Resource
+	private IContactorDao contactorDao;
 
 	public boolean addContactorToNewGroup(Contactor contactor, Group group) {
 
@@ -264,19 +268,16 @@ public class ContactorService implements IContactorService {
 
 	}
 
-	// public boolean addContactorToGroup(Contactor contactor, Group group) {
-	// try {
-	// sessionFactory.getCurrentSession().persist(contactor);
-	// Group_Contactor group_contactor = new Group_Contactor();
-	// group_contactor.setGroupId(group.getId());
-	// group_contactor.setContactorId(contactor.getId());
-	// sessionFactory.getCurrentSession().persist(group_contactor);
-	// return true;
-	// } catch (Exception e) {
-	// System.out.print(e.getMessage());
-	// sessionFactory.getCurrentSession().getTransaction().rollback();
-	// return false;
-	// }
-	// }
+	public Contactor findContactorByCellphpneNumber(
+			String contactorTelephoneNumber) {
+		
+		if(contactorTelephoneNumber==null||contactorTelephoneNumber.equals(""))
+			return null;
+		
+		Contactor contactor = contactorDao.findByCellphoneNumber(contactorTelephoneNumber);
+		
+		return contactor==null?null:contactor;
+	}
+
 
 }

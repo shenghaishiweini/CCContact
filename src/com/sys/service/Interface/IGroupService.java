@@ -1,4 +1,4 @@
-package com.sys.serviceInterface;
+package com.sys.service.Interface;
 
 import java.util.List;
 import java.util.Set;

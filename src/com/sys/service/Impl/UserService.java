@@ -1,4 +1,4 @@
-package com.sys.service;
+package com.sys.service.Impl;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import com.sys.model.Contactor;
 import com.sys.model.Group;
 import com.sys.model.Group_Contactor;
 import com.sys.model.User;
-import com.sys.serviceInterface.IUserService;
+import com.sys.service.Interface.IUserService;
 
 /**
  * 用户接口实现类

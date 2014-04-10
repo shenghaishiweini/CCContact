@@ -12,10 +12,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.sys.model.Contactor;
 import com.sys.model.ShortMsg;
 import com.sys.model.User;
-import com.sys.serviceInterface.IContactorService;
-import com.sys.serviceInterface.IGroupService;
-import com.sys.serviceInterface.IShortMsgService;
-import com.sys.serviceInterface.IUserService;
+import com.sys.service.Interface.IContactorService;
+import com.sys.service.Interface.IGroupService;
+import com.sys.service.Interface.IShortMsgService;
+import com.sys.service.Interface.IUserService;
 
 /**
  * 

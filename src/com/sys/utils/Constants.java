@@ -11,4 +11,6 @@ public class Constants {
 	
 	public static String RETURN_JSON="json";
 	
+	public static String TIP_MSG="msg";//错误提示信息
+	
 }

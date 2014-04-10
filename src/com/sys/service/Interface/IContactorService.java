@@ -1,4 +1,4 @@
-package com.sys.serviceInterface;
+package com.sys.service.Interface;
 
 import java.util.List;
 
@@ -137,6 +137,13 @@ public interface IContactorService {
 	 * @return List<Contactor>
 	 */
 	public List<Contactor> findSearchContactors(String searchStr,int userid);
+	
+	/**
+	 * 根据电话号码查找
+	 * @param contactorTelephoneNumber
+	 * @return
+	 */
+	public Contactor findContactorByCellphpneNumber(String contactorTelephoneNumber);
 	
 
 }

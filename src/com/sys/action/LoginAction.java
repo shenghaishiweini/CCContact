@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.sys.model.User;
-import com.sys.serviceInterface.IUserService;
+import com.sys.service.Interface.IUserService;
 
 public class LoginAction extends ActionSupport{
 

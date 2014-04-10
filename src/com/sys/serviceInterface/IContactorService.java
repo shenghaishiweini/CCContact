@@ -1,4 +1,4 @@
-package com.sys.service.Interface;
+package com.sys.serviceInterface;
 
 import java.util.List;
 
@@ -8,110 +8,123 @@ import com.sys.model.Group;
 
 
 /**
- * è”ç³»äººæ¥å£
+ * ½Ó¿Ú,ÉùÃ÷¶ÔÓÃ»§ÏàÓ¦µÄ²Ù×÷
  * @author Gui Junfei
  * 2014.2.7
  */
 public interface IContactorService {
 	
 	/**
+	 * ĞÂÔöÁªÏµÈËµ½Contactor±íÖĞ£¬²¢ÇÒĞÂÔö¶ÔÓ¦µÄGroup_Contactor¶ÔÏóµ½Group_Contactor±íÖĞ
+	 * @param contactor ĞÂÔöµÄÁªÏµÈË 
+	 * @return boolean
+	 * ³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
 	 * 
-	 * @param contactor
-	 * @return
 	 */
-	
 	public boolean addContactorDefault(Contactor contactor);
 	
 	/**
-	 * 
-	 * @param contactor 
+	 * ĞÂÔöÁªÏµÈËµ½Contactor±íÖĞ
+	 * @param contactor ĞÂÔöµÄÁªÏµÈË
 	 * @return
 	 */
 	public boolean addContactor(Contactor contactor);
 	
 	/**
-	 * 
-	 * @param contactor 
-	 * @param group 
+	 * ĞÂÔöÁªÏµÈËµ½Contactor±íÖĞ£¬²¢ÇÒĞÂÔö¶ÔÓ¦µÄGroup_Contactor¶ÔÏóµ½Group_Contactor±íÖĞ
+	 * @param contactor ĞÂÔöµÄÁªÏµÈË
+	 * @param group ÁªÏµÈË¶ÔÓ¦µÄ·Ö×é£¬²»°üº¬default·Ö×é
 	 * @return
 	 * add by Fu Yu, 2014/2/22
 	 */
 //	public boolean addContactorToGroup(Contactor contactor,Group group);
 	
 	/**
-	 * 
-	 * @param contactor
+	 * ĞŞ¸ÄÁªÏµÈËĞÅÏ¢
+	 * @param contactor ĞŞ¸ÄµÄÁªÏµÈË
 	 * @return boolean
+	 * ³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
 	 */
 	public boolean alterContactor(Contactor contactor);
 	
 	/**
-	 * @param contactorID 
+	 * É¾³ıContatorÖĞµÄ¼ÇÂ¼,²¢ÇÒ»¹»áÉ¾³ıGroup_Contactor±íÖĞµÄ¶ÔÓ¦¼ÇÂ¼
+	 * @param contactorID É¾³ıÖ»ÄÜ°´ÕÕIDÀ´É¾³ı
 	 * @return boolean
+	 * ³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
 	 */
 	public boolean deleteContactor(int contactorID);
 	
 	
 	/**
-	 * @param contactor 
-	 * @param group 
+	 * ¸øÁªÏµÈËĞÂÔö·Ö×é
+	 * @param contactor ĞÂÔöµÄÁªÏµÈË 
+	 * @param group Óû¼ÓÈëµÄ×é
 	 * @return boolean
+	 * ³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
 	 * 
 	 */
 	public boolean addContactorToNewGroup(Contactor contactor,Group group);
 	
 	
 	/**
+	 * ¸ù¾İÁªÏµÈËID ²éÕÒ
 	 * @param contactorID 
 	 * @return Contactor 
+	 * ÁªÏµµÄIDÊÇÎ¨Ò»µÄ£¬·µ»ØÎ¨Ò»¡£NULL ±íÊ¾²»´æÔÚÖ¸¶¨IDµÄÓÃ»§
 	 */
 	public Contactor findContactorById(int contactorID);
 	
 	/**
-
+	 * ¸ù¾İÁªÏµÈËÃû×Ö²éÕÒ
 	 * @param contactorName
 	 * @return List<Contactor> 
-
+	 * ¿ÉÄÜ´æÔÚÍ¬ÃûµÄÁªÏµÈË£¬²ÉÓÃÄ£ºı²éÕÒ
 	 * 
 	 */
 	public List<Contactor> findContactorByName(String contactorName,int userid);
 	
 	/**
-
+	 * ¸ù¾İÁªÏµÈËÊÖ»úºÅÂë²éÕÒ
 	 * @param contactorCellphoneNumber
 	 * @return List<Contactor> 
+	 * ÀíÂÛÉÏÀ´ËµÒ»¸öºÅÂë¶ÔÓ¦Ò»¸öÁªÏµÈË£¬µ«ÊÇ´æÔÚÓÃ»§ÊäÈëºÅÂë²»ÍêÈ«£¬ËùÒÔ¿ÉÄÜ´æÔÚ¶à¸ö½á¹û¡£²ÉÓÃÄ£ºı²éÕÒ
 	 */
 	public List<Contactor> findContactorsByCellphoneNumber(String contactorCellphoneNumber,int userid);
 	
 	
 	/**
+	 * ¸ù¾İÁªÏµÈËÊÖ»úºÅÂë²éÕÒ
 	 * @param contactorCellphoneNumber
 	 * @return Contactor 
+	 * ¾«È·²éÕÒ
 	 */
 	public Contactor findContactorByCellphoneNumber(String contactorCellphoneNumber,int userid);
 	
 	
 	/**
+	 * ¸ù¾İÁªÏµÈËµç»°ºÅÂë²éÕÒ
 	 * @param contactorTelephoneNumber
 	 * @return List<Contactor>
 	 */
 	public List<Contactor> findContactorByTelephoneNumber(String contactorTelephoneNumber,int userid);
 	
 	/**
-	 * @param GroupName,userId 
+	 * ¸ù¾İÁªÏµÈËËùÔÚ×éÃû²éÕÒ
+	 * @param GroupName,userId ²éÕÒ·Ö×éÁªÏµÈËµÄÊ±ºò ĞèÒª¸ù¾İÓÃ»§À´²éÕÒ
 	 * @return List<Contactor>
 	 */
 	public List<Contactor> findContactorByGroupName(String GroupName,int userId);
 	
 	/**
-
-	 * @param GroupId,userId
+	 * ¸ù¾İÁªÏµÈËËùÔÚ×éµÄID²éÕÒ
+	 * @param GroupId,userId ²éÕÒ·Ö×éÁªÏµÈËµÄÊ±ºò ĞèÒª¸ù¾İÓÃ»§À´²éÕÒ
 	 * @return List<Contactor>
 	 */
 	public List<Contactor> findContactorByGroupId(int GroupId,int userId);
 	
 	/**
-
+	 * ¸ù¾İÓÃ»§IDÁĞ³ö¶ÔÓ¦µÄËùÓĞµÄÁªÏµÈË
 	 * @param userId
 	 * @return List<Contactor>
 	 */
@@ -119,17 +132,11 @@ public interface IContactorService {
 	
 	
 	/**
-
-	 * @param searchStr 
+	 * ¸ù¾İÓÃ»§ÊäÈë²éÑ¯ Ö÷Òª²éÑ¯ ĞÕÃû£¬µç»°ºÅÂë£¬ÊÖ»úºÅÂë£¬QQºÅÂë
+	 * @param searchStr ÓÃ»§ÊäÈëµÄËÑË÷Ìõ¼ş
 	 * @return List<Contactor>
 	 */
 	public List<Contactor> findSearchContactors(String searchStr,int userid);
-	
-	/**
-	 * @param contactorTelephoneNumber
-	 * @return
-	 */
-	public Contactor findContactorByCellphpneNumber(String contactorTelephoneNumber);
 	
 
 }

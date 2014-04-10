@@ -111,7 +111,7 @@ public class ShortMsgAction extends ActionSupport {
 
 		shortMsg.setFromName(user.getDetailInfor().getName());
 		Contactor contactor = _iContactorService
-				.findContactorByCellphoneNumber(reciver, user.getId());
+				.findContactorByCellphpneNumber(reciver);
 		if (contactor != null)
 			shortMsg.setToName(contactor.getName());
 		else

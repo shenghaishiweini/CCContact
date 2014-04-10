@@ -1,5 +1,7 @@
 package com.sys.dao.Interface;
 
+import java.util.List;
+
 import com.sys.model.Contactor;
 /**
  * 
@@ -12,7 +14,7 @@ public interface IContactorDao {
 	 * 
 	 * @param contactor
 	 */
-	public void add(Contactor contactor);
+	public boolean add(Contactor contactor);
 	
 	/**
 	 * 
@@ -32,6 +34,19 @@ public interface IContactorDao {
 	 */
 	public  void deleteById(int contactorId);
 	
+	/**
+	 * 
+	 * @param contactorTelephoneNumber
+	 * @return
+	 */
 	public Contactor findByCellphoneNumber(String contactorTelephoneNumber);
+	
+	/**
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	public List<Contactor> findAllContactorsByUserId(int userId);
+	
 	
 }

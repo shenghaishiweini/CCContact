@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,9 +23,14 @@ public class ContactorDaoImpl implements IContactorDao{
 	@Resource
 	private SessionFactory sessionFactory;
 	
-	public void add(Contactor contactor) {
-		// TODO Auto-generated method stub
-		
+	public boolean add(Contactor contactor) {
+		try {
+			sessionFactory.getCurrentSession().persist(contactor);
+			return true;
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return false;
 	}
 
 	public void deleteById(int contactorId) {
@@ -33,8 +39,12 @@ public class ContactorDaoImpl implements IContactorDao{
 	}
 
 	public void update(Contactor contactor) {
-		// TODO Auto-generated method stub
-		
+	
+			Session session = sessionFactory.getCurrentSession();
+			Contactor temp = contactor;// (Group) session.get(Group.class,
+			if (temp != null) 
+				session.update(temp);
+
 	}
 
 	public Contactor findById(int contactorId) {
@@ -42,7 +52,6 @@ public class ContactorDaoImpl implements IContactorDao{
 		return null;
 	}
 
-	
 	public Contactor findByCellphoneNumber(String contactorTelephoneNumber) {
 			String hql = "select * from Contactors where cellphoneNumber =:cnumber";
 			try {
@@ -50,12 +59,21 @@ public class ContactorDaoImpl implements IContactorDao{
 						.addEntity(Contactor.class);
 				q.setParameter("cnumber", contactorTelephoneNumber,
 						Hibernate.STRING);
+				@SuppressWarnings("unchecked")
 				List<Contactor> res =(List<Contactor>) q.list();
 				return res==null?null:res.get(0);
 			} catch (Exception e) {
 				System.err.println(e);
 				return null;
 			}
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Contactor> findAllContactorsByUserId(int userId) {
+		
+		return sessionFactory.getCurrentSession().createSQLQuery(
+				"select * from Contactors where userID='" + userId + "'")
+				.addEntity(Contactor.class).list();
 	}
 
 }

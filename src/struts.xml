@@ -202,10 +202,11 @@
 
 	</package>
 	<package name="android" extends="json-default">
-		<action name="android_login" class="com.sys.action.UserAction"
-			method="checklogin">
-			<result type="json" name="ok"></result>
-		</action>
+			<action name="android_*" class="com.sys.action.AndroidAction" method="{1}">
+			<result name="synchronousContactor" type="json">
+                    <param name="root">contactorsList</param>
+            </result>
+           </action>
 	</package>
 
 </struts>

@@ -1,4 +1,4 @@
-package com.sys.service.Impl;
+package com.sys.service;
 
 import java.util.List;
 
@@ -6,19 +6,19 @@ import javax.annotation.Resource;
 
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sys.dao.Interface.IContactorDao;
-import com.sys.dao.Interface.IGroupDao;
 import com.sys.model.Contactor;
 import com.sys.model.Group;
 import com.sys.model.Group_Contactor;
 import com.sys.model.User;
-import com.sys.service.Interface.IContactorService;
+import com.sys.serviceInterface.IContactorService;
 
 /**
- * ËÅîÁ≥ª‰∫∫
+ * ¡™œµ»ÀΩ”ø⁄ µœ÷¿‡
  * 
  * @author Gui Junfei 2014.2.7
  */
@@ -27,12 +27,6 @@ public class ContactorService implements IContactorService {
 
 	@Resource
 	private SessionFactory sessionFactory;
-	
-	@Resource
-	private IContactorDao contactorDao;
-	
-	@Resource
-	private IGroupDao groupDao;
 
 	public boolean addContactorToNewGroup(Contactor contactor, Group group) {
 
@@ -40,18 +34,17 @@ public class ContactorService implements IContactorService {
 				Group_Contactor group_contactor = new Group_Contactor();
 				group_contactor.setGroupId(group.getId());
 				group_contactor.setContactorId(contactor.getId());
-//				sessionFactory.getCurrentSession().persist(group_contactor);
-				groupDao.add(group_contactor);
+				sessionFactory.getCurrentSession().persist(group_contactor);
 				
 				int memberNumber = group.getMemberNum();
 				group.setMemberNum(memberNumber+1);
-//				sessionFactory.getCurrentSession().update(group);
-				groupDao.update(group);
+				sessionFactory.getCurrentSession().update(group);
 				
 				return true;
 
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
+			sessionFactory.getCurrentSession().getTransaction().rollback();
 			return false;
 		}
 
@@ -60,58 +53,59 @@ public class ContactorService implements IContactorService {
 	public boolean addContactorDefault(Contactor contactor) {
 
 		try {
-			contactorDao.add(contactor);
-			//sessionFactory.getCurrentSession().persist(contactor);
+			sessionFactory.getCurrentSession().persist(contactor);
+			// throw new Exception();
 			User owner = contactor.getOwner();
-//			String hql = "select * from Groups where userID=:userid and groupName='default'";
-//			Query q = sessionFactory.getCurrentSession().createSQLQuery(hql).addEntity(Group.class);
-//			q.setParameter("userid", owner.getId());
-//			List<Group> res = q.list();
-//			
-//			if (res.size() <= 0) {
-//				return false;
-//			}
-			Group group=groupDao.findDefaultGroup(owner.getId());
-			if(group==null)
-				return false;
 			
+//			String hql = "select id from Groups where userID=:userid and groupName='default'";
+//			Query q = sessionFactory.getCurrentSession().createSQLQuery(hql);
+//			q.setParameter("userid", owner.getId());// owner.getId()
+//			List<Integer> res = q.list();
+			
+			String hql = "select * from Groups where userID=:userid and groupName='default'";
+			Query q = sessionFactory.getCurrentSession().createSQLQuery(hql).addEntity(Group.class);
+			q.setParameter("userid", owner.getId());// owner.getId()
+			List<Group> res = q.list();
+			
+			if (res.size() <= 0) {
+				return false;
+			}
 			Group_Contactor group_contactor = new Group_Contactor();
-			group_contactor.setGroupId(group.getId());
+			//group_contactor.setGroupId(res.get(0));// default
+			group_contactor.setGroupId(res.get(0).getId());
 			group_contactor.setContactorId(contactor.getId());
 
-//			sessionFactory.getCurrentSession().persist(group_contactor);
-			groupDao.add(group_contactor);
+			sessionFactory.getCurrentSession().persist(group_contactor);
 			
+			Group group = res.get(0);
 			int memberNumber = group.getMemberNum();
 			group.setMemberNum(memberNumber+1);
-//			sessionFactory.getCurrentSession().update(group);
-			groupDao.update(group);
+			sessionFactory.getCurrentSession().update(group);
 			
 			return true;
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
-			//sessionFactory.getCurrentSession().getTransaction().rollback();
+			sessionFactory.getCurrentSession().getTransaction().rollback();
 			return false;
 		}
+
 	}
 
 	public boolean alterContactor(Contactor contactor) {
-		
-		if(contactor==null)
-			return false;
-		
 		try {
-			contactorDao.update(contactor);
-//			Session session = sessionFactory.getCurrentSession();
-//			Contactor temp = contactor;// (Group) session.get(Group.class,
-//			if (temp != null) {
-//				session.update(temp);
+			Session session = sessionFactory.getCurrentSession();
+			Contactor temp = contactor;// (Group) session.get(Group.class,
+			// group.getId());
+			if (temp != null) {
+				// temp = copyNewEntiy(temp, group);
+				session.update(temp);
 				return true;
-//			} else {
-//				return false;
-//			}
+			} else {
+				return false;
+			}
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
+			sessionFactory.getCurrentSession().getTransaction().rollback();
 			return false;
 		}
 	}
@@ -136,6 +130,7 @@ public class ContactorService implements IContactorService {
 				group.setMemberNum(memberNumber-1);
 				sessionFactory.getCurrentSession().update(group);
 			}
+
 			return true;
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
@@ -162,10 +157,12 @@ public class ContactorService implements IContactorService {
 	}
 
 	public List<Contactor> findContactorByGroupId(int GroupId, int userId) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public List<Contactor> findContactorByGroupName(String GroupName, int userId) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -196,33 +193,7 @@ public class ContactorService implements IContactorService {
 		}
 	}
 
-
-	public List<Contactor> findAllContactorsByUserId(int userId) {
-		try{
-			List<Contactor> contactor = contactorDao.findAllContactorsByUserId(userId);
-			return contactor;
-		}catch(Exception e)
-		{
-			System.err.println(e);
-			return null;
-		}
-	}
-
-	public boolean addContactor(Contactor contactor) {
-		
-		if(contactor.getName()==null||contactor.getName().equals(""))
-			return false;
-		
-		if(contactorDao.add(contactor)) 
-			return true;
-		
-		return false;
-	}
-
-	/*
-	 * 
-	 
-	 	public List<Contactor> findContactorByTelephoneNumber(
+	public List<Contactor> findContactorByTelephoneNumber(
 			String contactorTelephoneNumber, int userid) {
 		try {
 			String hql = "select * from Contactors where telephoneNumber like :tnumber and userID=:userid";
@@ -236,6 +207,13 @@ public class ContactorService implements IContactorService {
 		} catch (Exception e) {
 			return null;
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Contactor> findAllContactorsByUserId(int userId) {
+		return sessionFactory.getCurrentSession().createSQLQuery(
+				"select * from Contactors where userID='" + userId + "'")
+				.addEntity(Contactor.class).list();
 	}
 
 	public List<Contactor> findSearchContactors(String searchStr, int userid) {
@@ -254,59 +232,51 @@ public class ContactorService implements IContactorService {
 		}
 	}
 
+	public boolean addContactor(Contactor contactor) {
+		try {
+			sessionFactory.getCurrentSession().persist(contactor);
+			return true;
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+			sessionFactory.getCurrentSession().getTransaction().rollback();
+			return false;
+		}
+	}
 
-
+	@SuppressWarnings("unchecked")
 	public Contactor findContactorByCellphoneNumber(
 			String contactorCellphoneNumber, int userid) {
-//		try {
-//			String hql = "select * from Contactors where cellphoneNumber =:cnumber and userID=:userid";
-//			Query q = sessionFactory.getCurrentSession().createSQLQuery(hql)
-//					.addEntity(Contactor.class);
-//			q.setParameter("cnumber", contactorCellphoneNumber,
-//					Hibernate.STRING);
-//			q.setParameter("userid", userid);
-//			List<Contactor> res =(List<Contactor>) q.list();
-//			if(res!=null&&res.size()==1)
-//				return res.get(0);
-//			return null;
-//		} catch (Exception e) {
-//			System.err.println(e);
-//			return null;
-//		}
-		return null;
-	}
-*/
-	
-	public Contactor findContactorByCellphpneNumber(
-			String contactorTelephoneNumber) {
-		
-		if(contactorTelephoneNumber==null||contactorTelephoneNumber.equals(""))
+		try {
+			String hql = "select * from Contactors where cellphoneNumber =:cnumber and userID=:userid";
+			Query q = sessionFactory.getCurrentSession().createSQLQuery(hql)
+					.addEntity(Contactor.class);
+			q.setParameter("cnumber", contactorCellphoneNumber,
+					Hibernate.STRING);
+			q.setParameter("userid", userid);
+			List<Contactor> res =(List<Contactor>) q.list();
+			if(res!=null&&res.size()==1)
+				return res.get(0);
 			return null;
-		
-		Contactor contactor = contactorDao.findByCellphoneNumber(contactorTelephoneNumber);
-		
-		return contactor==null?null:contactor;
+		} catch (Exception e) {
+			System.err.println(e);
+			return null;
+		}
+
 	}
 
-	public Contactor findContactorByCellphoneNumber(
-			String contactorCellphoneNumber, int userid) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<Contactor> findSearchContactors(String searchStr, int userid) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<Contactor> findContactorByTelephoneNumber(
-			String contactorTelephoneNumber, int userid) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-
-
+	// public boolean addContactorToGroup(Contactor contactor, Group group) {
+	// try {
+	// sessionFactory.getCurrentSession().persist(contactor);
+	// Group_Contactor group_contactor = new Group_Contactor();
+	// group_contactor.setGroupId(group.getId());
+	// group_contactor.setContactorId(contactor.getId());
+	// sessionFactory.getCurrentSession().persist(group_contactor);
+	// return true;
+	// } catch (Exception e) {
+	// System.out.print(e.getMessage());
+	// sessionFactory.getCurrentSession().getTransaction().rollback();
+	// return false;
+	// }
+	// }
 
 }

@@ -1,7 +1,6 @@
-package com.sys.service.Impl;
+package com.sys.service;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -16,10 +15,10 @@ import com.sys.model.Contactor;
 import com.sys.model.Group;
 import com.sys.model.Group_Contactor;
 import com.sys.model.User;
-import com.sys.service.Interface.IUserService;
+import com.sys.serviceInterface.IUserService;
 
 /**
- * ï¿½Ã»ï¿½ï¿½Ó¿ï¿½Êµï¿½ï¿½ï¿½ï¿½
+ * ÓÃ»§½Ó¿ÚÊµÏÖÀà
  * 
  * @author Gui Junfei 2014.2.7
  */
@@ -28,7 +27,6 @@ public class UserService implements IUserService {
 
 	@Resource
 	private SessionFactory sessionFactory;
-
 
 	@Transactional
 	public boolean registerUser(User user) {
@@ -87,7 +85,7 @@ public class UserService implements IUserService {
 
 	public boolean deleteUser(int userid) {
 		try{
-		
+			//É¾³ýContactor±í
 			String hql0="select * from Contactors where userID=:userid ";
 			Query q = sessionFactory.getCurrentSession().createSQLQuery(hql0)
 					.addEntity(Contactor.class);		
@@ -97,7 +95,7 @@ public class UserService implements IUserService {
 			{
 				sessionFactory.getCurrentSession().delete(res0.get(i));
 			}	
-			 
+			 //É¾³ýGroups±íºÍGroup_Contactor±í
 			String hql1="select * from Groups where userID=:userid ";
 			Query r = sessionFactory.getCurrentSession().createSQLQuery(hql1)
 					.addEntity(Group.class);		
@@ -112,7 +110,7 @@ public class UserService implements IUserService {
 			}	
 			
 			
-			 //É¾ï¿½ï¿½Usersï¿½ï¿½
+			 //É¾³ýUsers±í
 			User user=(User)sessionFactory.getCurrentSession().get(User.class,userid);
 			
 			sessionFactory.getCurrentSession().delete(user);

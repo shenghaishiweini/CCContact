@@ -1,52 +1,37 @@
 package com.sys.action;
 
-import java.util.Map;
-
 import javax.annotation.Resource;
 
 import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
 import com.sys.model.User;
 import com.sys.service.Interface.IUserService;
+import com.sys.utils.Constants;
 
-public class LoginAction extends ActionSupport{
+public class LoginAction extends BaseAction{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
+	
 	@Resource
 	IUserService _userService;
+	
+	
 
-	private User user;
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
 	public String login() {
-		return LOGIN;
+		return Constants.LOGIN;
 	}
 
 	public String checkLogin() {
-		ActionContext actionContext = ActionContext.getContext();
-		Map<String, Object> session = actionContext.getSession();
 
 		if (user == null) {
-			session.put("mesg", "µ«¬º ß∞‹£¨«ÎºÏ≤È”√ªß√˚√‹¬Î£°");
-			return LOGIN;
+			session.put(Constants.MSG,Constants.LOGIN_ERROR);
+			return Constants.LOGIN;
 		}
 		User temp = _userService.checkLogin(user);
 		if (temp == null) {
-			session.put("mesg", "µ«¬º ß∞‹£¨«ÎºÏ≤È”√ªß√˚√‹¬Î£°");
-			return LOGIN;
+			session.put(Constants.MSG, Constants.LOGIN_ERROR);
+			return Constants.LOGIN;
 		}
-		session.put("user", temp);
-		return SUCCESS;
+		session.put(Constants.USER_KEY, temp);
+		return Constants.SUCCESS;
 	}
 	
 
@@ -54,13 +39,13 @@ public class LoginAction extends ActionSupport{
 			
 			if (_userService.registerUser(this.user))
 
-				return SUCCESS;
+				return Constants.SUCCESS;
 			else
-				return INPUT;
+				return Constants.INPUT;
 		}
 
 		public String registerUserGet() {
-				return SUCCESS;
+				return Constants.SUCCESS;
 		}
 	 
 	 

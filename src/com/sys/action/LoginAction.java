@@ -13,14 +13,13 @@ public class LoginAction extends BaseAction{
 	@Resource
 	IUserService _userService;
 	
-	
-
 	public String login() {
 		return Constants.LOGIN;
 	}
 
 	public String checkLogin() {
-
+		 session=ActionContext.getContext().getSession();
+		 
 		if (user == null) {
 			session.put(Constants.MSG,Constants.LOGIN_ERROR);
 			return Constants.LOGIN;
@@ -34,7 +33,6 @@ public class LoginAction extends BaseAction{
 		return Constants.SUCCESS;
 	}
 	
-
 		public String registerUser() {
 			
 			if (_userService.registerUser(this.user))

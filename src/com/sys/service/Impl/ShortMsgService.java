@@ -15,7 +15,6 @@ import com.sys.model.User;
 import com.sys.service.Interface.IShortMsgService;
 
 /**
- * ∂Ã–≈Ω”ø⁄ µœ÷¿‡
  * 
  * @author Gui Junfei 2014.2.7
  */
@@ -115,7 +114,7 @@ public class ShortMsgService implements IShortMsgService {
 				talkerCellphoneNumber, userid);
 		try {
 			for (int i = 0; i < temp.size(); i++) {
-				if (!this.deleteShortMsg(temp.get(i)))//…æ≥˝ª·ª∞£¨“™√¥»´…æ£¨“™√¥»´≤ª…æ
+				if (!this.deleteShortMsg(temp.get(i)))//…æÔøΩÔøΩ·ª∞ÔøΩÔøΩ“™√¥»´…æÔøΩÔøΩ“™√¥»´ÔøΩÔøΩ…æ
 				{
 					throw new Exception();
 				}
@@ -123,7 +122,7 @@ public class ShortMsgService implements IShortMsgService {
 			return true;
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
-//			sessionFactory.getCurrentSession().getTransaction().rollback();’‚¿Ô≤ª–Ë“™£¨“ÚŒ™…æ≥˝∫Ø ˝¿Ô√Ê“—æ≠”–¡Àªÿπˆ≤Ÿ◊˜
+//			sessionFactory.getCurrentSession().getTransaction().rollback();ÔøΩÔøΩÔøΩÔ≤ªÔøΩÔøΩ“™ÔøΩÔøΩÔøΩÔøΩŒ™…æÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ—æÔøΩÔøΩÔøΩÔøΩÀªÿπÔøΩÔøΩÔøΩÔøΩÔøΩ
 			return false;
 		}
 	}

@@ -29,15 +29,7 @@ public interface IContactorService {
 	 */
 	public boolean addContactor(Contactor contactor);
 	
-	/**
-	 * 
-	 * @param contactor 
-	 * @param group 
-	 * @return
-	 * add by Fu Yu, 2014/2/22
-	 */
-//	public boolean addContactorToGroup(Contactor contactor,Group group);
-	
+
 	/**
 	 * 
 	 * @param contactor

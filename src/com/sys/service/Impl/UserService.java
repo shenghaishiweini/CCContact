@@ -1,25 +1,15 @@
 package com.sys.service.Impl;
 
-import java.util.List;
-import java.util.Map;
-
 import javax.annotation.Resource;
 
-import org.apache.struts2.ServletActionContext;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.opensymphony.xwork2.ActionContext;
-import com.sys.model.Contactor;
-import com.sys.model.Group;
-import com.sys.model.Group_Contactor;
+import com.sys.dao.Interface.IUserDao;
 import com.sys.model.User;
 import com.sys.service.Interface.IUserService;
 
 /**
- * �û��ӿ�ʵ����
+ * 用户
  * 
  * @author Gui Junfei 2014.2.7
  */
@@ -27,39 +17,33 @@ import com.sys.service.Interface.IUserService;
 public class UserService implements IUserService {
 
 	@Resource
-	private SessionFactory sessionFactory;
-
-
-	@Transactional
+	private IUserDao userDao;
+	
 	public boolean registerUser(User user) {
 
 		try {
-			Group defaultGroup = new Group();
-			defaultGroup.setGroupName("default");
-			defaultGroup.setOwner(user);
-			sessionFactory.getCurrentSession().persist(user);
-			sessionFactory.getCurrentSession().persist(defaultGroup);
+			userDao.add(user);
 			return true;
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
-			sessionFactory.getCurrentSession().getTransaction().rollback();
 			return false;
 		}
-
+		
 	}
 
-	@Transactional
 	public User findUserById(int userid) {
-		User user = (User) sessionFactory.getCurrentSession().get(User.class,
-				userid);
-		return user;
+		try{
+			return  userDao.find(userid);
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+			return null;
+		}
 	}
 
 	public boolean alterUser(User user) {
-		try{
-			User temp = user;			
-			if (temp !=null){
-				sessionFactory.getCurrentSession().saveOrUpdate(temp);
+		try{		
+			if (user !=null){
+				userDao.update(user);
 				return true;
 			}else{
 				return false;
@@ -71,51 +55,21 @@ public class UserService implements IUserService {
 	}
 
 	public User checkLogin(User user) {
-		String hql="select * from Users where username=:username and password=:password";
-		Query q = sessionFactory.getCurrentSession().createSQLQuery(hql)
-				.addEntity(User.class);		
-		q.setParameter("username", user.getUsername());
-		q.setParameter("password",user.getPassword());
-		
-		List<User> res = q.list();
-		
-		if(res != null && res.size()>0)
-			return res.get(0);
-		else  
+		try{		
+			if (user !=null&&user.getUsername()!=null&&user.getPassword()!=null&&!user.getUsername().equals("")&&!user.getPassword().equals("")){
+				return 	userDao.find(user.getUsername(),user.getPassword());
+			}else{
+				return null;
+			}
+		}catch (Exception e){
+			System.out.print(e.getMessage());
 			return null;
+		}
 	}
 
 	public boolean deleteUser(int userid) {
 		try{
-		
-			String hql0="select * from Contactors where userID=:userid ";
-			Query q = sessionFactory.getCurrentSession().createSQLQuery(hql0)
-					.addEntity(Contactor.class);		
-			q.setParameter("userid", userid);
-			List<Contactor> res0 = q.list();
-			for(int i = 0; i < res0.size(); i++)
-			{
-				sessionFactory.getCurrentSession().delete(res0.get(i));
-			}	
-			 
-			String hql1="select * from Groups where userID=:userid ";
-			Query r = sessionFactory.getCurrentSession().createSQLQuery(hql1)
-					.addEntity(Group.class);		
-			r.setParameter("userid", userid);
-			List<Group> res1 = r.list();
-			for(int i = 0; i < res1.size(); i++)
-			{
-				Group_Contactor group_contactor = (Group_Contactor)sessionFactory.getCurrentSession().get(Group_Contactor.class,res1.get(i).getId());
-				if(group_contactor != null)
-					sessionFactory.getCurrentSession().delete(group_contactor);
-				sessionFactory.getCurrentSession().delete(res1.get(i));
-			}	
-			
-			
-			 //ɾ��Users��
-			User user=(User)sessionFactory.getCurrentSession().get(User.class,userid);
-			
-			sessionFactory.getCurrentSession().delete(user);
+			userDao.delete(userid);
 			return true;
 		}catch(Exception e) {
 			System.out.print(e.getMessage());

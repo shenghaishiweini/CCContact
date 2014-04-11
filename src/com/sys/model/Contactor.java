@@ -7,7 +7,7 @@ package com.sys.model;
 
 
 /**
- * 联系人类
+ * 
  * @author Gui Junfei
  * 2014.2.7
  */
@@ -16,7 +16,7 @@ public class Contactor {
 	private String name;
 	private String gender;
 	/**
-	 * 图片存放在指定的目录下，在数据库中，只存放图片的URL
+	 * 
 	 */
 	private String picture_url;
 	private String cellphoneNumber;
@@ -24,18 +24,11 @@ public class Contactor {
 	private String email;
 	private String address;
 	private String QQ;
-	private String comments;//备注
-	private String other1;//扩展用
+	private String comments;
+	private String other1;
 	private String other2;
 	
-	/**
-	 * 外键，关联到Group类的主键
-	 * many to one 
-	 * 一个联系人可以属于多个分组
-	 */
-//	private Set groups=new HashSet(0);
-//	private Group group;
-	
+
 	private User owner; 
 	
 	

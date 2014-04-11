@@ -30,4 +30,6 @@ public interface IUserDao {
 	 * @param userid
 	 */
 	public User find(int userid);
+	
+	public User find(String username,String password);
 }

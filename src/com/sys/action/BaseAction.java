@@ -9,7 +9,6 @@ import com.sys.utils.PageInfo;
 
 public class BaseAction {
 
-
 	/**
 	 *
 	 */
@@ -28,7 +27,7 @@ public class BaseAction {
 	/**
 	 *
 	 */
-	protected static int pageSize = Constants.PAGE_SIZE;
+	protected  int pageSize = Constants.PAGE_SIZE;
 
 	
 	protected  ActionContext actionContext = ActionContext.getContext();
@@ -64,11 +63,11 @@ public class BaseAction {
 		this.pageInfo = pageInfo;
 	}
 
-	public Integer getPageIndex() {
+	public int getPageIndex() {
 		return pageIndex;
 	}
 
-	public void setPageIndex(Integer pageIndex) {
+	public void setPageIndex(int pageIndex) {
 		this.pageIndex = pageIndex;
 	}
 
@@ -76,7 +75,7 @@ public class BaseAction {
 		return pageSize;
 	}
 
-	public void setPageSize(Integer pageSize) {
+	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
 	} 
 	

@@ -47,6 +47,18 @@ public interface IContactorDao {
 	 * @return
 	 */
 	public List<Contactor> findAllContactorsByUserId(int userId);
+	/**
+	 * 模糊查找
+	 * @param contactorTelephoneNumber
+	 * @param userId
+	 * @return
+	 */
+	public List<Contactor> findByCellphoneNumber(String contactorTelephoneNumber,int userId);
 	
-	
+	/**
+	 * 按姓名查找，模糊查询
+	 * @param name
+	 * @return
+	 */
+	public List<Contactor> findContactorByName(String name,int userid);
 }

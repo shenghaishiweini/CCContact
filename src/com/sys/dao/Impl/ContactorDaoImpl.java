@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sys.dao.Interface.IContactorDao;
 import com.sys.model.Contactor;
+import com.sys.model.Group;
+import com.sys.model.Group_Contactor;
 /**
  * 
  * @author gjf
@@ -33,8 +35,25 @@ public class ContactorDaoImpl implements IContactorDao{
 		return false;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void deleteById(int contactorId) {
-		// TODO Auto-generated method stub
+		Contactor contactor=this.findById(contactorId);
+		if(contactor==null) return;
+		
+		sessionFactory.getCurrentSession().delete(contactor);
+		
+		String sql="select * from Group_Contactors where contactorid='"+ contactorId + "'";
+		List<Group_Contactor> list = sessionFactory.getCurrentSession()
+				.createSQLQuery(sql).addEntity(Group_Contactor.class).list();
+		Group group = null;
+		int memberNumber = 0;
+		for (int i = 0; i < list.size(); i++) {
+			sessionFactory.getCurrentSession().delete(list.get(i));
+			group = (Group) sessionFactory.getCurrentSession().get(Group.class, list.get(i).getGroupId());
+			memberNumber = group.getMemberNum();
+			group.setMemberNum(memberNumber-1);
+			sessionFactory.getCurrentSession().update(group);
+		}
 		
 	}
 
@@ -48,13 +67,14 @@ public class ContactorDaoImpl implements IContactorDao{
 	}
 
 	public Contactor findById(int contactorId) {
-		// TODO Auto-generated method stub
-		return null;
+		Contactor temp = (Contactor) sessionFactory.getCurrentSession()
+				.get(Contactor.class, contactorId);
+		return temp==null?null:temp;
 	}
 
 	public Contactor findByCellphoneNumber(String contactorTelephoneNumber) {
 			String hql = "select * from Contactors where cellphoneNumber =:cnumber";
-			try {
+
 				Query q = sessionFactory.getCurrentSession().createSQLQuery(hql)
 						.addEntity(Contactor.class);
 				q.setParameter("cnumber", contactorTelephoneNumber,
@@ -62,10 +82,6 @@ public class ContactorDaoImpl implements IContactorDao{
 				@SuppressWarnings("unchecked")
 				List<Contactor> res =(List<Contactor>) q.list();
 				return res==null?null:res.get(0);
-			} catch (Exception e) {
-				System.err.println(e);
-				return null;
-			}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -74,6 +90,31 @@ public class ContactorDaoImpl implements IContactorDao{
 		return sessionFactory.getCurrentSession().createSQLQuery(
 				"select * from Contactors where userID='" + userId + "'")
 				.addEntity(Contactor.class).list();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Contactor> findByCellphoneNumber(
+			String contactorTelephoneNumber, int userId) {
+
+			String hql = "select * from Contactors where cellphoneNumber like :cnumber and userID=:userid";
+			Query q = sessionFactory.getCurrentSession().createSQLQuery(hql)
+					.addEntity(Contactor.class);
+			q.setParameter("cnumber", "%" + contactorTelephoneNumber + "%",
+					Hibernate.STRING);
+			q.setParameter("userid", userId);
+			List<Contactor> res = q.list();
+			return res==null?null:res;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Contactor> findContactorByName(String name,int userid) {
+		String hql = "select * from Contactors where name like :cname and userID=:userid";
+		Query q = sessionFactory.getCurrentSession().createSQLQuery(hql)
+				.addEntity(Contactor.class);
+		q.setParameter("cname", "%" + name + "%",Hibernate.STRING);
+		q.setParameter("userid", userid);
+		List<Contactor> res = q.list();
+		return res==null?null:res;
 	}
 
 }

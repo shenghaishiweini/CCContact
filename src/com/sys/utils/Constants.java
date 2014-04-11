@@ -13,12 +13,12 @@ public class Constants {
 	
 	public static String RETURN_JSON="json";
 	
-	public static String MSG="msg";//´íÎóÌáÊ¾ĞÅÏ¢
+	public static String MSG="msg";
 	
 	public static int PAGE_SIZE=10;
 	
 	
-	/*****action ·µ»Ø******/
+	/*****action è¿”å›******/
 	public static final java.lang.String SUCCESS = "success";
 	  
 	public static final java.lang.String NONE = "none";
@@ -30,10 +30,10 @@ public class Constants {
 	public static final java.lang.String LOGIN = "login";
 	
 	
-	/***ÌáÊ¾ÏûÏ¢**/
-	public static String LOGIN_ERROR="µÇÂ¼Ê§°Ü£¬Çë¼ì²éÓÃ»§ÃûÃÜÂë£¡";//´íÎóÌáÊ¾ĞÅÏ¢
+	/***æç¤ºæ¶ˆæ¯*/
+	public static String LOGIN_ERROR="ç™»å½•å¤±è´¥ï¼";//
 	
-	public static String TIP_LOGIN_MSG="Äú»¹Î´µÇÂ½!";//´íÎóÌáÊ¾ĞÅÏ¢
+	public static String TIP_LOGIN_MSG="æ‚¨è¿˜æœªç™»å½•";
 	
 	
 	

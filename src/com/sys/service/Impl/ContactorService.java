@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.hibernate.Hibernate;
-import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,12 +38,12 @@ public class ContactorService implements IContactorService {
 				Group_Contactor group_contactor = new Group_Contactor();
 				group_contactor.setGroupId(group.getId());
 				group_contactor.setContactorId(contactor.getId());
-//				sessionFactory.getCurrentSession().persist(group_contactor);
+
 				groupDao.add(group_contactor);
 				
 				int memberNumber = group.getMemberNum();
 				group.setMemberNum(memberNumber+1);
-//				sessionFactory.getCurrentSession().update(group);
+
 				groupDao.update(group);
 				
 				return true;
@@ -61,16 +59,7 @@ public class ContactorService implements IContactorService {
 
 		try {
 			contactorDao.add(contactor);
-			//sessionFactory.getCurrentSession().persist(contactor);
 			User owner = contactor.getOwner();
-//			String hql = "select * from Groups where userID=:userid and groupName='default'";
-//			Query q = sessionFactory.getCurrentSession().createSQLQuery(hql).addEntity(Group.class);
-//			q.setParameter("userid", owner.getId());
-//			List<Group> res = q.list();
-//			
-//			if (res.size() <= 0) {
-//				return false;
-//			}
 			Group group=groupDao.findDefaultGroup(owner.getId());
 			if(group==null)
 				return false;
@@ -78,19 +67,16 @@ public class ContactorService implements IContactorService {
 			Group_Contactor group_contactor = new Group_Contactor();
 			group_contactor.setGroupId(group.getId());
 			group_contactor.setContactorId(contactor.getId());
-
-//			sessionFactory.getCurrentSession().persist(group_contactor);
 			groupDao.add(group_contactor);
 			
 			int memberNumber = group.getMemberNum();
 			group.setMemberNum(memberNumber+1);
-//			sessionFactory.getCurrentSession().update(group);
 			groupDao.update(group);
 			
 			return true;
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
-			//sessionFactory.getCurrentSession().getTransaction().rollback();
+
 			return false;
 		}
 	}
@@ -99,63 +85,30 @@ public class ContactorService implements IContactorService {
 		
 		if(contactor==null)
 			return false;
-		
 		try {
 			contactorDao.update(contactor);
-//			Session session = sessionFactory.getCurrentSession();
-//			Contactor temp = contactor;// (Group) session.get(Group.class,
-//			if (temp != null) {
-//				session.update(temp);
 				return true;
-//			} else {
-//				return false;
-//			}
+
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
 			return false;
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public boolean deleteContactor(int contactorID) {
 		try {
-			sessionFactory.getCurrentSession().delete(
-					sessionFactory.getCurrentSession().get(Contactor.class,
-							contactorID));
-			List<Group_Contactor> list = sessionFactory.getCurrentSession()
-					.createSQLQuery(
-							"select * from Group_Contactors where contactorid='"
-									+ contactorID + "'").addEntity(
-							Group_Contactor.class).list();
-			Group group = null;
-			int memberNumber = 0;
-			for (int i = 0; i < list.size(); i++) {
-				sessionFactory.getCurrentSession().delete(list.get(i));
-				group = (Group) sessionFactory.getCurrentSession().get(Group.class, list.get(i).getGroupId());
-				memberNumber = group.getMemberNum();
-				group.setMemberNum(memberNumber-1);
-				sessionFactory.getCurrentSession().update(group);
-			}
+		   contactorDao.deleteById(contactorID);
 			return true;
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
-			sessionFactory.getCurrentSession().getTransaction().rollback();
 			return false;
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Contactor> findContactorsByCellphoneNumber(
 			String contactorCellphoneNumber, int userid) {
 		try {
-			String hql = "select * from Contactors where cellphoneNumber like :cnumber and userID=:userid";
-			Query q = sessionFactory.getCurrentSession().createSQLQuery(hql)
-					.addEntity(Contactor.class);
-			q.setParameter("cnumber", "%" + contactorCellphoneNumber + "%",
-					Hibernate.STRING);
-			q.setParameter("userid", userid);
-			List<Contactor> res = q.list();
-			return res;
+			return contactorDao.findByCellphoneNumber(contactorCellphoneNumber, userid);
 		} catch (Exception e) {
 			return null;
 		}
@@ -171,26 +124,15 @@ public class ContactorService implements IContactorService {
 
 	public Contactor findContactorById(int contactorID) {
 		try {
-			Contactor temp = (Contactor) sessionFactory.getCurrentSession()
-					.get(Contactor.class, contactorID);
-			return temp;
+			return contactorDao.findById(contactorID);
 		} catch (Exception e) {
 			return null;
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Contactor> findContactorByName(String contactorName, int userid) {
 		try {
-			String hql = "select * from Contactors where name like :cname and userID=:userid";
-			Query q = sessionFactory.getCurrentSession().createSQLQuery(hql)
-					.addEntity(Contactor.class);
-			q
-					.setParameter("cname", "%" + contactorName + "%",
-							Hibernate.STRING);
-			q.setParameter("userid", userid);
-			List<Contactor> res = q.list();
-			return res;
+			return contactorDao.findContactorByName(contactorName, userid);
 		} catch (Exception e) {
 			return null;
 		}

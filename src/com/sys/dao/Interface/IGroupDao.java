@@ -10,6 +10,10 @@ public interface IGroupDao {
 	 */
 	public void add(Group group);
 	
+	/**
+	 * 
+	 * @param group_contactor
+	 */
 	public void add(Group_Contactor group_contactor);
 	
 	

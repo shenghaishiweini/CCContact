@@ -9,7 +9,7 @@ public class Constants {
 	
 	public static String RETURN_SMG_CONVERSATION_DETAIL="conversationDetailMsgs";
 	
-	public static String RETURN_SYN_Contactor="synchronousContactor";
+	public static String RETURN_SYN_CONTACTOR="synchronousContactor";
 	
 	public static String RETURN_JSON="json";
 	

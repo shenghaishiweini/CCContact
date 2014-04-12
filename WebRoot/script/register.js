@@ -1,43 +1,31 @@
 $(document).ready(function() {
-
 jQuery.extend(jQuery.validator.messages, {
-		   required: "±ØÑ¡×Ö¶Î",
-		   remote: "ÇëĞŞÕı¸Ã×Ö¶Î",
-		   email: "ÇëÊäÈëÕıÈ·¸ñÊ½µÄµç×ÓÓÊ¼ş",
-		   url: "ÇëÊäÈëºÏ·¨µÄÍøÖ·",
-		   date: "ÇëÊäÈëºÏ·¨µÄÈÕÆÚ",
-		   dateISO: "ÇëÊäÈëºÏ·¨µÄÈÕÆÚ (ISO).",
-		   number: "ÇëÊäÈëÊı×Ö",
-		   digits: "Ö»ÄÜÊäÈëÕûÊı",
-		   creditcard: "ÇëÊäÈëºÏ·¨µÄĞÅÓÃ¿¨ºÅ",
-		   equalTo: "ÇëÔÙ´ÎÊäÈëÏàÍ¬µÄÖµ",
-		   accept: "ÇëÊäÈëÓµÓĞºÏ·¨ºó×ºÃûµÄ×Ö·û´®",
-		   maxlength: jQuery.validator.format("ÇëÊäÈëÒ»¸ö ³¤¶È×î¶àÊÇ {0} µÄ×Ö·û´®"),
-		   minlength: jQuery.validator.format("ÇëÊäÈëÒ»¸ö ³¤¶È×îÉÙÊÇ {0} µÄ×Ö·û´®"),
-		   rangelength: jQuery.validator.format("ÇëÊäÈë Ò»¸ö³¤¶È½éÓÚ {0} ºÍ {1} Ö®¼äµÄ×Ö·û´®"),
-		   range: jQuery.validator.format("ÇëÊäÈëÒ»¸ö½éÓÚ {0} ºÍ {1} Ö®¼äµÄÖµ"),
-		   max: jQuery.validator.format("ÇëÊäÈëÒ»¸ö×î´óÎª{0} µÄÖµ"),
-		   min: jQuery.validator.format("ÇëÊäÈëÒ»¸ö×îĞ¡Îª{0} µÄÖµ")
-	});
+	  required: "å¿…å¡«å­—æ®µ",
+	   remote: "è¯·ä¿®æ­£è¯¥å­—æ®µ",
+	   email: "è¯·è¾“å…¥æ­£ç¡®æ ¼å¼çš„ç”µå­é‚®ä»¶",
+	   url: "è¯·è¾“å…¥åˆæ³•çš„ç½‘å€",
+	   date: "è¯·è¾“å…¥åˆæ³•çš„æ—¥æœŸ",
+	   dateISO: "è¯·è¾“å…¥åˆæ³•çš„æ—¥æœŸ (ISO).",
+	   number: "è¯·è¾“å…¥æ•°å­—",
+	   digits: "åªèƒ½è¾“å…¥æ•´æ•°",
+	   creditcard: "è¯·è¾“å…¥åˆæ³•çš„ä¿¡ç”¨å¡å·",
+	   equalTo: "è¯·å†æ¬¡è¾“å…¥ç›¸åŒçš„å€¼",
+	   accept: "è¯·è¾“å…¥æ‹¥æœ‰åˆæ³•åç¼€åçš„å­—ç¬¦ä¸²",
+	   maxlength: jQuery.validator.format("è¯·è¾“å…¥ä¸€ä¸ª é•¿åº¦æœ€å¤šæ˜¯ {0} çš„å­—ç¬¦ä¸²"),
+	   minlength: jQuery.validator.format("è¯·è¾“å…¥ä¸€ä¸ª é•¿åº¦æœ€å°‘æ˜¯ {0} çš„å­—ç¬¦ä¸²"),
+	   rangelength: jQuery.validator.format("è¯·è¾“å…¥ ä¸€ä¸ªé•¿åº¦ä»‹äº {0} å’Œ {1} ä¹‹é—´çš„å­—ç¬¦ä¸²"),
+	   range: jQuery.validator.format("è¯·è¾“å…¥ä¸€ä¸ªä»‹äº {0} å’Œ {1} ä¹‹é—´çš„å€¼"),
+	   max: jQuery.validator.format("è¯·è¾“å…¥ä¸€ä¸ªæœ€å¤§ä¸º{0} çš„å€¼"),
+	   min: jQuery.validator.format("è¯·è¾“å…¥ä¸€ä¸ªæœ€å°ä¸º{0} çš„å€¼")	});
 	$("#register").validate({
 		 rules: {
-			  "product_inventory":{
-			    	number: "[0-9*.0-9*]"
-			  },
-			  "inventory":{
-			    	number: "[0-9*.0-9*]"
-			  },
-			  "pricePerUnit":{
+			  "cellnumber":{
 			    	number: "[0-9*.0-9*]"
 			  }
 			 },
-			 messages: {
-				 "product_inventory":{
-					 rangelength:"ÇëÊäÈëÊı×Ö"
-				    }
-			 },
+
 		submitHandler:function(form){
-			submit();//·¢²¼ÉÌÆ·
+			submit();
 		}
 	});
 	
@@ -49,10 +37,9 @@ jQuery.extend(jQuery.validator.messages, {
             dataType:'json',  
             data:{"product.shopId":shopId,"product.productId" :productId ,"product.productType" :productType ,"product.version" :productVersion , "cartListVo.productNumber" :parseInt(amount),"classId":productClassId},
             success: function(data) {
-            	alert("Ìí¼Ó³É¹¦£¡");
+            	alert("ï¿½ï¿½Ó³É¹ï¿½ï¿½ï¿½");
             	showActionMsg($("#action_msg"), data);
-            }
-            		
+            }		
 		 });
 	};
 	

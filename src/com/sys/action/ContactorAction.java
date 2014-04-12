@@ -79,7 +79,8 @@ public class ContactorAction extends ActionSupport {
 		User owner = (User) session.get("user");
 
 		List<Group> groups = groupService.getAllGroupByUserId(owner.getId());
-		groups.remove(0); // ÔÚgroupsÖÐÉ¾³ýdefault·Ö×é£¬ÒòÎªÔÚÌí¼ÓÁªÏµÈËÒ³ÃæÖÐ²»ÐèÒªÏÔÊ¾¡°Î´·Ö×é¡±Õâ¸öÑ¡Ïî
+		if(groups!=null)
+			groups.remove(0); // ï¿½ï¿½groupsï¿½ï¿½É¾ï¿½ï¿½defaultï¿½ï¿½ï¿½é£¬ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½Ò³ï¿½ï¿½ï¿½Ð²ï¿½ï¿½ï¿½Òªï¿½ï¿½Ê¾ï¿½ï¿½Î´ï¿½ï¿½ï¿½é¡±ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½
 
 		session.put("groups", groups);
 
@@ -108,8 +109,8 @@ public class ContactorAction extends ActionSupport {
 		this.updateShortMsg(contactor, owner);
 		
 		HttpServletRequest request = ServletActionContext.getRequest();
-		request.setAttribute("tipMessage", "Ìí¼Ó³É¹¦£¡");
-		// session.put("tipMessage", "Ìí¼Ó³É¹¦£¡");
+		request.setAttribute("tipMessage", "ï¿½ï¿½Ó³É¹ï¿½ï¿½ï¿½");
+		// session.put("tipMessage", "ï¿½ï¿½Ó³É¹ï¿½ï¿½ï¿½");
 
 		return SUCCESS;
 	}
@@ -122,7 +123,7 @@ public class ContactorAction extends ActionSupport {
 
 		List<Group> groups = groupService.getAllGroupByUserId(temp.getOwner()
 				.getId());
-		groups.remove(0); // ÔÚgroupsÖÐÉ¾³ýdefault·Ö×é£¬ÒòÎªÔÚÁªÏµÈËÐÅÏ¢Ò³ÃæÖÐ²»ÐèÒªÏÔÊ¾¡°Î´·Ö×é¡±Õâ¸öÑ¡Ïî
+		groups.remove(0); // ï¿½ï¿½groupsï¿½ï¿½É¾ï¿½ï¿½defaultï¿½ï¿½ï¿½é£¬ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ï¿½Ï¢Ò³ï¿½ï¿½ï¿½Ð²ï¿½ï¿½ï¿½Òªï¿½ï¿½Ê¾ï¿½ï¿½Î´ï¿½ï¿½ï¿½é¡±ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½
 
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		session.put("groups", groups);
@@ -163,7 +164,7 @@ public class ContactorAction extends ActionSupport {
 		}
 
 		HttpServletRequest request = ServletActionContext.getRequest();
-		request.setAttribute("tipMessage", "¸ü¸Ä³É¹¦£¡");
+		request.setAttribute("tipMessage", "ï¿½ï¿½Ä³É¹ï¿½ï¿½ï¿½");
 
 		return SUCCESS;
 	}
@@ -205,7 +206,7 @@ public class ContactorAction extends ActionSupport {
 				String temp = groups.get(j).getGroupName();
 				if (!"default".equals(temp)) {
 					str.append(temp);
-					str.append("   "); // ÓÃ3¸ö¿Õ¸ñ×÷Îª¼ä¸ô·û
+					str.append("   "); // ï¿½ï¿½3ï¿½ï¿½ï¿½Õ¸ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½
 				}
 			}
 			groupsOfContactor.put(list.get(i).getId(), str.toString());

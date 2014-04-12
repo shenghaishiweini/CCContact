@@ -19,7 +19,7 @@ public class UserService implements IUserService {
 	@Resource
 	private IUserDao userDao;
 	
-	public boolean registerUser(User user) {
+	public boolean addUser(User user) {
 
 		try {
 			userDao.add(user);

@@ -17,7 +17,7 @@ public interface IUserService {
 	 *
 	 * 
 	 */
-	public boolean registerUser(User user);
+	public boolean addUser(User user);
 	
 	/**
 	 *֤

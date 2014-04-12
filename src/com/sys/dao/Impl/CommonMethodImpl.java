@@ -4,7 +4,6 @@ import javax.annotation.Resource;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.sys.dao.Interface.CommonMethodInterface;
 
@@ -12,7 +11,7 @@ public class CommonMethodImpl<T> implements CommonMethodInterface<T>{
 	@Resource
 	private SessionFactory sessionFactory;
 	
-	@Transactional
+	
 	public boolean saveObject(T obj) {
 		
 		try {
@@ -25,7 +24,7 @@ public class CommonMethodImpl<T> implements CommonMethodInterface<T>{
 		}
 	}
 	
-	@Transactional
+	
 	public boolean updateObject(T obj) {
 		try {
 			Session session = sessionFactory.getCurrentSession();

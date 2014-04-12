@@ -33,6 +33,6 @@ public class test {
 		contactor.setName("myself");
 		user.setDetailInfor(contactor);
 		user.getDetailInfor().setCellphoneNumber("15056998912");
-		_userService.registerUser(user);//±£´æÓÃ»§
+		_userService.addUser(user);//ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½
 	}
 }

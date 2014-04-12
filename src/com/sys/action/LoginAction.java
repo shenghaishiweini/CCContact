@@ -35,7 +35,7 @@ public class LoginAction extends BaseAction{
 	
 		public String registerUser() {
 			
-			if (_userService.registerUser(this.user))
+			if (_userService.addUser(this.user))
 
 				return Constants.SUCCESS;
 			else

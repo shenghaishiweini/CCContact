@@ -16,7 +16,7 @@ import com.sys.service.Interface.IContactorService;
 import com.sys.service.Interface.IGroupService;
 import com.sys.service.Interface.IUserService;
 /**
- * ÓÃ»§ µ¥Ôª²âÊÔ
+ * ï¿½Ã»ï¿½ ï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½
  * @author Gui Junfei
  * 2014.2.9
  */
@@ -50,7 +50,7 @@ public class UserTest {
 //		Set mset=new HashSet();
 //		mset.add(sh);
 //		user.getMessages().add(mset);
-		_userService.registerUser(user);//±£´æÓÃ»§
+		_userService.addUser(user);//ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½
 	}
 	@Test
 	public void tsetAlterUser()
@@ -87,22 +87,22 @@ public class UserTest {
 //		user.setUsername("gjf02");
 //		user.setPassword("123456");
 //		user.setCellphoneNumber("987654321");
-//		_userService.registerUser(user);//±£´æÓÃ»§
+//		_userService.registerUser(user);//ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½
 //		
 ////		Group gp=new Group();
 ////		gp.setGroupName("test123");
 ////		
 ////		Contactor ct=new Contactor();
 ////		ct.setName("lisi");
-////		///_contactorService.addContactor(ct);//±£´æÁªÏµÈË
+////		///_contactorService.addContactor(ct);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½
 ////		
 ////		Set contact=new HashSet<Contactor>();
 ////		contact.add(ct);
 ////		
 ////		gp.setContacts(contact);
 ////		gp.setOwner(user);
-////		//_userService.registerUser(user);//±£´æÓÃ»§
-////		_groupService.newGroup(gp);//±£´æ·Ö×é
+////		//_userService.registerUser(user);//ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½
+////		_groupService.newGroup(gp);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //		
 //	}
 	

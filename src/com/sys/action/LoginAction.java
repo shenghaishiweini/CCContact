@@ -24,6 +24,7 @@ public class LoginAction extends BaseAction{
 			session.put(Constants.MSG,Constants.LOGIN_ERROR);
 			return Constants.LOGIN;
 		}
+		
 		User temp = _userService.checkLogin(user);
 		if (temp == null) {
 			session.put(Constants.MSG, Constants.LOGIN_ERROR);

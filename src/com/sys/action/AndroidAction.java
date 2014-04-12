@@ -13,8 +13,8 @@ import com.sys.service.Impl.ContactorService;
 import com.sys.utils.Constants;
 
 /**
- * 专门接受android的请求
- * @author user
+ * 
+ * @author gjf
  *
  */
 public class AndroidAction extends BaseAction{
@@ -33,7 +33,6 @@ public class AndroidAction extends BaseAction{
 	}
 	
 	/**
-	 * 同步联系人
 	 * @return
 	 */
 	public String synchronousContactor()
@@ -48,7 +47,7 @@ public class AndroidAction extends BaseAction{
 
 		contactorsList=contactorListToJson(contactors);
 		
-		return Constants.RETURN_SYN_Contactor;
+		return Constants.RETURN_SYN_CONTACTOR;
 	}
 
 	
@@ -61,22 +60,27 @@ public class AndroidAction extends BaseAction{
 		
 		JSONArray dataArray = new JSONArray();
 		
-		for(Contactor themeVo : ContactorList){
+		for(Contactor contactor : ContactorList){
 			JSONArray array = new JSONArray();
 			
-//			array.add(themeVo.getThemeId());				//0
-//			array.add(themeVo.getThemeName());			//1
-//			array.add(themeVo.getStartTime());				//2
-//			array.add(themeVo.getEndTime());				//3
-//			array.add(themeVo.getApplyDeadline());		//4
-//			array.add(themeVo.getTagId());					//5
-//			array.add(themeVo.getThemeRequest());		//6
-//			array.add(themeVo.getThemeContent());		//7
-//			
+			array.add(contactor.getId());				//0
+			array.add(contactor.getAddress());				
+			array.add(contactor.getCellphoneNumber());				
+			array.add(contactor.getComments());				
+			array.add(contactor.getEmail());
+			array.add(contactor.getGender());
+			array.add(contactor.getName());
+			array.add(contactor.getOther1());
+			array.add(contactor.getOther2());
+			array.add(contactor.getOwner());
+			array.add(contactor.getPicture_url());
+			array.add(contactor.getQQ());
+			array.add(contactor.getTelephoneNumber());
+			
 			dataArray.add(array);
 		}
 		
-		result.accumulate("theme", dataArray);
+		result.accumulate("contactors", dataArray);
 		
 		return result;
 	}

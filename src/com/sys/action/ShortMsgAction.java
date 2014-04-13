@@ -15,8 +15,8 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.sys.model.Contactor;
 import com.sys.model.ShortMsg;
 import com.sys.model.User;
-import com.sys.serviceInterface.IContactorService;
-import com.sys.serviceInterface.IShortMsgService;
+import com.sys.service.Interface.IContactorService;
+import com.sys.service.Interface.IShortMsgService;
 import com.sys.utils.Constants;
 import com.sys.utils.TimeUtils;
 
@@ -111,7 +111,7 @@ public class ShortMsgAction extends ActionSupport {
 
 		shortMsg.setFromName(user.getDetailInfor().getName());
 		Contactor contactor = _iContactorService
-				.findContactorByCellphoneNumber(reciver, user.getId());
+				.findContactorByCellphpneNumber(reciver);
 		if (contactor != null)
 			shortMsg.setToName(contactor.getName());
 		else
@@ -154,7 +154,8 @@ public class ShortMsgAction extends ActionSupport {
 					.valueOf(str[i].trim()));
 			_isIShortMsgService.deleteShortMsg(t);
 		}
-
+//		HttpServletRequest request = ServletActionContext.getRequest();
+//		request.setAttribute("conversationlist", res);
 		return "success";
 	}
 

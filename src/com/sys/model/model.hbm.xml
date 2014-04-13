@@ -6,7 +6,7 @@
 <hibernate-mapping package="com.sys.model">
 	<!--  configure your class here-->
 
-	<class name="User" table="[Users]">
+	<class name="User" table="Users">
 		<cache usage="read-write" region="com.sys.model.User" />
 		<id name="id">
 			<generator class="identity" />
@@ -43,7 +43,7 @@
 		<property name="ipAdress" column="ipAdress" not-null="false" />
 	</class>
 
-	<class name="Group" table="[Groups]">
+	<class name="Group" table="Groups">
 		<cache usage="read-write" region="com.sys.model.Group" />
 		<id name="id">
 			<generator class="identity" />
@@ -70,7 +70,7 @@
 	</class>
 
 
-	<class name="Contactor" table="[Contactors]">
+	<class name="Contactor" table="Contactors">
 		<cache usage="read-write" region="com.sys.model.Contactor" />
 		<id name="id">
 			<generator class="identity" />
@@ -107,7 +107,7 @@
 	</class>
 
 
-	<class name="Group_Contactor" table="[Group_Contactors]">
+	<class name="Group_Contactor" table="Group_Contactors">
 		<cache usage="read-write" region="com.sys.model.Group_Contactor" />
 		<id name="id">
 			<generator class="identity" />
@@ -117,9 +117,7 @@
 	</class>
 
 
-
-
-	<class name="ShortMsg" table="[ShortMsgs]">
+	<class name="ShortMsg" table="ShortMsgs">
 		<cache usage="read-write" region="com.sys.model.ShortMsg" />
 			<id name="id">
 			<generator class="identity" />

@@ -1,6 +1,7 @@
 package com.sys.dao.Interface;
 
 import com.sys.model.Group;
+import com.sys.model.Group_Contactor;
 
 public interface IGroupDao {
 	/**
@@ -8,6 +9,14 @@ public interface IGroupDao {
 	 * @param group
 	 */
 	public void add(Group group);
+	
+	/**
+	 * 
+	 * @param group_contactor
+	 */
+	public void add(Group_Contactor group_contactor);
+	
+	
 	/**
 	 * 
 	 * @param group
@@ -29,4 +38,11 @@ public interface IGroupDao {
 	 * @param groupId
 	 */
 	public Group find(int groupId);
+	
+	/**
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	public Group findDefaultGroup(int userId);
 }

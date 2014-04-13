@@ -81,9 +81,7 @@
 		</action>
 
 		<action name="user_checkUserName" class="userAction" method="checkUserName">
-			<result name="ok" type="chain">
-				<param name="sData">1</param>
-			</result>
+
 		</action>
 		<action name="user_alterUser" class="userAction" method="alterUser">
 			<result name="alterFail" type="redirect">/main.html</result>
@@ -173,8 +171,6 @@
 			<result name="input">/jumpToLogin.jsp</result>
 		</action>
 
-
-
 		<action name="getConversationList" class="shortMsgAction"
 			method="getConversationList">
 			<result name="success">/shortMsgLeft.jsp</result>
@@ -186,7 +182,9 @@
 		</action>
 		<!-- 删除短信 -->
 		<action name="deleteShortMsg" class="shortMsgAction" method="deleteShortMsg">
-			<result name="success" type="redirect">../shortMsgmiddle.html</result>
+<!--			<result name="success" type="chain">-->
+<!--				<param name="actionName">getConversationDetailMsg</param>-->
+<!--			</result>-->
 		</action>
 
 		<!-- 发送短信 -->
@@ -204,10 +202,11 @@
 
 	</package>
 	<package name="android" extends="json-default">
-		<action name="android_login" class="com.sys.action.UserAction"
-			method="checklogin">
-			<result type="json" name="ok"></result>
-		</action>
+			<action name="android_*" class="com.sys.action.AndroidAction" method="{1}">
+			<result name="synchronousContactor" type="json">
+                    <param name="root">contactorsList</param>
+            </result>
+           </action>
 	</package>
 
 </struts>

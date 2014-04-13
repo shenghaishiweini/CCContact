@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java"
 	pageEncoding="UTF-8"%>
 
 
@@ -143,7 +143,7 @@ body {
 									<p>
 										修改密码
 										<span id="mesg2Span"><font color='red'>
-										${msg }
+										
 										</font>
 									</p>
 								

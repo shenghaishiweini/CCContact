@@ -17,8 +17,8 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.sys.model.Contactor;
 import com.sys.model.Group;
 import com.sys.model.User;
-import com.sys.serviceInterface.IContactorService;
-import com.sys.serviceInterface.IGroupService;
+import com.sys.service.Interface.IContactorService;
+import com.sys.service.Interface.IGroupService;
 
 @Controller @Scope("prototype")
 public class GroupAction extends ActionSupport {

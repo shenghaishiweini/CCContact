@@ -36,8 +36,8 @@
     <div class="container">
       <form class="form-signin" role="form" action="user_checkLogin" method="post">
         <h1 class="form-signin-heading">圈圈通讯录</h1>
-        <input type="text" class="form-control" placeholder="Username" required autofocus>
-        <input type="password" class="form-control" placeholder="Password" required>
+        <input type="text" class="form-control" placeholder="Username" name="user.username" required autofocus>
+        <input type="password" class="form-control" placeholder="Password" name="user.password" required>
         <label class="checkbox">
           <input type="checkbox" value="remember-me"> Remember me
         </label>

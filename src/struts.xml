@@ -68,12 +68,12 @@
 			<result name="modifyPwd" type="redirect">/main.html</result>
 		</action>
 
-		<action name="registerUser" class="loginAction" method="registerUser">
-			<result name="success" type="json">
-				<param name="sData">${1}
-				</param>
-			</result>
+		<action name="registerUser" class="loginAction" method="registerUser">	
+			<result name="success" type="redirect">/login.jsp</result>
 			<result name="input">/registerUser.jsp</result>
+		</action>
+			<action name="registerUserGet" class="loginAction" method="registerUserGet">
+			<result name="success">/registerUser.jsp</result>
 		</action>
 
 		<action name="registerUserGet" class="loginAction" method="registerUserGet">
@@ -182,9 +182,9 @@
 		</action>
 		<!-- 删除短信 -->
 		<action name="deleteShortMsg" class="shortMsgAction" method="deleteShortMsg">
-<!--			<result name="success" type="chain">-->
-<!--				<param name="actionName">getConversationDetailMsg</param>-->
-<!--			</result>-->
+			<result name="success" type="chain">
+				<param name="actionName">getConversationDetailMsg</param>
+			</result>
 		</action>
 
 		<!-- 发送短信 -->

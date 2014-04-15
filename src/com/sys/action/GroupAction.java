@@ -1,6 +1,5 @@
 package com.sys.action;
 
-import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +22,10 @@ import com.sys.service.Interface.IGroupService;
 @Controller @Scope("prototype")
 public class GroupAction extends ActionSupport {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5756008654491546829L;
 	@Resource IGroupService groupService;
 	@Resource IContactorService contactorService;
 	
@@ -30,29 +33,6 @@ public class GroupAction extends ActionSupport {
 	private String groupName;
 	private Group group;
 
-	public String getGroupName() {
-		return groupName;
-	}
-
-	public void setGroupName(String groupName) {
-		this.groupName = groupName;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public Group getGroup() {
-		return group;
-	}
-
-	public void setGroup(Group group) {
-		this.group = group;
-	}
 
 	public String listAllGroups()
 	{
@@ -82,7 +62,7 @@ public class GroupAction extends ActionSupport {
 //		System.out.println(contactorNumbers.get(0));
 		HttpServletRequest request = ServletActionContext.getRequest();
 		request.setAttribute("defaultGroup", list.get(0));
-		list.remove(0); //ÒÆ³ýdefault·Ö×é£¬defaultÒªµ¥¶ÀÁÐ³öÀ´ÏÔÊ¾£¬ÒòÎª²»ÔÊÐíÐÞ¸ÄºÍÉ¾³ý
+		list.remove(0); 
 		request.setAttribute("list", list);
 		request.setAttribute("numbers", contactorNumbers);
 		
@@ -135,7 +115,7 @@ public class GroupAction extends ActionSupport {
 			groupService.newGroup(group);
 		}else if(temp != null){
 			HttpServletRequest request = ServletActionContext.getRequest();
-			request.setAttribute("tipMessage", "·Ö×éÃûÖØ¸´£¡");
+			request.setAttribute("tipMessage", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½ï¿½");
 			return INPUT;
 		}
 		
@@ -163,7 +143,7 @@ public class GroupAction extends ActionSupport {
 		}
 		HttpServletRequest request = ServletActionContext.getRequest();
 		request.setAttribute("defaultGroup", list.get(0));
-		list.remove(0); //ÒÆ³ýdefault·Ö×é£¬defaultÒªµ¥¶ÀÁÐ³öÀ´ÏÔÊ¾£¬ÒòÎª²»ÔÊÐíÐÞ¸ÄºÍÉ¾³ý
+		list.remove(0); //ï¿½Æ³ï¿½defaultï¿½ï¿½ï¿½é£¬defaultÒªï¿½ï¿½ï¿½ï¿½ï¿½Ð³ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸Äºï¿½É¾ï¿½ï¿½
 		request.setAttribute("list", list);
 		request.setAttribute("numbers", contactorNumbers);
 		request.setAttribute("editGroupId", id);
@@ -181,7 +161,7 @@ public class GroupAction extends ActionSupport {
 			groupService.alterGroup(editGroup);
 		}else if(temp != null){
 			HttpServletRequest request = ServletActionContext.getRequest();
-			request.setAttribute("tipMessage", "·Ö×éÃûÖØ¸´£¡");
+			request.setAttribute("tipMessage", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½ï¿½");
 			return INPUT;
 		}
 		
@@ -204,7 +184,7 @@ public class GroupAction extends ActionSupport {
 					String temp = groups.get(j).getGroupName();
 					if(!"default".equals(temp)){
 						str.append(temp);
-						str.append("   "); //ÓÃ3¸ö¿Õ¸ñ×÷Îª¼ä¸ô·û
+						str.append("   "); 
 					}				
 				}
 				groupsOfContactor.put(list.get(i).getId(), str.toString());
@@ -214,5 +194,30 @@ public class GroupAction extends ActionSupport {
 		
 		return SUCCESS;
 	}
+	
+	public String getGroupName() {
+		return groupName;
+	}
+
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Group getGroup() {
+		return group;
+	}
+
+	public void setGroup(Group group) {
+		this.group = group;
+	}
+
 	
 }

@@ -29,6 +29,10 @@ import com.sys.utils.Constants;
 @Scope("prototype")
 public class ContactorAction extends ActionSupport {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5458408085732718297L;
 	@Resource
 	IContactorService contactorService;
 	@Resource

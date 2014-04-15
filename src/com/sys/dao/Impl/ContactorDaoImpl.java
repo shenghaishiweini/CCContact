@@ -117,4 +117,16 @@ public class ContactorDaoImpl implements IContactorDao{
 		return res==null?null:res;
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Contactor> findById(List<Integer> contactorIds) {
+		
+		String hql = "select * from Contactors where id in :userid";
+		Query q = sessionFactory.getCurrentSession().createSQLQuery(hql)
+				.addEntity(Contactor.class);
+
+		q.setParameter("userid", contactorIds);
+		List<Contactor> res = q.list();
+		return res==null?null:res;
+	}
+
 }

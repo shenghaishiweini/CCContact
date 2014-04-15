@@ -32,6 +32,12 @@ public interface IContactorDao {
 	 * 
 	 * @param contactorId
 	 */
+	public List<Contactor> findById(List<Integer> contactorIds);
+	
+	/**
+	 * 
+	 * @param contactorId
+	 */
 	public  void deleteById(int contactorId);
 	
 	/**
@@ -61,4 +67,5 @@ public interface IContactorDao {
 	 * @return
 	 */
 	public List<Contactor> findContactorByName(String name,int userid);
+
 }

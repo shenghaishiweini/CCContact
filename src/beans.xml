@@ -95,6 +95,5 @@
 	<bean id="GroupDAO" class="com.sys.dao.Impl.GroupDaoImpl" />
 	<bean id="UserDao" class="com.sys.dao.Impl.UserDaoImpl" />
 	<bean id="ShortMsgDao" class="com.sys.dao.Impl.ShortMsgDaoImpl" />
-	<bean id="GroupContactorDao" class="com.sys.dao.Impl.GroupContactorDaoImpl" />
 	
 </beans>

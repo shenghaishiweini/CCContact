@@ -4,30 +4,37 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 /**
- * 
+ * 短信类主要是临时使用，如果用户选择备份，则需要存入数据库
  * @author Gui Junfei
  * 2014.2.7
  */
 
 public class ShortMsg {
 	private int id;
-
+	/*
+	 * 发短信者的号码
+	 * 外键，Contact的cellphoneNumber
+	 */
 	private String from;
-	/**
-	 * 
-	 * 
+	/*
+	 * 收短信者的号码
+	 * 外键，Contact的cellphoneNumber
 	 */
 	private String to;
 	
-
+	/*
+	 * 发短信者的姓名
+	 * 外键，Contact的name
+	 * 如果不存在，则为空
+	 */
 	private String fromName;
 	private String toName;
 	private Timestamp createTime;
 	private String content;
-	private int msgType;
+	private int msgType;//短信类型，可能是彩信或语音
 	
 	/**
-	 * 锟叫讹拷锟角凤拷锟角革拷锟矫伙拷锟斤拷锟酵碉拷
+	 * 判断是否是该用户发送的
 	 * 1 YES, 0 NO
 	 */
 	private int ifSender;

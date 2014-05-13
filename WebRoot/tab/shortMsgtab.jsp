@@ -3,7 +3,7 @@
 <%@ page import="java.util.*,com.sys.model.*"%>
 <%@ page import="java.text.*"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-<html >
+<html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<title>无标题文档</title>
 		<script src="../script/jquery-1.8.3.min.js" type="text/javascript"></script>

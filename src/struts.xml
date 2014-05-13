@@ -57,7 +57,10 @@
 
 		<action name="user_checkLogin" class="loginAction" method="checkLogin">
 			<result name="login">/login.jsp</result>
-			<result name="success" type="redirect">/main.html</result>
+			<!--<result name="success" type="redirect">/main.jsp</result> -->
+			<result name="success" type="chain">
+				<param name="actionName">listAllGroups</param>
+			</result>
 		</action>
 
 		<action name="user_logout" class="userAction" method="logout">
@@ -68,12 +71,12 @@
 			<result name="modifyPwd" type="redirect">/main.html</result>
 		</action>
 
-		<action name="registerUser" class="loginAction" method="registerUser">	
-			<result name="success" type="redirect">/login.jsp</result>
+		<action name="registerUser" class="loginAction" method="registerUser">
+			<result name="success" type="json">
+				<param name="sData">${1}
+				</param>
+			</result>
 			<result name="input">/registerUser.jsp</result>
-		</action>
-			<action name="registerUserGet" class="loginAction" method="registerUserGet">
-			<result name="success">/registerUser.jsp</result>
 		</action>
 
 		<action name="registerUserGet" class="loginAction" method="registerUserGet">
@@ -89,7 +92,10 @@
 
 
 		<action name="listAllGroups" class="groupAction" method="listAllGroups">
-			<result name="success">/groups.jsp</result>
+			<!-- <result name="success">/groups.jsp</result> -->
+			<result name="success" type="chain">
+				<param name="actionName">listAllContactors</param>
+			</result>
 		</action>
 
 		<action name="newGroup1" class="groupAction" method="newGroup1">
@@ -135,7 +141,8 @@
 
 		<action name="listContactorsOfGroup" class="groupAction"
 			method="listContactorsOfGroup">
-			<result name="success">/tab/contactortab.jsp</result>
+			<!-- <result name="success">/tab/contactortab.jsp</result>-->
+			<result name="success">/main.jsp</result>
 		</action>
 
 		<action name="addContactor1" class="contactorAction" method="addContactor1">
@@ -167,7 +174,8 @@
 
 		<action name="listAllContactors" class="contactorAction"
 			method="findAllContactorsByUserId">
-			<result name="success">/tab/contactortab.jsp</result>
+			<!-- <result name="success">/tab/contactortab.jsp</result>-->
+			<result name="success">/main.jsp</result>
 			<result name="input">/jumpToLogin.jsp</result>
 		</action>
 
@@ -182,9 +190,9 @@
 		</action>
 		<!-- 删除短信 -->
 		<action name="deleteShortMsg" class="shortMsgAction" method="deleteShortMsg">
-			<result name="success" type="chain">
-				<param name="actionName">getConversationDetailMsg</param>
-			</result>
+<!--			<result name="success" type="chain">-->
+<!--				<param name="actionName">getConversationDetailMsg</param>-->
+<!--			</result>-->
 		</action>
 
 		<!-- 发送短信 -->

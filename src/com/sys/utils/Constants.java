@@ -35,8 +35,6 @@ public class Constants {
 	
 	public static String TIP_LOGIN_MSG="您还未登录";
 	
-	/**
-	 * 无效ID
-	 */
-	public static int INVALID_ID= 0;
+	
+	
 }

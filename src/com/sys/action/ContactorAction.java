@@ -1,4 +1,4 @@
-package com.sys.action;
+﻿package com.sys.action;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,10 +29,6 @@ import com.sys.utils.Constants;
 @Scope("prototype")
 public class ContactorAction extends ActionSupport {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -5458408085732718297L;
 	@Resource
 	IContactorService contactorService;
 	@Resource
@@ -199,7 +195,7 @@ public class ContactorAction extends ActionSupport {
 				.getId());
 
 		HttpServletRequest request = ServletActionContext.getRequest();
-		request.setAttribute("list", list);
+		request.setAttribute("contatorList", list);
 
 		Map<Integer, String> groupsOfContactor = new HashMap<Integer, String>();
 		for (int i = 0; i < list.size(); i++) {

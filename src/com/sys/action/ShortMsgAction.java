@@ -156,7 +156,6 @@ public class ShortMsgAction extends ActionSupport {
 		}
 //		HttpServletRequest request = ServletActionContext.getRequest();
 //		request.setAttribute("conversationlist", res);
-		//需要修改
 		return "success";
 	}
 

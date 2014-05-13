@@ -1,5 +1,6 @@
 package com.sys.action;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,10 +23,6 @@ import com.sys.service.Interface.IGroupService;
 @Controller @Scope("prototype")
 public class GroupAction extends ActionSupport {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -5756008654491546829L;
 	@Resource IGroupService groupService;
 	@Resource IContactorService contactorService;
 	
@@ -33,6 +30,29 @@ public class GroupAction extends ActionSupport {
 	private String groupName;
 	private Group group;
 
+	public String getGroupName() {
+		return groupName;
+	}
+
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Group getGroup() {
+		return group;
+	}
+
+	public void setGroup(Group group) {
+		this.group = group;
+	}
 
 	public String listAllGroups()
 	{
@@ -62,7 +82,7 @@ public class GroupAction extends ActionSupport {
 //		System.out.println(contactorNumbers.get(0));
 		HttpServletRequest request = ServletActionContext.getRequest();
 		request.setAttribute("defaultGroup", list.get(0));
-		list.remove(0); 
+		list.remove(0); //�Ƴ�default���飬defaultҪ�����г�����ʾ����Ϊ�������޸ĺ�ɾ��
 		request.setAttribute("list", list);
 		request.setAttribute("numbers", contactorNumbers);
 		
@@ -173,7 +193,7 @@ public class GroupAction extends ActionSupport {
 		List<Contactor> list = groupService.getGroupContactors(id);
 		
 		HttpServletRequest request = ServletActionContext.getRequest();
-		request.setAttribute("list", list);
+		request.setAttribute("contatorList", list);
 		
 		if(list != null){
 			Map<Integer,String> groupsOfContactor = new HashMap<Integer,String>();
@@ -194,30 +214,5 @@ public class GroupAction extends ActionSupport {
 		
 		return SUCCESS;
 	}
-	
-	public String getGroupName() {
-		return groupName;
-	}
-
-	public void setGroupName(String groupName) {
-		this.groupName = groupName;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public Group getGroup() {
-		return group;
-	}
-
-	public void setGroup(Group group) {
-		this.group = group;
-	}
-
 	
 }
